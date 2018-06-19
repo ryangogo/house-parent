@@ -1,0 +1,29 @@
+<!--
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration scan="true" scanPeriod="40 seconds" debug="true">
+
+    <property name="log.base" value="logs"/>
+
+    <contextListene class="ch.qos.logback.classic.jul.LevelChangePropagator">
+        <resultJUL>true</resultJUL>
+    </contextListene>
+
+    &lt;!&ndash;输出到控制台 ConsoleAppender&ndash;&gt;
+    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+        &lt;!&ndash;展示格式 layout&ndash;&gt;
+        <encoder charset="UTF-8">
+            <pattern>
+                <pattern>%d{HH:mm:ss.SSS} %contextName [%thread] %-5level %logger{36} - %msg%n</pattern>
+            </pattern>
+        </encoder>
+    </appender>
+
+
+    &lt;!&ndash;指定最基础的日志输出级别&ndash;&gt;
+    <root level="DEBUG">
+        &lt;!&ndash;appender将会添加到这个loger&ndash;&gt;
+        <appender-ref ref="FILE-DEBUG"/>
+        <appender-ref ref="FILE-ERROR"/>
+        <appender-ref ref="CONSOLE"/>
+    </root>
+</configuration>-->
