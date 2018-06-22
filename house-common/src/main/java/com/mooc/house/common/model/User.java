@@ -1,172 +1,258 @@
 package com.mooc.house.common.model;
 
-
-import org.springframework.web.multipart.MultipartFile;
-
 import java.util.Date;
 
 public class User {
-
+    /**
+     * 主键
+     */
     private Long id;
 
-    private String email;
-
-    private String phone;
-
+    /**
+     * 姓名
+     */
     private String name;
 
-    private String passwd;
+    /**
+     * 手机号
+     */
+    private String phone;
 
-    private String confirmPasswd;
+    /**
+     * 电子邮件
+     */
+    private String email;
 
-    private Integer type;//普通用户1，经纪人2
-
-    private Date createTime;
-
-    private Integer enable;
-
-    private String avatar;
-
-    private MultipartFile avatarFile;
-
-    private String newPassword;
-
-    private String key;
-
-    private Long agencyId;
-
+    /**
+     * 自我介绍
+     */
     private String aboutme;
 
-    private String agencyName;
+    /**
+     * 经过md5加密的密码
+     */
+    private String passwd;
 
+    /**
+     * 头像图片
+     */
+    private String avatar;
+
+    /**
+     * 1:普通用户，2:房产经纪人
+     */
+    private Byte type;
+
+    /**
+     * 创建时间
+     */
+    private Date createTime;
+
+    /**
+     * 是否启用1：启用，0：停用
+     */
+    private Byte enable;
+
+    /**
+     * 所属经纪机构
+     */
+    private Integer agencyId;
+
+    /**
+     * 获取主键
+     *
+     * @return id - 主键
+     */
     public Long getId() {
         return id;
     }
 
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getPhone() {
-        return phone;
-    }
-
-    public void setPhone(String phone) {
-        this.phone = phone;
-    }
-
-    public String getPasswd() {
-        return passwd;
-    }
-
-    public void setPasswd(String passwd) {
-        this.passwd = passwd;
-    }
-
-    public String getConfirmPasswd() {
-        return confirmPasswd;
-    }
-
-    public void setConfirmPasswd(String confirmPasswd) {
-        this.confirmPasswd = confirmPasswd;
-    }
-
-    public String getAboutme() {
-        return aboutme;
-    }
-
-    public void setAboutme(String aboutme) {
-        this.aboutme = aboutme;
-    }
-
-    public Integer getType() {
-        return type;
-    }
-
-    public void setType(Integer type) {
-        this.type = type;
-    }
-
-    public Date getCreateTime() {
-        return createTime;
-    }
-
-    public void setCreateTime(Date createTime) {
-        this.createTime = createTime;
-    }
-
-    public Integer getEnable() {
-        return enable;
-    }
-
-    public void setEnable(Integer enable) {
-        this.enable = enable;
-    }
-
-
-    public String getNewPassword() {
-        return newPassword;
-    }
-
-    public void setNewPassword(String newPassword) {
-        this.newPassword = newPassword;
-    }
-
-    public MultipartFile getAvatarFile() {
-        return avatarFile;
-    }
-
-    public void setAvatarFile(MultipartFile avatarFile) {
-        this.avatarFile = avatarFile;
-    }
-
-    public String getAgencyName() {
-        return agencyName;
-    }
-
-    public void setAgencyName(String agencyName) {
-        this.agencyName = agencyName;
-    }
-
-    public String getKey() {
-        return key;
-    }
-
-    public void setKey(String key) {
-        this.key = key;
-    }
-
-    public Long getAgencyId() {
-        return agencyId;
-    }
-
-    public void setAgencyId(Long agencyId) {
-        this.agencyId = agencyId;
-    }
-
-    public String getAvatar() {
-        return avatar;
-    }
-
-    public void setAvatar(String avatar) {
-        this.avatar = avatar;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
+    /**
+     * 设置主键
+     *
+     * @param id 主键
+     */
     public void setId(Long id) {
         this.id = id;
     }
 
+    /**
+     * 获取姓名
+     *
+     * @return name - 姓名
+     */
+    public String getName() {
+        return name;
+    }
 
+    /**
+     * 设置姓名
+     *
+     * @param name 姓名
+     */
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    /**
+     * 获取手机号
+     *
+     * @return phone - 手机号
+     */
+    public String getPhone() {
+        return phone;
+    }
+
+    /**
+     * 设置手机号
+     *
+     * @param phone 手机号
+     */
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    /**
+     * 获取电子邮件
+     *
+     * @return email - 电子邮件
+     */
+    public String getEmail() {
+        return email;
+    }
+
+    /**
+     * 设置电子邮件
+     *
+     * @param email 电子邮件
+     */
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    /**
+     * 获取自我介绍
+     *
+     * @return aboutme - 自我介绍
+     */
+    public String getAboutme() {
+        return aboutme;
+    }
+
+    /**
+     * 设置自我介绍
+     *
+     * @param aboutme 自我介绍
+     */
+    public void setAboutme(String aboutme) {
+        this.aboutme = aboutme;
+    }
+
+    /**
+     * 获取经过md5加密的密码
+     *
+     * @return passwd - 经过md5加密的密码
+     */
+    public String getPasswd() {
+        return passwd;
+    }
+
+    /**
+     * 设置经过md5加密的密码
+     *
+     * @param passwd 经过md5加密的密码
+     */
+    public void setPasswd(String passwd) {
+        this.passwd = passwd;
+    }
+
+    /**
+     * 获取头像图片
+     *
+     * @return avatar - 头像图片
+     */
+    public String getAvatar() {
+        return avatar;
+    }
+
+    /**
+     * 设置头像图片
+     *
+     * @param avatar 头像图片
+     */
+    public void setAvatar(String avatar) {
+        this.avatar = avatar;
+    }
+
+    /**
+     * 获取1:普通用户，2:房产经纪人
+     *
+     * @return type - 1:普通用户，2:房产经纪人
+     */
+    public Byte getType() {
+        return type;
+    }
+
+    /**
+     * 设置1:普通用户，2:房产经纪人
+     *
+     * @param type 1:普通用户，2:房产经纪人
+     */
+    public void setType(Byte type) {
+        this.type = type;
+    }
+
+    /**
+     * 获取创建时间
+     *
+     * @return create_time - 创建时间
+     */
+    public Date getCreateTime() {
+        return createTime;
+    }
+
+    /**
+     * 设置创建时间
+     *
+     * @param createTime 创建时间
+     */
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
+    }
+
+    /**
+     * 获取是否启用1：启用，0：停用
+     *
+     * @return enable - 是否启用1：启用，0：停用
+     */
+    public Byte getEnable() {
+        return enable;
+    }
+
+    /**
+     * 设置是否启用1：启用，0：停用
+     *
+     * @param enable 是否启用1：启用，0：停用
+     */
+    public void setEnable(Byte enable) {
+        this.enable = enable;
+    }
+
+    /**
+     * 获取所属经纪机构
+     *
+     * @return agency_id - 所属经纪机构
+     */
+    public Integer getAgencyId() {
+        return agencyId;
+    }
+
+    /**
+     * 设置所属经纪机构
+     *
+     * @param agencyId 所属经纪机构
+     */
+    public void setAgencyId(Integer agencyId) {
+        this.agencyId = agencyId;
+    }
 }
