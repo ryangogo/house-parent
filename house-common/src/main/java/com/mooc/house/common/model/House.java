@@ -1,7 +1,10 @@
 package com.mooc.house.common.model;
 
+import lombok.Data;
+
 import java.util.Date;
 
+@Data
 public class House {
     private Long id;
 
