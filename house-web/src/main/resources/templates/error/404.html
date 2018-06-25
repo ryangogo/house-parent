@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+
+<html lang="en-US" xmlns:th="http://www.thymeleaf.org">
+<head th:include="/base/common :: commonHead">
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="ThemeStarz">
+    <title>Zoner | 404 Page not found</title>
+
+</head>
+
+<body class="page-sub-page page-404 page-error" id="page-top">
+<!-- Wrapper -->
+<div class="wrapper">
+    <!-- Navigation -->
+    <div th:replace="/base/header :: pageHead"></div>
+    <!-- /.navigation -->
+    <!-- end Navigation -->
+    <!-- Page Content -->
+    <div id="page-content">
+        <!-- Breadcrumb -->
+        <div class="container">
+            <ol class="breadcrumb">
+                <li><a href="#">Home</a></li>
+                <li class="active">404</li>
+            </ol>
+        </div>
+        <!-- end Breadcrumb -->
+
+        <div class="container">
+            <section id="404">
+                <div class="error-page">
+                    <div class="title">
+                        <img alt="" th:src="@{/static/assets/img/error-page-background.png}" class="top">
+                        <header>404</header>
+                        <img alt="" th:src="@{/static/assets/img/error-page-background.png}" class="bottom">
+                    </div>
+                    <h2 class="no-border">页面未找到</h2>
+                    <a href="" class="link-arrow back" onclick="history.back(-1)">Go Back</a>
+                </div>
+            </section>
+        </div><!-- /.container -->
+    </div>
+    <!-- end Page Content -->
+    <!-- Page Footer -->
+    <!-- end Page Footer -->
+</div>
+</body>
+</html>

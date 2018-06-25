@@ -10,7 +10,7 @@ public class HashUtils {
 
     private static final HashFunction FUNCTION = Hashing.md5();
 
-    private static final String SALT = "mooc.com";
+    private static final String SALT = "ryan";
 
     public static String encryPassword(String password) {
         HashCode hashCode = FUNCTION.hashString(password + SALT, Charset.forName("UTF-8"));

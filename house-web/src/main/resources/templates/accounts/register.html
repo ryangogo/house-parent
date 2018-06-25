@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+
+<html lang="en-US" xmlns:th="http://www.thymeleaf.org">
+<head th:include="/base/common :: commonHead">
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="ThemeStarz">
+    <title>Zoner | 404 Page not found</title>
+    <script type="text/javascript" th:src="@{/static/js/register.js}"></script>
+</head>
+<body class="page-sub-page page-create-account page-account" id="page-top">
+<!-- Wrapper -->
+<div class="wrapper">
+    <!-- Navigation -->
+    <div th:replace="/base/header :: pageHead"></div>
+    <!-- end Navigation -->
+    <!-- Page Content -->
+    <div id="page-content">
+        <!-- Breadcrumb -->
+        <div class="container">
+            <ol class="breadcrumb">
+                <li><a href="#">Home</a></li>
+                <li class="active">注册</li>
+            </ol>
+        </div>
+        <!-- end Breadcrumb -->
+
+        <div class="container">
+            <header><h1>注册账号</h1></header>
+            <div class="row">
+                <div class="col-md-4 col-sm-6 col-md-offset-4 col-sm-offset-3">
+                    <form role="form" id="form-create-account" method="post" enctype="multipart/form-data"
+                          action="/account/register">
+                        <div class="radio" id="create-account-user">
+                            <label>
+                                <input type="radio" value="1" checked id="account-type-user" name="type" required>普通用户
+                            </label>
+                        </div>
+                        <div class="radio" id="agent-switch" data-agent-state="">
+                            <label>
+                                <input type="radio" value="2" id="account-type-agent" name="type" required>经纪人
+                            </label>
+                        </div>
+                        <!--<div id="agency" class="disabled">
+                            <div class="form-group">
+                                <label>选择经纪机构:</label>
+                                <select name="agencyId" id="agencyId">
+                                    <option value="0" >请选择经纪机构</option>
+                                    <#list agencyList as agency>
+                                        <option value="" >W</option>
+                                    </#list>
+                                </select>
+                            </div>&lt;!&ndash; /.form-group &ndash;&gt;
+                        </div>-->
+                        <hr>
+                        <div class="form-group">
+                            <label for="form-create-account-full-name">全名:</label>
+                            <input type="text" class="form-control" id="form-create-account-full-name" typeName="姓名"
+                                   name="name" required>
+                        </div><!-- /.form-group -->
+                        <div class="form-group">
+                            <label for="form-create-account-email">Email:</label>
+                            <input type="text" class="form-control" id="form-create-account-email" typeName="email"
+                                   name="email" required>
+                        </div><!-- /.form-group -->
+                        <div class="form-group">
+                            <label for="form-create-account-phonenum">手机号:</label>
+                            <input type="text" class="form-control" id="form-create-account-phonenum" typeName="电话号码"
+                                   name="phone">
+                        </div><!-- /.form-group -->
+                        <div class="form-group">
+                            <label for="form-create-account-password">密码:</label>
+                            <input type="password" class="form-control" id="form-create-account-password" typeName="密码"
+                                   name="passwd" required>
+                        </div><!-- /.form-group -->
+                        <div class="form-group">
+                            <label for="form-create-account-confirm-password">确认密码:</label>
+                            <input type="password" class="form-control" id="form-create-account-confirm-password"
+                                   typeName="确认密码" name="confirmPasswd" required>
+                        </div><!-- /.form-group -->
+                        <div class="form-group">
+                            <label for="form-create-account-email">自我介绍:</label>
+                            <textarea class="form-control" typeName="自我介绍" name="aboutme"></textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="form-create-account-email">用户头像:</label>
+                            <input id="file-upload" type="file" class="file" multiple="true" typeName="用户头像"
+                                   data-show-upload="false" data-show-caption="false" data-show-remove="false"
+                                   accept="image/jpeg,image/png" data-browse-class="btn btn-default"
+                                   data-browse-label="Browse Images" name="avatarFile" required>
+                            <figure class="note"><strong>Hint:</strong> You can upload all images at once!</figure>
+                        </div>
+                    </form>
+
+                    <div class="form-group clearfix">
+                        <button class="btn pull-right btn-default" id="account-submit">注册账号</button>
+                    </div><!-- /.form-group -->
+
+
+                    <hr>
+                    <div class="center">
+                        <figure class="note"> 我已阅读并同意<a href="terms-conditions.html">用户协议</a></figure>
+                    </div>
+                </div>
+            </div><!-- /.row -->
+        </div><!-- /.container -->
+    </div>
+    <!-- end Page Content -->
+    <!-- Page Footer -->
+    <div th:replace="/base/footer :: pageFoot">
+        <!-- end Page Footer -->
+    </div>
+    <script type="text/javascript" th:src="@{/static/assets/js/jquery-2.1.0.min.js}"></script>
+    <script type="text/javascript" th:src="@{/static/assets/js/jquery.form.js}"></script>
+    <script type="text/javascript" th:src="@{/static/assets/js/layer/layer.js}"></script>
+    <script type="text/javascript" th:src="@{/static/js/register.js}"></script>
+</div>
+</body>
+</html>

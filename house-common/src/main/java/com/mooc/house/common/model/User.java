@@ -32,14 +32,29 @@ public class User {
     private String aboutme;
 
     /**
-     * 经过md5加密的密码
+     * 密码
      */
     private String passwd;
 
     /**
-     * 头像图片
+     * 新密码
+     */
+    private String newPassword;
+
+    /**
+     * 确认密码
+     */
+    private String confirmPasswd;
+
+    /**
+     * 头像图片URL
      */
     private String avatar;
+
+    /**
+     *
+     */
+    private String key;
 
     /**
      * 1:普通用户，2:房产经纪人
@@ -61,4 +76,8 @@ public class User {
      */
     private Integer agencyId;
 
+    /**
+     * 经纪机构名称
+     */
+    private String agencyName;
 }
