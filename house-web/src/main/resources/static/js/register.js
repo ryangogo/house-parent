@@ -8,8 +8,8 @@ $("#form-create-account").ajaxForm({
     },
     success: function (obj) {
         if (obj.status == 0) {
-            layer.alert("注册成功");
-            window.location.href = "";
+            var email = $("#form-create-account-email").val();
+            window.location.href = "/account/registerSubmit?email=" + email;
         } else {
             layer.alert(obj.msg);
         }

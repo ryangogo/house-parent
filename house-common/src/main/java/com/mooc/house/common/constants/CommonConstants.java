@@ -15,6 +15,6 @@ public class CommonConstants {
     public static final Integer COMMENT_BLOG_TYPE = 2;
 
     //七牛云url
-    public static final String DEFAULT_QINIU_URL = "http://pavcev6vm.bkt.clouddn.com";
+    public static final String DEFAULT_QINIU_URL = "http://pavcev6vm.bkt.clouddn.com/";
 
 }

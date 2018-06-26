@@ -7,7 +7,7 @@ import org.springframework.scheduling.annotation.EnableAsync;
 
 @SpringBootApplication
 @EnableHttpClient
-@EnableAsync
+@EnableAsync//启动异步功能 ：在具体需要实现异步的方法上面加上@Async注解即可
 public class HouseApplication {
 
     public static void main(String[] args) {
