@@ -15,8 +15,12 @@
             <div class="user-area">
                 <div class="actions">
                     <a th:href="create-agency.html" class="promoted">Create Agency</a>
-                    <a href="/account/register" class="promoted"><strong>注册</strong></a>
-                    <a href="/account/login">登录</a>
+                    <a th:if="${session.loginUser} == null" href="/account/register"
+                       class="promoted"><strong>注册</strong></a>
+                    <a th:if="${session.loginUser} == null" href="/account/login">登录</a>
+                    <a th:if="${session.loginUser} != null" th:text="${session.loginUser.name}"
+                       href="javascript:void(0)"></a>
+                    <a th:if="${session.loginUser} != null" href="/account/logout">登出</a>
                 </div>
                 <!--<div class="language-bar">
                     <a href="#" class="active"><img th:src="@{/static/assets/img/flags/gb.png}" alt=""></a>

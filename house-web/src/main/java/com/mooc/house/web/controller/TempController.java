@@ -48,7 +48,12 @@ public class TempController {
 
     @GetMapping("index")
     public String index() {
-        return "index";
+        return "homepage/index";
+    }
+
+    @GetMapping("index2")
+    public String index2() {
+        return "index-slider-search-box";
     }
 
     @GetMapping("propertyDetail")

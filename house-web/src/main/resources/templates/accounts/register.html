@@ -5,8 +5,7 @@
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="author" content="ThemeStarz">
-    <title>Zoner | 404 Page not found</title>
-    <script type="text/javascript" th:src="@{/static/js/register.js}"></script>
+    <title>注册</title>
 </head>
 <body class="page-sub-page page-create-account page-account" id="page-top">
 <!-- Wrapper -->
@@ -111,9 +110,9 @@
     <div th:replace="/base/footer :: pageFoot">
         <!-- end Page Footer -->
     </div>
-    <script type="text/javascript" th:src="@{/static/assets/js/jquery-2.1.0.min.js}"></script>
-    <script type="text/javascript" th:src="@{/static/assets/js/jquery.form.js}"></script>
-    <script type="text/javascript" th:src="@{/static/assets/js/layer/layer.js}"></script>
+
+    <div th:include="/base/common :: commonJs">
+    </div>
     <script type="text/javascript" th:src="@{/static/js/register.js}"></script>
 </div>
 </body>

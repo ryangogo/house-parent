@@ -1,6 +1,7 @@
 package com.mooc.house.biz.service;
 
 import com.mooc.house.biz.mapper.UserMapper;
+import com.mooc.house.common.constants.CommonConstants;
 import com.mooc.house.common.model.User;
 import com.mooc.house.common.result.ServerResponse;
 import com.mooc.house.common.utils.HashUtils;
@@ -13,6 +14,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
 import java.util.UUID;
 
@@ -48,7 +50,7 @@ public class UserService {
             return ServerResponse.createByErrorMessage("用户邮箱已存在");
         }
         if (account.getPasswd().length() < 6) {
-            return ServerResponse.createByErrorMessage("密码需要大于6位");
+            return ServerResponse.createByErrorMessage("密码至少需要6位");
         }
         if (!account.getPasswd().equals(account.getConfirmPasswd())) {
             return ServerResponse.createByErrorMessage("两次密码输入不一致");
@@ -77,4 +79,42 @@ public class UserService {
     public boolean enable(String key) {
         return mailService.enable(key);
     }
+
+    public User auth(String email, String password) {
+        password = HashUtils.encryPassword(password);
+        User user = userMapper.selectByEmailAndPassword(email, password);
+        if (user != null) {
+            user.setAvatar(CommonConstants.DEFAULT_QINIU_URL + user.getAvatar());
+            user.setPasswd("");
+            return user;
+        }
+        return null;
+    }
+
+    public void retrieve(String email) {
+        mailService.passwordRetrieve(email);
+    }
+
+    public HashMap<String, Object> revise(String email, String key, String password) {
+        HashMap<String, Object> returnMap = new HashMap<String, Object>();
+        if (password.length() < 6) {
+            returnMap.put("status", false);
+            returnMap.put("message", "密码至少需要6位");
+            return returnMap;
+        }
+        returnMap = mailService.revise(key, email);//清除guava的缓存
+        if ((boolean) returnMap.get("status")) {
+            password = HashUtils.encryPassword(password);
+            userMapper.modifyPasswordByEmail(email, password);
+            return returnMap;
+        }
+        return returnMap;
+    }
+
+    public boolean checkEmail(String email) {
+        int resultCount = userMapper.CheckEmail(email);
+        return resultCount == 1;
+    }
+
+
 }

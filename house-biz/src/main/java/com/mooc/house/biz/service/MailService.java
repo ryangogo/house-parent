@@ -5,6 +5,8 @@ import com.google.common.cache.CacheBuilder;
 import com.google.common.cache.RemovalListener;
 import com.google.common.cache.RemovalNotification;
 import com.mooc.house.biz.mapper.UserMapper;
+import com.mooc.house.common.constants.CommonConstants;
+import lombok.val;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +16,7 @@ import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -49,6 +52,17 @@ public class MailService {
         }
     }).build();
 
+    private final Cache<String, String> retrieveCache = CacheBuilder.newBuilder().
+            maximumSize(100).//空间
+            expireAfterAccess(15, TimeUnit.MINUTES).//缓存时间15分钟
+            removalListener(new RemovalListener<String, String>() {//超时就删除
+        //无论是手动清除缓存，还是自动清除缓存都会执行该方法。所以要判断user的enable属性是否已经被修改，在决定是否删除user
+        @Override
+        public void onRemoval(RemovalNotification<String, String> removalNotification) {
+
+        }
+    }).build();
+
     public void sendMail(String title, String url, String email) {
         SimpleMailMessage message = new SimpleMailMessage();
         message.setFrom(from);
@@ -67,7 +81,7 @@ public class MailService {
      */
     @Async
     public void registerNotify(String email) {
-        String randomKey = RandomStringUtils.randomAlphabetic(10);
+        String randomKey = RandomStringUtils.randomAlphabetic(CommonConstants.EMAIL_CODE_LENGTH);
         registerCache.put(randomKey, email);//把email存入guavacache中
         String url = "http://" + domainName + "/account/verify?key=" + randomKey;
         sendMail("平台激活邮件", url, email);
@@ -83,4 +97,33 @@ public class MailService {
         registerCache.invalidate(key);//清掉guava缓存
         return resultCount > 0;
     }
+
+    @Async
+    public void passwordRetrieve(String email) {
+        String randomKey = RandomStringUtils.randomAlphabetic(CommonConstants.EMAIL_CODE_LENGTH);
+        retrieveCache.put(randomKey, email);//把email存入guavacache中
+        String url = "http://" + domainName + "/account/retrieve?key=" + randomKey + "&email=" + email;
+        sendMail("访问url确认重新设置密码", url, email);
+    }
+
+    public HashMap<String, Object> revise(String key, String email) {
+        val returnMap = new HashMap<String, Object>();
+        String guavaEmail = retrieveCache.getIfPresent(key);
+        if (StringUtils.isBlank(guavaEmail)) {
+            returnMap.put("status", false);
+            returnMap.put("message", "无效的连接，请重新操作");
+            return returnMap;
+        }
+        if (email.equals(guavaEmail)) {
+            retrieveCache.invalidate(key);//清掉guava缓存
+            returnMap.put("status", true);
+            return returnMap;
+        } else {
+            returnMap.put("status", false);
+            returnMap.put("message", "无效的连接");
+            return returnMap;
+        }
+
+    }
+
 }

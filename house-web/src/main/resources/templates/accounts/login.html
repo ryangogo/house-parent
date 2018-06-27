@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+
+<html lang="en-US" xmlns:th="http://www.thymeleaf.org">
+<head th:include="/base/common :: commonHead">
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="ThemeStarz">
+    <title>用户登录</title>
+</head>
+
+<body class="page-sub-page page-create-account page-account" id="page-top">
+<!-- Wrapper -->
+<div class="wrapper">
+    <!-- Navigation -->
+    <div th:replace="/base/header :: pageHead"></div>
+    <!-- end Navigation -->
+    <!-- Page Content -->
+    <div id="page-content">
+        <!-- Breadcrumb -->
+        <div class="container">
+            <ol class="breadcrumb">
+                <li><a href="#">Home</a></li>
+                <li class="active">登录</li>
+            </ol>
+        </div>
+        <!-- end Breadcrumb -->
+
+        <div class="container">
+            <header><h1>登录</h1></header>
+            <div class="row">
+                <div class="col-md-4 col-sm-6 col-md-offset-4 col-sm-offset-3">
+                    <form role="form" id="form-create-account" method="post" action="/account/login">
+                        <div class="form-group">
+                            <label for="form-create-account-email">Email:</label>
+                            <input type="text" name="email" th:value="${email}" class="form-control"
+                                   id="form-create-account-email" required>
+                        </div><!-- /.form-group -->
+                        <div class="form-group">
+                            <label for="form-create-account-password">密码:</label>
+                            <input type="password" name="password" th:value="${password}" class="form-control"
+                                   id="form-create-account-password" required>
+                        </div><!-- /.form-group -->
+                        <div class="form-group">
+                            <span style="color: crimson" th:text="${errorMsg}"></span>
+                        </div><!-- /.form-group -->
+                        <!--<input type="hidden" value="${target!}" name="target" />-->
+                        <div class="form-group clearfix">
+                            <button type="submit" class="btn pull-right btn-default" id="account-submit">登录</button>
+                        </div><!-- /.form-group -->
+                    </form>
+                    <hr>
+                    <div class="center"><a href="/account/retrieve?key=1">忘记密码</a></div>
+                </div>
+            </div>
+
+        </div><!-- /.container -->
+    </div>
+    <!-- end Page Content -->
+    <!-- Page Footer -->
+    <div th:replace="/base/footer :: pageFoot">
+        <!-- end Page Footer -->
+    </div>
+
+    <div id="overlay"></div>
+    <div th:include="/base/common :: commonJs"></div>
+    <!-- end Page Footer -->
+</div>
+
+<!--[if gt IE 8]>
+<![endif]-->
+<script type="text/javascript">
+    /*$(document).ready(function() {
+     var errorMsg   = $("#errorMsg").val();
+     var successMsg = $("#successMsg").val();
+     if(errorMsg){
+     errormsg("error",errorMsg);
+     }
+     if(successMsg) {
+     successmsg("success",successMsg);
+     }
+     });
+
+     function openRemember(){
+     var email = document.getElementById('form-create-account-email');
+     window.open('/accounts/remember?username='+email.value);
+     }
+     */
+</script>
+
+</body>
+</html>

@@ -27,4 +27,10 @@ public interface UserMapper {
 
     @Update("UPDATE user SET enable = #{enable} WHERE email = #{email}")
     int setEnable(@Param("enable") int enable, @Param("email") String email);
+
+    @Update("UPDATE user SET passwd = #{password} WHERE email = #{email} and enable = 1")
+    int modifyPasswordByEmail(@Param("email") String email, @Param("password") String password);
+
+    @Select("select * from user where email = #{email} and passwd = #{password} and enable = 1")
+    User selectByEmailAndPassword(@Param("email") String email, @Param("password") String password);
 }
