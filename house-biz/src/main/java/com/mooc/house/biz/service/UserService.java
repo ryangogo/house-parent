@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpSession;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.HashMap;
@@ -116,5 +117,47 @@ public class UserService {
         return resultCount == 1;
     }
 
+    public HashMap<String, Object> changePassword(User user) {
+        HashMap<String, Object> returnMap = new HashMap<String, Object>();
+        if (!user.getNewPassword().equals(user.getConfirmPasswd())) {
+            returnMap.put("status", false);
+            returnMap.put("message", "两次输入新密码不一致，请重新输入");
+            return returnMap;
+        }
+        if (user.getNewPassword().length() < 6) {
+            returnMap.put("status", false);
+            returnMap.put("message", "密码长度需要大于6位");
+            return returnMap;
+        }
+        String passwd = userMapper.checkByUserNameAndEmail(user.getName(), user.getEmail());
+        user.setPasswd(HashUtils.encryPassword(user.getPasswd()));
+        if (!user.getPasswd().equals(passwd)) {
+            returnMap.put("status", false);
+            returnMap.put("message", "密码错误，请重新输入");
+            return returnMap;
+        }
+        String encPwd = HashUtils.encryPassword(user.getNewPassword());
+        userMapper.modifyPasswordByEmail(user.getEmail(), encPwd);
+        returnMap.put("status", true);
+        returnMap.put("message", "密码修改成功");
+        return returnMap;
+    }
 
+    public HashMap<String, Object> modifyUser(HttpSession session, User user, String name, String phone, String email, String aboutme) {
+        HashMap<String, Object> returnMap = new HashMap<String, Object>();
+        int resultCount = userMapper.modifyUserByEmail(name, phone, email, aboutme);
+        if (resultCount == 1) {
+            returnMap.put("status", true);
+            returnMap.put("message", "密码修改成功");
+            user.setName(name);
+            user.setPhone(phone);
+            user.setAboutme(aboutme);
+            session.removeAttribute(CommonConstants.USER_ATTRIBUTE);
+            session.setAttribute(CommonConstants.USER_ATTRIBUTE, user);
+            return returnMap;
+        }
+        returnMap.put("status", false);
+        returnMap.put("message", "修改密码失败");
+        return returnMap;
+    }
 }

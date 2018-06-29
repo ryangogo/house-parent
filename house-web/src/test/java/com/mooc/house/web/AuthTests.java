@@ -18,6 +18,7 @@ public class AuthTests {
 
     @Test
     public void testAuth() {
+        System.out.println(111);
     }
 
 }

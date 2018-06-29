@@ -15,12 +15,17 @@ public class WebMvcConf extends WebMvcConfigurerAdapter {
     @Autowired
     private AuthInterceptor authInterceptor;
 
+    /**
+     * 为拦截器添加需要拦截的url
+     *
+     * @param registry
+     */
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(authInterceptor).excludePathPatterns("/static").addPathPatterns("/**");
         registry
-                .addInterceptor(authActionInterceptor).addPathPatterns("/house/toAdd")
-                .addPathPatterns("/accounts/profile").addPathPatterns("/accounts/profileSubmit")
+                .addInterceptor(authActionInterceptor).addPathPatterns("/account/changePassword")
+                .addPathPatterns("/account/message").addPathPatterns("/account/changeMessage")
                 .addPathPatterns("/house/bookmarked").addPathPatterns("/house/del")
                 .addPathPatterns("/house/ownlist").addPathPatterns("/house/add")
                 .addPathPatterns("/house/toAdd").addPathPatterns("/agency/agentMsg")

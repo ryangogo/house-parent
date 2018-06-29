@@ -17,6 +17,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpSession;
+import java.util.HashMap;
+import java.util.Map;
 
 @Controller
 @RequestMapping("/account/")
@@ -96,6 +98,15 @@ public class UserController {
         return "redirect:/account/login";
     }
 
+    @GetMapping("/test")
+    public String testFunction(Map<String, String> ua) {
+        if (ua.get("version").equals("1.0.0")) {
+            return "1.0.0";
+        } else {
+            return "new_version";
+        }
+    }
+
     @GetMapping("retrieve")
     public String retrieve(String key, String email, Model model) {
         if (CommonConstants.FORGET_PWD_CODE.equals(key) && StringUtils.isBlank(email)) {//跳转到邮箱获取页面
@@ -130,4 +141,50 @@ public class UserController {
             return "accounts/retrieve";
         }
     }
+
+    //-----------------------------------------------------个人信息-----------------------------------------------------
+
+    @GetMapping("message")
+    public String message() {
+        return "accounts/message";
+    }
+
+    @GetMapping("changePassword")
+    public String changePassword() {//防止用户刷新报错
+        return "accounts/message";
+    }
+
+    @GetMapping("changeMessage")
+    public String changeMessage() {//防止用户刷新报错
+        return "accounts/message";
+    }
+
+    @PostMapping("changePassword")
+    public String changePassword(HttpSession session, String password, String newPassword, String confirmPassword, Model model) {
+        User user = (User) session.getAttribute(CommonConstants.USER_ATTRIBUTE);
+        user.setPasswd(password);
+        user.setNewPassword(newPassword);
+        user.setConfirmPasswd(confirmPassword);
+        HashMap<String, Object> resultMap = userService.changePassword(user);
+        if ((boolean) resultMap.get("status")) {
+            model.addAttribute(ResultMsg.successMsgKey, (String) resultMap.get("message"));
+        } else {
+            model.addAttribute(ResultMsg.errorMsgKey, (String) resultMap.get("message"));
+        }
+        return "accounts/message";
+    }
+
+    @PostMapping("changeMessage")
+    public String changeMessage(HttpSession session, String name,
+                                String phone, String email, String aboutme, Model model) {
+        User user = (User) session.getAttribute(CommonConstants.USER_ATTRIBUTE);
+        HashMap<String, Object> resultMap = userService.modifyUser(session, user, name, phone, email, aboutme);
+        if ((boolean) resultMap.get("status")) {
+            model.addAttribute(ResultMsg.successMsgKey, (String) resultMap.get("message"));
+        } else {
+            model.addAttribute(ResultMsg.errorMsgKey, (String) resultMap.get("message"));
+        }
+        return "accounts/message";
+    }
+
 }

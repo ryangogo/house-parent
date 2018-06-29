@@ -3,6 +3,7 @@ package com.mooc.house.web.interceptor;
 import com.google.common.base.Joiner;
 import com.mooc.house.common.constants.CommonConstants;
 import com.mooc.house.common.model.User;
+import com.mooc.house.common.result.ResultMsg;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
@@ -21,12 +22,14 @@ public class AuthInterceptor implements HandlerInterceptor {
 
         Map<String, String[]> map = request.getParameterMap();
         map.forEach((k, v) -> {
-            if (k.equals("errorMsg") || k.equals("successMsg") || k.equals("target")) {
+            if (k.equals(ResultMsg.successMsgKey) || k.equals(ResultMsg.errorMsgKey) || k.equals("target")) {
                 request.setAttribute(k, Joiner.on(",").join(v));
             }
         });
-        String reqUri = request.getRequestURI();
-        if (reqUri.startsWith("/static") || reqUri.startsWith("/error")) {
+
+
+        String reqURI = request.getRequestURI();
+        if (reqURI.startsWith("/static") || reqURI.startsWith("/error")) {//判断如果是静态资源或者 error请求则不需要进行拦截
             return true;
         }
         HttpSession session = request.getSession(true);

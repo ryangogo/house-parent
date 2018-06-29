@@ -1,11 +1,14 @@
-package com.mooc.house.common.model;
+package com.mooc.house.common.vo;
 
+import com.mooc.house.common.model.City;
+import com.mooc.house.common.model.Community;
 import lombok.Data;
 
 import java.util.Date;
+import java.util.List;
 
 @Data
-public class House {
+public class HouseVO {
     private Long id;
 
     /**
@@ -93,4 +96,13 @@ public class House {
      */
     private Byte state;
 
+    /**
+     * 所有城市
+     */
+    private List<City> cities;
+
+    /**
+     * 所有城市
+     */
+    private List<Community> communities;
 }

@@ -8,6 +8,7 @@ import java.net.URLEncoder;
 import java.util.Map;
 
 public class ResultMsg {
+
     public static final String errorMsgKey = "errorMsg";
 
     public static final String successMsgKey = "successMsg";
@@ -19,7 +20,6 @@ public class ResultMsg {
     public boolean isSuccess() {
         return errorMsg == null;
     }
-
 
     public String getErrorMsg() {
         return errorMsg;

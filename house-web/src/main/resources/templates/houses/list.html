@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+
+<html lang="en-US" xmlns:th="http://www.thymeleaf.org">
+<head th:include="/base/common :: commonHead">
+    <title>用户登录</title>
+</head>
+
+<body class="page-sub-page page-listing-lines page-search-results" id="page-top">
+<!-- Wrapper -->
+<div class="wrapper">
+    <!-- Navigation -->
+    <div th:replace="/base/header :: pageHead"></div><!-- /.navigation -->
+    <!-- end Navigation -->
+    <!-- Page Content -->
+    <div id="page-content">
+        <!-- Breadcrumb -->
+        <div class="container">
+            <ol class="breadcrumb">
+                <li><a href="#">Home</a></li>
+                <li class="active">房产列表</li>
+            </ol>
+        </div>
+        <!-- end Breadcrumb -->
+
+
+        <div class="container">
+            <div class="row">
+                <!-- Results -->
+                <div class="col-md-9 col-sm-9">
+                    <section id="results">
+                        <header><h1>房产列表</h1></header>
+                        <section id="search-filter">
+                            <figure><h3><i class="fa fa-search"></i>搜索结果:</h3>
+                                <span class="search-count"></span>
+                                <div class="sorting">
+                                    <div class="form-group">
+                                        <select name="sorting" id="sorting">
+                                            <option value="">排序</option>
+                                            <option value="price_asc" selected>价格由低到高</option>
+                                            <option value="price_desc">价格由高到低</option>
+                                            <option value="time_desc">加入时间</option>
+                                        </select>
+                                    </div><!-- /.form-group -->
+                                </div>
+                            </figure>
+                        </section>
+                        <section id="properties" class="display-lines">
+
+                            <div class="property">
+                                <figure class="tag status">正在销售</figure>
+                                <div class="property-image">
+                                    <figure class="ribbon">In Hold</figure>
+                                    <a href="/house/detail">
+                                        <img alt="" src="" style="width: 260px;height: 195px">
+                                    </a>
+                                </div>
+
+                                <div class="info">
+                                    <header>
+                                        <a href="/house/detail"><h3>橡树湾 全南向 南北通透</h3></a>
+                                        <figure>清河中街</figure>
+
+                                    </header>
+                                    <div class="tag price">1万</div>
+                                    <aside>
+                                        <p>
+                                        </p>
+
+                                        <dl>
+                                            <dt>状态:</dt>
+                                            <dd>销售中</dd>
+                                            <dt>面积:</dt>
+                                            <dd> 120m<sup>2</sup></dd>
+                                            <dt>卧室:</dt>
+                                            <dd>2</dd>
+                                            <dt>卫生间:</dt>
+                                            <dd>2</dd>
+                                        </dl>
+                                    </aside>
+                                    <a href="/house/detail" class="link-arrow">Read More</a>
+                                </div>
+                            </div>
+                            </#list>
+                        </section>
+                        <!-- Pagination -->
+                        <div class="center">
+                            <div class="page"></div>
+                        </div><!-- /.center-->
+                    </section><!-- /#properties-->
+                </div><!-- /.col-md-9 -->
+                <!-- end Results -->
+
+                <!-- sidebar -->
+                <div class="col-md-3 col-sm-3">
+                    <section id="sidebar">
+                        <aside id="edit-search">
+                            <header><h3>Search Properties</h3></header>
+                            <form role="form" id="searchForm" class="form-search" method="post" action="/house/list">
+
+                                <div class="form-group">
+                                    <input type="text" class="form-control" id="search-box-property-id" value=""
+                                           name="name" placeholder="尝试输入小区名">
+                                </div>
+                                <div class="form-group">
+                                    <select name="type">
+                                        <option value="1">类型</option>
+                                        <option value="2">售卖</option>
+                                        <option value="3">出租</option>
+                                    </select>
+                                </div><!-- /.form-group -->
+                                <input type="text" value="" name=sort hidden="true">
+
+                                <div class="form-group">
+                                    <button type="submit" class="btn btn-default">搜索</button>
+                                </div><!-- /.form-group -->
+                            </form><!-- /#form-map -->
+                        </aside><!-- /#edit-search -->
+                        <aside id="featured-properties">
+                            <header><h3>热门房产</h3></header>
+                            <div class="property small">
+                                <a href="/house/detail">
+                                    <div class="property-image">
+                                        <img alt="" src="" style="width: 100px;height: 75px">
+                                    </div>
+                                </a>
+                                <div class="info">
+                                    <a href="/house/detail"><h4></h4></a>
+                                    <figure></figure>
+                                    <div class="tag price">￥万</div>
+                                </div>
+                            </div><!-- /.property -->
+
+                        </aside><!-- /#featured-properties -->
+
+                    </section><!-- /#sidebar -->
+                </div><!-- /.col-md-3 -->
+                <!-- end Sidebar -->
+            </div><!-- /.row -->
+        </div><!-- /.container -->
+    </div>
+    <!-- end Page Content -->
+    <!-- Page Footer -->
+    <div th:replace="/base/footer :: pageFoot"></div>
+    <!-- end Page Footer -->
+</div>
+
+<div th:include="/base/common :: commonJs"></div>
+<!--[if gt IE 8]>
+<![endif]-->
+<script type="text/javascript">
+    $('.page').page({
+        //id : '#paging',//id
+        leng: 9,//总页数
+        activeClass: 'activP',//active类
+        firstPage: '首页',//
+        lastPage: '末页',
+        prv: '«',
+        next: '»',
+        clickBack: function (page) {
+            alert(page);
+        }
+    })
+</script>
+
+</body>
+</html>

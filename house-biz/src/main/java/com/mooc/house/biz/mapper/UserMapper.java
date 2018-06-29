@@ -33,4 +33,11 @@ public interface UserMapper {
 
     @Select("select * from user where email = #{email} and passwd = #{password} and enable = 1")
     User selectByEmailAndPassword(@Param("email") String email, @Param("password") String password);
+
+    @Select("select passwd from user where name = #{name} and email = #{email} and enable = 1")
+    String checkByUserNameAndEmail(@Param("name") String name, @Param("email") String email);
+
+    @Update("UPDATE user SET name = #{name},phone = #{phone},aboutme = #{aboutme} WHERE email = #{email} and enable = 1")
+    int modifyUserByEmail(@Param("name") String name, @Param("phone") String phone, @Param("email") String email, @Param("aboutme") String aboutme);
+
 }

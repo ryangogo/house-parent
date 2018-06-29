@@ -19,7 +19,7 @@
                        class="promoted"><strong>注册</strong></a>
                     <a th:if="${session.loginUser} == null" href="/account/login">登录</a>
                     <a th:if="${session.loginUser} != null" th:text="${session.loginUser.name}"
-                       href="javascript:void(0)"></a>
+                       href="/account/message"></a>
                     <a th:if="${session.loginUser} != null" href="/account/logout">登出</a>
                 </div>
                 <!--<div class="language-bar">
