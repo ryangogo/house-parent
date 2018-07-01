@@ -3,24 +3,24 @@
 <mapper namespace="com.mooc.house.biz.mapper.HouseMapper">
 
     <sql id="houseField">
-     a.id,
-     a.type,
-     a.name,
-     a.price,
-     a.images,
-     a.area,
-     a.beds,
-     a.baths,
-     a.rating,
-     a.remarks,
-     a.properties,
-     a.floor_plan,
-     a.tags,
-     a.create_time,
-     a.city_id,
-     a.community_id,
-     a.address,
-     a.state
+        id,
+        type,
+        name,
+        price,
+        images,
+        area,
+        beds,
+        baths,
+        rating,
+        remarks,
+        properties,
+        floor_plan,
+        tags,
+        create_time,
+        city_id,
+        community_id,
+        address,
+        state
    </sql>
 
     <sql id="houseCondition">
@@ -63,28 +63,24 @@
         </where>
     </sql>
 
-    <select id="selectPageHouses" resultType="house">
+    <select id="listPageHouse" resultType="house">
         select
         <include refid="houseField"/>
-        from house a
-        <include refid="houseCondition"></include>
-        <choose>
-            <when test="house.sort != null and house.sort == 'price_asc'">
-                order by a.price asc
-            </when>
-            <when test="house.sort != null and house.sort == 'price_desc'">
-                order by a.price desc
-            </when>
-            <otherwise>
-                order by a.create_time desc
-            </otherwise>
-        </choose>
-        <if test="pageParams.offset !=null and pageParams.limit != null">
-            limit #{pageParams.offset},#{pageParams.limit}
-        </if>
-        <if test="pageParams.offset == null and pageParams.limit != null">
-            limit #{pageParams.limit}
-        </if>
+        from house
+        <where>
+            <if test="name != null and name != ''">
+                and name like concat('%',#{name},'%')
+            </if>
+            <if test="type != null and type != ''">
+                and type = #{type}
+            </if>
+            <if test="sorting == 1 ">
+                order by create_time asc
+            </if>
+            <if test="sorting == 2 ">
+                order by create_time desc
+            </if>
+        </where>
     </select>
 
     <select id="selectPageCount" resultType="long">
@@ -165,7 +161,7 @@
                      #{properties},
                      #{floorPlan},
                      #{tags},
-                     #{createTime},
+        now(),
                      #{cityId},
                      #{communityId},
                      #{address},
@@ -181,7 +177,7 @@
                      value(
                        #{houseId},
                        #{userId},
-                       #{createTime},
+        now(),
                        #{type}
                      )
                      

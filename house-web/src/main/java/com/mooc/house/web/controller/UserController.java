@@ -18,7 +18,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpSession;
 import java.util.HashMap;
-import java.util.Map;
 
 @Controller
 @RequestMapping("/account/")
@@ -96,15 +95,6 @@ public class UserController {
         session.removeAttribute(CommonConstants.USER_ATTRIBUTE);
         session.removeAttribute(CommonConstants.PLAIN_USER_ATTRIBUTE);
         return "redirect:/account/login";
-    }
-
-    @GetMapping("/test")
-    public String testFunction(Map<String, String> ua) {
-        if (ua.get("version").equals("1.0.0")) {
-            return "1.0.0";
-        } else {
-            return "new_version";
-        }
     }
 
     @GetMapping("retrieve")

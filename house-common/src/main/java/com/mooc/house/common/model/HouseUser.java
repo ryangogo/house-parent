@@ -26,6 +26,6 @@ public class HouseUser {
     /**
      * 1：售卖，2：收藏
      */
-    private Boolean type;
+    private Integer type;
 
 }

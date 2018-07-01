@@ -5,12 +5,12 @@
     //默认参数 (放在插件外面，避免每次调用插件都调用一次，节省内存)
     var defaults = {
         //id : '#paging',//id
-        leng: 9,//总页数
+        leng: 1,//总页数
         activeClass: 'page-active',//active类
         /*firstPage: '首页',//
          lastPage: '末页',*/
-        prv: '«',
-        next: '»',
+        /*prv: '«',
+         next: '»',*/
         clickBack: function () {
         }
     };

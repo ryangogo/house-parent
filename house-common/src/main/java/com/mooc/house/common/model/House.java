@@ -2,7 +2,9 @@ package com.mooc.house.common.model;
 
 import lombok.Data;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @Data
 public class House {
@@ -16,7 +18,7 @@ public class House {
     /**
      * 1:销售，2:出租
      */
-    private Boolean type;
+    private String type;
 
     /**
      * 房屋价格
@@ -91,6 +93,9 @@ public class House {
     /**
      * 1:上架，2:下架
      */
-    private Byte state;
+    private Integer state;
+
+    List<String> imageList = new ArrayList<>();
+    List<String> floorPlanList = new ArrayList<>();
 
 }

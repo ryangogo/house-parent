@@ -2,7 +2,10 @@ package com.mooc.house.biz.mapper;
 
 import com.mooc.house.common.model.City;
 import com.mooc.house.common.model.Community;
+import com.mooc.house.common.model.House;
+import com.mooc.house.common.model.HouseUser;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 
 import java.util.List;
@@ -18,4 +21,10 @@ public interface HouseMapper {
 
     @Select("select id,name from community group by name")
     List<Community> selectAllCommunity();
+
+    int insert(House house);
+
+    int insertHouseUser(HouseUser houseUser);
+
+    List<House> listPageHouse(@Param("name") String name, @Param("type") String type, @Param("sorting") String sorting);
 }

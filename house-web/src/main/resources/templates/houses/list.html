@@ -35,10 +35,8 @@
                                 <div class="sorting">
                                     <div class="form-group">
                                         <select name="sorting" id="sorting">
-                                            <option value="">排序</option>
-                                            <option value="price_asc" selected>价格由低到高</option>
-                                            <option value="price_desc">价格由高到低</option>
-                                            <option value="time_desc">加入时间</option>
+                                            <option value="1" selected>价格由低到高</option>
+                                            <option value="2">价格由高到低</option>
                                         </select>
                                     </div><!-- /.form-group -->
                                 </div>
@@ -57,7 +55,7 @@
 
                                 <div class="info">
                                     <header>
-                                        <a href="/house/detail"><h3>橡树湾 全南向 南北通透</h3></a>
+                                        <a href="/house/detail"><h3>橡树湾 清河中街 不把不临街</h3></a>
                                         <figure>清河中街</figure>
 
                                     </header>
@@ -72,14 +70,15 @@
                                             <dt>面积:</dt>
                                             <dd> 120m<sup>2</sup></dd>
                                             <dt>卧室:</dt>
-                                            <dd>2</dd>
+                                            <dd>2间</dd>
                                             <dt>卫生间:</dt>
-                                            <dd>2</dd>
+                                            <dd>2间</dd>
                                         </dl>
                                     </aside>
                                     <a href="/house/detail" class="link-arrow">Read More</a>
                                 </div>
                             </div>
+
                             </#list>
                         </section>
                         <!-- Pagination -->
@@ -98,22 +97,21 @@
                             <form role="form" id="searchForm" class="form-search" method="post" action="/house/list">
 
                                 <div class="form-group">
-                                    <input type="text" class="form-control" id="search-box-property-id" value=""
-                                           name="name" placeholder="尝试输入小区名">
+                                    <input type="text" class="form-control" id="search-box-property-name" value=""
+                                           name="name" placeholder="小区名称">
                                 </div>
                                 <div class="form-group">
-                                    <select name="type">
-                                        <option value="1">类型</option>
-                                        <option value="2">售卖</option>
-                                        <option value="3">出租</option>
+                                    <select name="type" id="type">
+                                        <option value="1">售卖</option>
+                                        <option value="2">出租</option>
                                     </select>
                                 </div><!-- /.form-group -->
                                 <input type="text" value="" name=sort hidden="true">
 
-                                <div class="form-group">
-                                    <button type="submit" class="btn btn-default">搜索</button>
-                                </div><!-- /.form-group -->
                             </form><!-- /#form-map -->
+                            <div class="form-group">
+                                <button onclick="loadingPage()" class="btn btn-default">搜索</button>
+                            </div><!-- /.form-group -->
                         </aside><!-- /#edit-search -->
                         <aside id="featured-properties">
                             <header><h3>热门房产</h3></header>
@@ -145,21 +143,11 @@
 </div>
 
 <div th:include="/base/common :: commonJs"></div>
+<script type="text/javascript" th:src="@{/static/js/houses/list.js}"></script>
 <!--[if gt IE 8]>
 <![endif]-->
 <script type="text/javascript">
-    $('.page').page({
-        //id : '#paging',//id
-        leng: 9,//总页数
-        activeClass: 'activP',//active类
-        firstPage: '首页',//
-        lastPage: '末页',
-        prv: '«',
-        next: '»',
-        clickBack: function (page) {
-            alert(page);
-        }
-    })
+
 </script>
 
 </body>
