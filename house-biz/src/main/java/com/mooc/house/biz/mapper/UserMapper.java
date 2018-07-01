@@ -1,5 +1,6 @@
 package com.mooc.house.biz.mapper;
 
+import com.mooc.house.common.model.Agency;
 import com.mooc.house.common.model.User;
 import org.apache.ibatis.annotations.*;
 
@@ -40,4 +41,6 @@ public interface UserMapper {
     @Update("UPDATE user SET name = #{name},phone = #{phone},aboutme = #{aboutme} WHERE email = #{email} and enable = 1")
     int modifyUserByEmail(@Param("name") String name, @Param("phone") String phone, @Param("email") String email, @Param("aboutme") String aboutme);
 
+    @Select("select * from agency")
+    List<Agency> selectAllAgency();
 }

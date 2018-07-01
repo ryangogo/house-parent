@@ -14,7 +14,7 @@
             </div>
             <div class="user-area">
                 <div class="actions">
-                    <a th:href="create-agency.html" class="promoted">Create Agency</a>
+                    <!--<a th:href="create-agency.html" class="promoted">Create Agency</a>-->
                     <a th:if="${session.loginUser} == null" href="/account/register"
                        class="promoted"><strong>注册</strong></a>
                     <a th:if="${session.loginUser} == null" href="/account/login">登录</a>
@@ -61,7 +61,8 @@
                     <li><a href="/blog/list">百科</a></li>
                 </ul>
             </nav><!-- /.navbar collapse-->
-            <div class="add-your-property">
+            <div class="add-your-property"
+                 th:if="(${session.loginUser} == null)?false:(${session.loginUser.type} == 2?true:false)">
                 <a href="/house/add" class="btn btn-default"><i class="fa fa-plus"></i><span
                         class="text">添加房产</span></a>
             </div>

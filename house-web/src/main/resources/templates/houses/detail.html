@@ -1,13 +1,14 @@
 <!DOCTYPE html>
 
-<html lang="en-US">
-<@common.header/>
-
+<html lang="en-US" xmlns:th="http://www.thymeleaf.org">
+<head th:include="/base/common :: commonHead">
+    <title>用户登录</title>
+</head>
 <body class="page-sub-page page-property-detail" id="page-top">
 <!-- Wrapper -->
 <div class="wrapper">
     <!-- Navigation -->
-    <@common.nav/><!-- /.navigation -->
+    <div th:replace="/base/header :: pageHead"></div><!-- /.navigation -->
     <!-- end Navigation -->
     <!-- Page Content -->
     <div id="page-content">
@@ -295,7 +296,7 @@
 </div>
 <!-- <script type="text/javascript" src="http://maps.google.com/maps/api/js?key=AIzaSyABT1kCnk8CW4Ckpd0RisUg25PIdDD3Gfg"></script> -->
 
-<@common.js/>
+<div th:include="/base/common :: commonJs"></div>
 
 <!--[if gt IE 8]>
 <script type="text/javascript" src="/static//js/ie.js"></script>

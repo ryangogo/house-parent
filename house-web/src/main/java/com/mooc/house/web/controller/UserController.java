@@ -2,6 +2,7 @@ package com.mooc.house.web.controller;
 
 import com.mooc.house.biz.service.UserService;
 import com.mooc.house.common.constants.CommonConstants;
+import com.mooc.house.common.model.Agency;
 import com.mooc.house.common.model.User;
 import com.mooc.house.common.result.ResultMsg;
 import com.mooc.house.common.result.ServerResponse;
@@ -18,6 +19,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpSession;
 import java.util.HashMap;
+import java.util.List;
 
 @Controller
 @RequestMapping("/account/")
@@ -32,7 +34,9 @@ public class UserController {
      * @return
      */
     @GetMapping("register")
-    public String accountsRegister() {
+    public String accountsRegister(Model model) {
+        List<Agency> agencies = userService.getAgencies();
+        model.addAttribute("agencies", agencies);
         return "accounts/register";
     }
 
@@ -58,8 +62,8 @@ public class UserController {
     public String verify(String key, Model model) {
         boolean result = userService.enable(key);
         if (result) {
-            model.addAttribute("msg", "激活成功");
-            return "index";
+            model.addAttribute(ResultMsg.successMsgKey, "激活成功");
+            return "accounts/login";
         } else {
             model.addAttribute("msg", "key不存在");
             return "accounts/register";

@@ -2,6 +2,7 @@ package com.mooc.house.biz.service;
 
 import com.mooc.house.biz.mapper.UserMapper;
 import com.mooc.house.common.constants.CommonConstants;
+import com.mooc.house.common.model.Agency;
 import com.mooc.house.common.model.User;
 import com.mooc.house.common.result.ServerResponse;
 import com.mooc.house.common.utils.HashUtils;
@@ -55,6 +56,9 @@ public class UserService {
         }
         if (!account.getPasswd().equals(account.getConfirmPasswd())) {
             return ServerResponse.createByErrorMessage("两次密码输入不一致");
+        }
+        if (account.getType() == 1) {
+            account.setAgencyId(0);
         }
         //对密码进行加盐MD5操作
         account.setPasswd(HashUtils.encryPassword(account.getPasswd()));
@@ -159,5 +163,9 @@ public class UserService {
         returnMap.put("status", false);
         returnMap.put("message", "修改密码失败");
         return returnMap;
+    }
+
+    public List<Agency> getAgencies() {
+        return userMapper.selectAllAgency();
     }
 }

@@ -40,17 +40,15 @@
                                 <input type="radio" value="2" id="account-type-agent" name="type" required>经纪人
                             </label>
                         </div>
-                        <!--<div id="agency" class="disabled">
+                        <div id="agency">
                             <div class="form-group">
                                 <label>选择经纪机构:</label>
                                 <select name="agencyId" id="agencyId">
-                                    <option value="0" >请选择经纪机构</option>
-                                    <#list agencyList as agency>
-                                        <option value="" >W</option>
-                                    </#list>
+                                    <option th:each="agency : ${agencies}" th:value='${agency.id}'
+                                            th:text="${agency.name}"></option>
                                 </select>
-                            </div>&lt;!&ndash; /.form-group &ndash;&gt;
-                        </div>-->
+                            </div>
+                        </div>
                         <hr>
                         <div class="form-group">
                             <label for="form-create-account-full-name">全名:</label>

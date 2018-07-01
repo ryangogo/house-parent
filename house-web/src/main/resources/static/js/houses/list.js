@@ -92,7 +92,7 @@ function setMsg(obj) {
             '<div class="info">' +
             '<header>' +
             '<a href="/house/detail"><h3>' + data.name + '</h3></a>' +
-            '<figure>清河中街</figure>' +
+            '<figure>' + data.address + '</figure>' +
             '</header>' +
             '<div class="tag price">' + data.price + '万</div>' +
             '<aside>' +
