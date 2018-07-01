@@ -57,4 +57,9 @@ public class HouseController {
         houseService.add(house, houseFiles, floorPlanFiles, featureList, user);
         return "houses/add";
     }
+
+    @GetMapping("detail")
+    public String detail(Model model, String id) {
+        return "houses/detail";
+    }
 }
