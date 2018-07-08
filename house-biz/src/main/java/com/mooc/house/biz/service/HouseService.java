@@ -35,6 +35,9 @@ public class HouseService {
     @Autowired
     private UserMapper userMapper;
 
+    @Autowired
+    private MailService mailService;
+
     public HouseVO getCitiesAndCommunities() {
         val cities = houseMapper.selectAllCity();
         val communities = houseMapper.selectAllCommunity();
@@ -128,5 +131,31 @@ public class HouseService {
         return ServerResponse.createBySuccess(pageInfo);
     }
 
+    public House getHouseDetail(String id) {
+        House house = houseMapper.selectById(id);
+        String properties = house.getProperties();
+        String[] propertyArray = properties.split("\\|");
+        for (String property : propertyArray) {
+            house.getPropertyList().add(property);
+        }
+        for (String image : house.getImages().split("\\|")) {
+            house.getImageList().add(CommonConstants.DEFAULT_QINIU_URL + image);
+        }
+        for (String floorPlan : house.getFloorPlan().split("\\|")) {
+            house.getFloorPlanList().add(CommonConstants.DEFAULT_QINIU_URL + floorPlan);
+        }
+        return house;
+    }
 
+    public User getUserByHouseId(long id) {
+        User user = houseMapper.selectUserByHouseId(id);
+        user.setAvatar(CommonConstants.DEFAULT_QINIU_URL + user.getAvatar());
+        return user;
+    }
+
+    public void sendEmailToAgent(Integer houseId, Integer agencyId, String msg, User loginUser) {
+        House house = houseMapper.selectById(String.valueOf(houseId));
+        User agent = userMapper.selectById(agencyId);
+        mailService.sendMailToAgent(house, agent, msg, loginUser);
+    }
 }

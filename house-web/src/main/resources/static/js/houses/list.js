@@ -83,15 +83,15 @@ function setMsg(obj) {
         var state = data.type == 1 ? "销售中" : "出租中";
         var src = data.imageList[1];
         $("#properties").append('<div class="property">' +
-            '<figure class="tag status">正在销售</figure>' +
+            '<figure class="tag status">' + state + '</figure>' +
             '<div class="property-image">' +
             '<figure class="ribbon">In Hold</figure>' +
-            '<a href="/house/detail">' +
+            '<a href="/house/detail?id=' + data.id + '">' +
             '<img alt="" src="' + src + '" style="width: 260px;height: 195px"></a>' +
             '</div>' +
             '<div class="info">' +
             '<header>' +
-            '<a href="/house/detail"><h3>' + data.name + '</h3></a>' +
+            '<a href="/house/detail?id=' + data.id + '"><h3>' + data.name + '</h3></a>' +
             '<figure>' + data.address + '</figure>' +
             '</header>' +
             '<div class="tag price">' + data.price + '万</div>' +
@@ -108,7 +108,7 @@ function setMsg(obj) {
             '<dd>' + data.baths + '间</dd>' +
             '</dl>' +
             '</aside>' +
-            '<a href="/house/detail" class="link-arrow">Read More</a>' +
+            '<a href="/house/detail?id=' + data.id + '" class="link-arrow">Read More</a>' +
             '</div>' +
             '</div>')
     });

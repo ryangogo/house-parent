@@ -43,4 +43,7 @@ public interface UserMapper {
 
     @Select("select * from agency")
     List<Agency> selectAllAgency();
+
+    @Select("select * from user where id = #{agencyId}")
+    User selectById(@Param("agencyId") Integer agencyId);
 }

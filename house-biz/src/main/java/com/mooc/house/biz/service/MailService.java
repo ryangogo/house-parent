@@ -6,6 +6,8 @@ import com.google.common.cache.RemovalListener;
 import com.google.common.cache.RemovalNotification;
 import com.mooc.house.biz.mapper.UserMapper;
 import com.mooc.house.common.constants.CommonConstants;
+import com.mooc.house.common.model.House;
+import com.mooc.house.common.model.User;
 import lombok.val;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -126,4 +128,12 @@ public class MailService {
 
     }
 
+    @Async
+    public void sendMailToAgent(House house, User agent, String msg, User loginUser) {
+        String sendMsg = "用户" + loginUser.getName() +
+                "邮箱为" + loginUser.getEmail() +
+                "在了解了您发布的房产" + house.getName() +
+                "后通过本平台向您发送邮件：" + msg;
+        sendMail("房产平台有用户向您发送邮件", sendMsg, agent.getEmail());
+    }
 }

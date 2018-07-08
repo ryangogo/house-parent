@@ -60,6 +60,18 @@ public class HouseController {
 
     @GetMapping("detail")
     public String detail(Model model, String id) {
+        House house = houseService.getHouseDetail(id);
+        User agencyUser = houseService.getUserByHouseId(house.getId());
+        model.addAttribute("house", house);
+        model.addAttribute("agencyUser", agencyUser);
         return "houses/detail";
+    }
+
+    @PostMapping("sendEmail")
+    @ResponseBody
+    public ServerResponse sendEmail(Integer houseId, Integer agencyId, String msg, HttpSession session) {
+        User user = (User) session.getAttribute(CommonConstants.USER_ATTRIBUTE);
+        houseService.sendEmailToAgent(houseId, agencyId, msg, user);
+        return ServerResponse.createBySuccessMessage("发送邮件成功");
     }
 }

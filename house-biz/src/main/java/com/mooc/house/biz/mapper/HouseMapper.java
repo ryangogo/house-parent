@@ -1,9 +1,6 @@
 package com.mooc.house.biz.mapper;
 
-import com.mooc.house.common.model.City;
-import com.mooc.house.common.model.Community;
-import com.mooc.house.common.model.House;
-import com.mooc.house.common.model.HouseUser;
+import com.mooc.house.common.model.*;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
@@ -27,4 +24,9 @@ public interface HouseMapper {
     int insertHouseUser(HouseUser houseUser);
 
     List<House> listPageHouse(@Param("name") String name, @Param("type") String type, @Param("sorting") String sorting);
+
+    @Select("select * from house where id = #{id}")
+    House selectById(@Param("id") String id);
+
+    User selectUserByHouseId(@Param("houseId") Long houseId);
 }

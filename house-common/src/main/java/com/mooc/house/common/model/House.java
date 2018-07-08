@@ -97,5 +97,6 @@ public class House {
 
     List<String> imageList = new ArrayList<>();
     List<String> floorPlanList = new ArrayList<>();
+    List<String> propertyList = new ArrayList<>();
 
 }

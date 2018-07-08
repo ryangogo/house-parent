@@ -206,5 +206,20 @@
     
     </delete>
 
-
+    <select id="selectUserByHouseId" resultType="user">
+        select
+            u.*
+        from
+          user u
+        left join
+          house_user
+        on
+          u.id = house_user.user_id
+        left join
+            house
+        on
+            house.id = house_user.house_id
+        where
+            house_id = #{houseId}
+    </select>
 </mapper>
