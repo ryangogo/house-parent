@@ -222,4 +222,24 @@
         where
             house_id = #{houseId}
     </select>
+
+    <insert id="insertHouseMsg">
+        insert into house_msg (msg,
+        agent_id,
+        house_id,
+        user_id,
+        user_name,
+        user_avatar,
+        create_time
+        )
+        value(
+        #{msg},
+        #{agentId},
+        #{houseId},
+        #{userId},
+        #{userName},
+        #{userAvatar},
+        #{createTime}
+        )
+    </insert>
 </mapper>

@@ -74,4 +74,19 @@ public class HouseController {
         houseService.sendEmailToAgent(houseId, agencyId, msg, user);
         return ServerResponse.createBySuccessMessage("发送邮件成功");
     }
+
+    @PostMapping("comment")
+    @ResponseBody
+    public ServerResponse comment(Integer houseId, Integer agentId, String msg, HttpSession session) {
+        User user = (User) session.getAttribute(CommonConstants.USER_ATTRIBUTE);
+        return houseService.addComment(houseId, agentId, msg, user);
+    }
+
+    @GetMapping("commons")
+    @ResponseBody
+    public ServerResponse commons(Integer houseId) {
+        return houseService.getCommons(houseId);
+    }
+
+
 }

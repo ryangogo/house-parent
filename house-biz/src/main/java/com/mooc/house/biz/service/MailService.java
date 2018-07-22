@@ -127,7 +127,6 @@ public class MailService {
         }
 
     }
-
     @Async
     public void sendMailToAgent(House house, User agent, String msg, User loginUser) {
         String sendMsg = "用户" + loginUser.getName() +

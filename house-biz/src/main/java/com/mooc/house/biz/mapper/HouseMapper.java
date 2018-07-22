@@ -29,4 +29,9 @@ public interface HouseMapper {
     House selectById(@Param("id") String id);
 
     User selectUserByHouseId(@Param("houseId") Long houseId);
+
+    int insertHouseMsg(HouseMsg houseMsg);
+
+    @Select("select * from house_msg where house_id = #{houseId}")
+    List<HouseMsg> selectCommonsByHouseId(@Param("houseId") Integer houseId);
 }

@@ -153,7 +153,8 @@
                                                           action="/house/sendEmail" class="clearfix">
                                                         <div class="form-group">
                                                             <label>你的名字<em>*</em></label>
-                                                            <input type="hidden" name="houseId" th:value="${house.id}">
+                                                            <input type="hidden" id="houseId" name="houseId"
+                                                                   th:value="${house.id}">
                                                             <input type="hidden" name="agencyId"
                                                                    th:value="${agencyUser.id}">
                                                             <input type="text" class="form-control" id="name" readonly
@@ -187,43 +188,85 @@
                                 </section><!-- /#contact-agent -->
 
                                 <hr class="thick">
-                                <section id="comments">
+                                <section>
                                     <div class="agent-form">
                                         <form role="form" id="form-contact-agent" method="post"
-                                              action="/comment/leaveComment" class="clearfix">
-                                            <input type="hidden" name="houseId" value="${house.id}">
+                                              action="/house/comment" class="clearfix">
+                                            <input type="hidden" name="houseId" th:value="${house.id}">
+                                            <input type="hidden" name="agentId" th:value="${agencyUser.id}">
                                             <div class="form-group">
                                                 <label for="form-contact-agent-message">评论</label>
                                                 <textarea class="form-control" id="form-contact-agent-message" rows="2"
-                                                          name="content" required></textarea>
-                                            </div><!-- /.form-group -->
+                                                          name="msg" required></textarea>
+                                            </div>
+                                        </form>
                                             <div class="form-group">
-                                                <button type="submit" class="btn pull-right btn-default"
-                                                        id="form-contact-agent-submit">评论
+                                                <button class="btn pull-right btn-default"
+                                                        id="form-contact-agent-submit">添加评论
                                                 </button>
                                             </div><!-- /.form-group -->
                                             <div id="form-contact-agent-status"></div>
-                                        </form><!-- /#form-contact -->
+                                        <!-- /#form-contact -->
                                     </div>
-                                    <header><h2 class="no-border">Comments</h2></header>
-                                    <ul class="comments">
-                                        <#list commentList as comment>
-                                            <li class="comment" style="width: 830px;">
+                                    <section id="comments">
+                                        <header><h2 class="no-border">留言</h2></header>
+                                        <ul class="comments">
+                                            <!--<li class="comment">
                                                 <figure>
                                                     <div class="image">
-                                                        <img alt="" src="${comment.avatar}">
+                                                        <img alt="" src="assets/img/client-01.jpg">
                                                     </div>
                                                 </figure>
                                                 <div class="comment-wrapper">
-                                                    <div class="name pull-left">${comment.userName}</div>
-                                                    <span class="date pull-right"><span class="fa fa-calendar"></span>${(comment.createTime)?datetime}</span>
-                                                    <p>${comment.content}
+                                                    <div class="name pull-left">Catherine Brown</div>
+                                                    <span class="date pull-right"><span class="fa fa-calendar"></span>12.05.2014</span>
+                                                    <div class="rating rating-overall" data-score="4"></div>
+                                                    <p style="width: 55em">hahaha
                                                     </p>
+                                                    <a href="#" class="reply"><span class="fa fa-reply"></span>Reply</a>
                                                     <hr>
                                                 </div>
                                             </li>
-                                        </#list>
-                                    </ul>
+                                            <li>
+                                                <ul class="comments-child">
+                                                    <li class="comment">
+                                                        <figure>
+                                                            <div class="image">
+                                                                <img alt="" src="assets/img/agent-01.jpg">
+                                                            </div>
+                                                        </figure>
+                                                        <div class="comment-wrapper" >
+                                                            <div class="name">John Doe</div>
+                                                            <span class="date" style=" "><span class="fa fa-calendar"></span>24.06.2014</span>
+                                                            <div class="rating rating-overall" data-score="3"></div>
+                                                            <p style="width: 730px">呵呵大
+                                                            </p>
+                                                            <a href="#" class="reply"><span class="fa fa-reply"></span>Reply</a>
+                                                            <hr>
+                                                        </div>
+                                                    </li>
+                                                </ul>
+                                            </li>
+                                            <li class="comment">
+                                                <figure>
+                                                    <div class="image">
+                                                        <img alt="" src="assets/img/user-02.jpg">
+                                                    </div>
+                                                </figure>
+                                                <div class="comment-wrapper">
+                                                    <div class="name">John Doe</div>
+                                                    <span class="date"><span class="fa fa-calendar"></span>08.05.2014</span>
+                                                    <div class="rating rating-overall" data-score="5"></div>
+                                                    <p>Quisque iaculis neque at dui cursus posuere. Sed tristique pharetra orci, eu malesuada ante tempus nec.
+                                                        Phasellus enim odio, facilisis et ante vel, tempor congue sapien. Praesent eget ligula
+                                                        eu libero cursus facilisis vel non arcu. Sed vitae quam enim.
+                                                    </p>
+                                                    <a href="#" class="reply"><span class="fa fa-reply"></span>Reply</a>
+                                                    <hr>
+                                                </div>
+                                            </li>-->
+                                        </ul>
+                                    </section>
                                 </section>
                             </div><!-- /.col-md-12 -->
 

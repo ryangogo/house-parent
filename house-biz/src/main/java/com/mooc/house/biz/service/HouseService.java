@@ -7,9 +7,11 @@ import com.mooc.house.biz.mapper.UserMapper;
 import com.mooc.house.common.constants.CommonConstants;
 import com.mooc.house.common.constants.HouseUserType;
 import com.mooc.house.common.model.House;
+import com.mooc.house.common.model.HouseMsg;
 import com.mooc.house.common.model.HouseUser;
 import com.mooc.house.common.model.User;
 import com.mooc.house.common.result.ServerResponse;
+import com.mooc.house.common.utils.DateUtil;
 import com.mooc.house.common.utils.QiNiuCDNOperator;
 import com.mooc.house.common.vo.HouseVO;
 import com.qiniu.storage.model.DefaultPutRet;
@@ -21,6 +23,8 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.util.Date;
+import java.util.List;
 import java.util.UUID;
 
 /**
@@ -157,5 +161,33 @@ public class HouseService {
         House house = houseMapper.selectById(String.valueOf(houseId));
         User agent = userMapper.selectById(agencyId);
         mailService.sendMailToAgent(house, agent, msg, loginUser);
+    }
+
+    public ServerResponse addComment(Integer houseId, Integer agentId, String msg, User user) {
+        HouseMsg houseMsg = new HouseMsg();
+        Date nowDate = DateUtil.getNowDate();
+        houseMsg.setCreateTime(nowDate);
+        houseMsg.setAgentId(agentId);
+        houseMsg.setHouseId(houseId);
+        houseMsg.setMsg(msg);
+        houseMsg.setUserAvatar(user.getAvatar());
+        houseMsg.setUserName(user.getName());
+        houseMsg.setUserId(user.getId());
+        int flag = houseMapper.insertHouseMsg(houseMsg);
+        if (flag == 1) {
+
+            houseMsg.setCreateTimeStr(DateUtil.dateToStrYMD(nowDate));
+            return ServerResponse.createBySuccess(houseMsg);
+        } else {
+            return ServerResponse.createBySuccessMessage("评论失败");
+        }
+    }
+
+    public ServerResponse getCommons(Integer houseId) {
+        List<HouseMsg> list = houseMapper.selectCommonsByHouseId(houseId);
+        for (HouseMsg hm : list) {
+            hm.setCreateTimeStr(DateUtil.dateToStrYMD(hm.getCreateTime()));
+        }
+        return ServerResponse.createBySuccess(list);
     }
 }
