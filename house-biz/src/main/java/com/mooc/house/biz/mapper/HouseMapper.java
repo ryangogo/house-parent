@@ -34,4 +34,6 @@ public interface HouseMapper {
 
     @Select("select * from house_msg where house_id = #{houseId}")
     List<HouseMsg> selectCommonsByHouseId(@Param("houseId") Integer houseId);
+
+    List<House> selectByHotIds(List<Long> ids);
 }

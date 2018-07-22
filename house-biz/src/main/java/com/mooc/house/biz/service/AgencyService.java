@@ -3,6 +3,7 @@ package com.mooc.house.biz.service;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.mooc.house.biz.mapper.AgencyMapper;
+import com.mooc.house.biz.mapper.UserMapper;
 import com.mooc.house.common.constants.CommonConstants;
 import com.mooc.house.common.model.User;
 import com.mooc.house.common.result.ServerResponse;
@@ -19,6 +20,9 @@ public class AgencyService {
     @Autowired
     private AgencyMapper agencyMapper;
 
+    @Autowired
+    private UserMapper userMapper;
+
     public ServerResponse<PageInfo> getAllAgent(int pageNum, int pageSize) {
         PageHelper.startPage(pageNum, pageSize);
         val agentList = agencyMapper.listPageAgent();
@@ -28,5 +32,12 @@ public class AgencyService {
         }
         PageInfo pageInfo = new PageInfo<>(agentList, pageSize);
         return ServerResponse.createBySuccess(pageInfo);
+    }
+
+    public User getAgencyById(Integer agentId) {
+        User user = userMapper.selectById(agentId);
+        user.setAvatar(CommonConstants.DEFAULT_QINIU_URL + user.getAvatar());
+        user.setPasswd("");
+        return user;
     }
 }

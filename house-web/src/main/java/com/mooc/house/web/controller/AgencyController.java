@@ -2,9 +2,11 @@ package com.mooc.house.web.controller;
 
 import com.github.pagehelper.PageInfo;
 import com.mooc.house.biz.service.AgencyService;
+import com.mooc.house.common.model.User;
 import com.mooc.house.common.result.ServerResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 /**
@@ -32,7 +34,7 @@ public class AgencyController {
 
     @GetMapping("agentList")
     public String agentList() {
-        return "agency/agentList";
+        return "agency/agent/agentList";
     }
 
     @PostMapping("agentList")
@@ -43,8 +45,10 @@ public class AgencyController {
     }
 
     @GetMapping("agentDetail")
-    public String agentDetail() {
-        return "agency/agencyDetail";
+    public String agentDetail(Integer id, Model model) {
+        User user = agencyService.getAgencyById(id);
+        model.addAttribute("agent", user);
+        return "agency/agent/agentDetail";
     }
 
 

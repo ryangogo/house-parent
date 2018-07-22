@@ -190,4 +190,8 @@ public class HouseService {
         }
         return ServerResponse.createBySuccess(list);
     }
+
+    public List<House> findHotByIds(List<Long> ids) {
+        return houseMapper.selectByHotIds(ids);
+    }
 }

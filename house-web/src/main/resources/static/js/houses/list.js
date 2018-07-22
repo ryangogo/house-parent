@@ -1,5 +1,6 @@
 $(document).ready(function () {
-    loadingPage()
+    loadingPage();
+    getHotHouse();
 });
 /**
  * 加载分页信息
@@ -112,4 +113,39 @@ function setMsg(obj) {
             '</div>' +
             '</div>')
     });
+}
+
+/**
+ * 获取热门房产信息
+ */
+function getHotHouse() {
+    $.ajax({
+        url: "/house/hotHouses",
+        type: "GET",
+        success: function (data) {
+            $.each(data, function (index, obj) {
+                addHotHouse(obj);
+            })
+        }
+    })
+}
+
+/**
+ * 动态添加热门房产
+ * @param data
+ */
+function addHotHouse(data) {
+    $("#houHouse").after('' +
+        '<div class="property small">' +
+        '<a href="/house/detail?id=' + data.id + '">' +
+        '<div class="property-image">' +
+        '<img alt="" src="' + data.imageList[1] + '" style="width: 100px;height: 75px">' +
+        '</div>' +
+        '</a>' +
+        '<div class="info">' +
+        '<a href="/house/detail?id=' + data.id + '"><h4></h4></a>' +
+        '<figure>' + data.name + '</figure>' +
+        '<div class="tag price">' + data.price + '￥万</div>' +
+        '</div>' +
+        '</div>')
 }

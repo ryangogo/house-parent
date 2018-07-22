@@ -82,7 +82,7 @@ function setMsg(obj) {
             '<div class="row">' +
             '<div class="col-md-12 col-lg-6" >' +
             '<div class="agent">' +
-            '<a href="/agency/agentDeatil?id=' + data.id + '" class="agent-image"><img alt="" src="' + data.avatar + '"></a>' +
+            '<a href="/agency/agentDetail?id=' + data.id + '" class="agent-image"><img alt="" src="' + data.avatar + '"></a>' +
             '<div class="wrapper">' +
             '<header><a href="/agency/agentDetail?id=' + data.id + '"><h2>' + data.name + '</h2></a></header>' +
             '<dl>' +

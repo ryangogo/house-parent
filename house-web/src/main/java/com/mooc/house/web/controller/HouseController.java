@@ -2,6 +2,7 @@ package com.mooc.house.web.controller;
 
 import com.github.pagehelper.PageInfo;
 import com.mooc.house.biz.service.HouseService;
+import com.mooc.house.biz.service.RecommandService;
 import com.mooc.house.common.constants.CommonConstants;
 import com.mooc.house.common.model.House;
 import com.mooc.house.common.model.User;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
 
 /**
  * Created by Administrator on 2018/6/27.
@@ -25,6 +27,9 @@ public class HouseController {
 
     @Autowired
     private HouseService houseService;
+
+    @Autowired
+    private RecommandService recommandService;
 
     @GetMapping("list")
     public String list() {
@@ -61,6 +66,7 @@ public class HouseController {
     @GetMapping("detail")
     public String detail(Model model, String id) {
         House house = houseService.getHouseDetail(id);
+        recommandService.increase(Long.parseLong(id));//被点击以后，排序增加1
         User agencyUser = houseService.getUserByHouseId(house.getId());
         model.addAttribute("house", house);
         model.addAttribute("agencyUser", agencyUser);
@@ -88,5 +94,10 @@ public class HouseController {
         return houseService.getCommons(houseId);
     }
 
-
+    @GetMapping("hotHouses")
+    @ResponseBody
+    public ArrayList<House> hotHouses() {
+        val list = recommandService.getHotHouse();
+        return list;
+    }
 }

@@ -242,4 +242,13 @@
         #{createTime}
         )
     </insert>
+
+    <select id="selectByHotIds" parameterType="java.util.List" resultType="house">
+        select * from house where id in
+        <foreach collection="list" index="index" item="item" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </select>
+
+
 </mapper>
