@@ -36,4 +36,7 @@ public interface HouseMapper {
     List<HouseMsg> selectCommonsByHouseId(@Param("houseId") Integer houseId);
 
     List<House> selectByHotIds(List<Long> ids);
+
+    @Select("select * from house where type = 1 and state = 1  order by create_time desc limit 0,8")
+    List<House> selectSellHouseLatest();
 }

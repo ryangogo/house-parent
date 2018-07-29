@@ -60,4 +60,18 @@ public class RecommandService {
         return houseList;
     }
 
+
+    /**
+     * 获取最新房源
+     *
+     * @return
+     */
+    public List<House> getLastest() {
+        List<House> houses = houseMapper.selectSellHouseLatest();
+        for (House house : houses) {
+            String[] images = house.getImages().split("\\|");
+            house.setImages(CommonConstants.DEFAULT_QINIU_URL + images[0]);
+        }
+        return houses;
+    }
 }
