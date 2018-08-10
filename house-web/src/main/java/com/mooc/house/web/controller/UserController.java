@@ -85,7 +85,7 @@ public class UserController {
             session.setAttribute(CommonConstants.USER_ATTRIBUTE, user);
             session.setAttribute(CommonConstants.PLAIN_USER_ATTRIBUTE, user);
             model.addAttribute(ResultMsg.successMsgKey, "登录成功");
-            return "homepage/index";
+            return "redirect:/index";
         } else {
             model.addAttribute(ResultMsg.errorMsgKey, "登录失败");
             model.addAttribute("email", email);

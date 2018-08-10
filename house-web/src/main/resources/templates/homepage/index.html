@@ -23,7 +23,7 @@
                 <div class="container">
                     <div class="overlay">
                         <div class="info">
-                            <div class="tag price">$<span th:text="${hot.price}"></span>万</div>
+                            <div class="tag price"><span th:text="${hot.price}"></span>万</div>
                             <h3><span>地址</span><span th:text="${hot.address}"></span></h3>
                             <figure></figure>
                         </div>
@@ -31,14 +31,14 @@
                         <a href="property-detail.html" class="link-arrow">Read More</a>
                     </div>
                 </div>
-                <img alt="" style="width: 200%;height: 100%" th:src="@{${hot.imageList[1]}}">
+                <img alt="" th:src="@{${hot.imageList[1]}}"/>
             </div>
         </div>
     </div>
     <!-- end Slider -->
 
     <!-- Search Box -->
-    <div class="search-box-wrapper">
+    <!--<div class="search-box-wrapper">
         <div class="search-box-inner">
             <div class="container">
                 <div class="row">
@@ -57,17 +57,17 @@
                                         <option value="1">售卖</option>
                                         <option value="2">出租</option>
                                     </select>
-                                </div><!-- /.form-group -->
+                                </div>&lt;!&ndash; /.form-group &ndash;&gt;
                                 <div class="form-group">
                                     <button type="submit" class="btn btn-default">查找</button>
-                                </div><!-- /.form-group -->
-                            </form><!-- /#form-map -->
-                        </div><!-- /.search-box.map -->
-                    </div><!-- /.col-md-3 -->
-                </div><!-- /.row -->
-            </div><!-- /.container -->
-        </div><!-- /.search-box-inner -->
-    </div>
+                                </div>&lt;!&ndash; /.form-group &ndash;&gt;
+                            </form>&lt;!&ndash; /#form-map &ndash;&gt;
+                        </div>&lt;!&ndash; /.search-box.map &ndash;&gt;
+                    </div>&lt;!&ndash; /.col-md-3 &ndash;&gt;
+                </div>&lt;!&ndash; /.row &ndash;&gt;
+            </div>&lt;!&ndash; /.container &ndash;&gt;
+        </div>&lt;!&ndash; /.search-box-inner &ndash;&gt;
+    </div>-->
     <!-- end Search Box -->
 
     <!-- Page Content -->

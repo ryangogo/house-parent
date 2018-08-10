@@ -152,7 +152,7 @@ public class UserService {
         int resultCount = userMapper.modifyUserByEmail(name, phone, email, aboutme);
         if (resultCount == 1) {
             returnMap.put("status", true);
-            returnMap.put("message", "密码修改成功");
+            returnMap.put("message", "信息更新成功");
             user.setName(name);
             user.setPhone(phone);
             user.setAboutme(aboutme);
@@ -161,7 +161,7 @@ public class UserService {
             return returnMap;
         }
         returnMap.put("status", false);
-        returnMap.put("message", "修改密码失败");
+        returnMap.put("message", "信息更新失败");
         return returnMap;
     }
 

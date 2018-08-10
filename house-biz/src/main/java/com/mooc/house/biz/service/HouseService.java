@@ -20,6 +20,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
+import redis.clients.jedis.Jedis;
 
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -78,9 +79,7 @@ public class HouseService {
         }
         String properties = stringBuilder.toString();
         house.setProperties(properties);
-        //TODO 这个评级是什么鬼 先添加一个默认的0对付一下吧
         house.setRating((double) 0);
-        //TODO 这个标签又是个什么鬼 先添加一个默认的“default”对付一下吧
         house.setTags("default");
         //各种数据添加完毕 准备上传房产
         houseMapper.insert(house);
@@ -193,5 +192,11 @@ public class HouseService {
 
     public List<House> findHotByIds(List<Long> ids) {
         return houseMapper.selectByHotIds(ids);
+    }
+
+    public void updateRating(String id, Double rating) {
+        Jedis jedis = new Jedis("127.0.0.1");
+
+
     }
 }

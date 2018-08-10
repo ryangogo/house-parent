@@ -6,6 +6,7 @@ import com.mooc.house.biz.service.RecommandService;
 import com.mooc.house.common.constants.CommonConstants;
 import com.mooc.house.common.model.House;
 import com.mooc.house.common.model.User;
+import com.mooc.house.common.result.ResultMsg;
 import com.mooc.house.common.result.ServerResponse;
 import com.mooc.house.common.vo.HouseVO;
 import lombok.val;
@@ -100,4 +101,18 @@ public class HouseController {
         val list = recommandService.getHotHouse();
         return list;
     }
+
+    //1.评分
+    @GetMapping("rating")
+    @ResponseBody
+    public ResultMsg houseRating(String id, Double rating) {
+        //TODO 评分
+        houseService.updateRating(id, rating);
+        return null;
+    }
+
+    //2.收藏
+    //3.删除收藏
+    //4.收藏列表
+
 }
