@@ -26,31 +26,32 @@
         }, addLayer: function (t) {
             if (t instanceof L.LayerGroup) {
                 var e = [];
-                for (var i in t._layers)e.push(t._layers[i]);
+                for (var i in t._layers) e.push(t._layers[i]);
                 return this.addLayers(e)
             }
-            if (!t.getLatLng)return this._nonPointGroup.addLayer(t), this;
-            if (!this._map)return this._needsClustering.push(t), this;
-            if (this.hasLayer(t))return this;
+            if (!t.getLatLng) return this._nonPointGroup.addLayer(t), this;
+            if (!this._map) return this._needsClustering.push(t), this;
+            if (this.hasLayer(t)) return this;
             this._unspiderfy && this._unspiderfy(), this._addLayer(t, this._maxZoom);
             var n = t, s = this._map.getZoom();
-            if (t.__parent)for (; n.__parent._zoom >= s;)n = n.__parent;
+            if (t.__parent) for (; n.__parent._zoom >= s;) n = n.__parent;
             return this._currentShownBounds.contains(n.getLatLng()) && (this.options.animateAddingMarkers ? this._animationAddLayer(t, n) : this._animationAddLayerNonAnimated(t, n)), this
         }, removeLayer: function (t) {
             if (t instanceof L.LayerGroup) {
                 var e = [];
-                for (var i in t._layers)e.push(t._layers[i]);
+                for (var i in t._layers) e.push(t._layers[i]);
                 return this.removeLayers(e)
             }
             return t.getLatLng ? this._map ? t.__parent ? (this._unspiderfy && (this._unspiderfy(), this._unspiderfyLayer(t)), this._removeLayer(t, !0), this._featureGroup.hasLayer(t) && (this._featureGroup.removeLayer(t), t.setOpacity && t.setOpacity(1)), this) : this : (!this._arraySplice(this._needsClustering, t) && this.hasLayer(t) && this._needsRemoving.push(t), this) : (this._nonPointGroup.removeLayer(t), this)
         }, addLayers: function (t) {
-            var e, i, n, s, r = this._featureGroup, o = this._nonPointGroup, a = this.options.chunkedLoading, h = this.options.chunkInterval, _ = this.options.chunkProgress;
+            var e, i, n, s, r = this._featureGroup, o = this._nonPointGroup, a = this.options.chunkedLoading,
+                h = this.options.chunkInterval, _ = this.options.chunkProgress;
             if (this._map) {
                 var u = 0, l = (new Date).getTime(), d = L.bind(function () {
                     for (var e = (new Date).getTime(); u < t.length; u++) {
                         if (a && 0 === u % 200) {
                             var i = (new Date).getTime() - e;
-                            if (i > h)break
+                            if (i > h) break
                         }
                         if (s = t[u], s.getLatLng) {
                             if (!this.hasLayer(s) && (this._addLayer(s, this._maxZoom), s.__parent && 2 === s.__parent.getChildCount())) {
@@ -65,17 +66,17 @@
                 }, this);
                 d()
             } else {
-                for (e = [], i = 0, n = t.length; n > i; i++)s = t[i], s.getLatLng ? this.hasLayer(s) || e.push(s) : o.addLayer(s);
+                for (e = [], i = 0, n = t.length; n > i; i++) s = t[i], s.getLatLng ? this.hasLayer(s) || e.push(s) : o.addLayer(s);
                 this._needsClustering = this._needsClustering.concat(e)
             }
             return this
         }, removeLayers: function (t) {
             var e, i, n, s = this._featureGroup, r = this._nonPointGroup;
             if (!this._map) {
-                for (e = 0, i = t.length; i > e; e++)n = t[e], this._arraySplice(this._needsClustering, n), r.removeLayer(n);
+                for (e = 0, i = t.length; i > e; e++) n = t[e], this._arraySplice(this._needsClustering, n), r.removeLayer(n);
                 return this
             }
-            for (e = 0, i = t.length; i > e; e++)n = t[e], n.__parent ? (this._removeLayer(n, !0, !0), s.hasLayer(n) && (s.removeLayer(n), n.setOpacity && n.setOpacity(1))) : r.removeLayer(n);
+            for (e = 0, i = t.length; i > e; e++) n = t[e], n.__parent ? (this._removeLayer(n, !0, !0), s.hasLayer(n) && (s.removeLayer(n), n.setOpacity && n.setOpacity(1))) : r.removeLayer(n);
             return this._topClusterLevel._recursivelyAddChildrenToMap(null, this._zoom, this._currentShownBounds), s.eachLayer(function (t) {
                 t instanceof L.MarkerCluster && t._updateIcon()
             }), this
@@ -86,11 +87,11 @@
         }, getBounds: function () {
             var t = new L.LatLngBounds;
             this._topClusterLevel && t.extend(this._topClusterLevel._bounds);
-            for (var e = this._needsClustering.length - 1; e >= 0; e--)t.extend(this._needsClustering[e].getLatLng());
+            for (var e = this._needsClustering.length - 1; e >= 0; e--) t.extend(this._needsClustering[e].getLatLng());
             return t.extend(this._nonPointGroup.getBounds()), t
         }, eachLayer: function (t, e) {
             var i, n = this._needsClustering.slice();
-            for (this._topClusterLevel && this._topClusterLevel.getAllChildMarkers(n), i = n.length - 1; i >= 0; i--)t.call(e, n[i]);
+            for (this._topClusterLevel && this._topClusterLevel.getAllChildMarkers(n), i = n.length - 1; i >= 0; i--) t.call(e, n[i]);
             this._nonPointGroup.eachLayer(t, e)
         }, getLayers: function () {
             var t = [];
@@ -103,14 +104,14 @@
                 L.stamp(i) === t && (e = i)
             }), e
         }, hasLayer: function (t) {
-            if (!t)return !1;
+            if (!t) return !1;
             var e, i = this._needsClustering;
-            for (e = i.length - 1; e >= 0; e--)if (i[e] === t)return !0;
-            for (i = this._needsRemoving, e = i.length - 1; e >= 0; e--)if (i[e] === t)return !1;
+            for (e = i.length - 1; e >= 0; e--) if (i[e] === t) return !0;
+            for (i = this._needsRemoving, e = i.length - 1; e >= 0; e--) if (i[e] === t) return !1;
             return !(!t.__parent || t.__parent._group !== this) || this._nonPointGroup.hasLayer(t)
         }, zoomToShowLayer: function (t, e) {
             var i = function () {
-                if ((t._icon || t.__parent._icon) && !this._inZoomAnimation)if (this._map.off("moveend", i, this), this.off("animationend", i, this), t._icon)e(); else if (t.__parent._icon) {
+                if ((t._icon || t.__parent._icon) && !this._inZoomAnimation) if (this._map.off("moveend", i, this), this.off("animationend", i, this), t._icon) e(); else if (t.__parent._icon) {
                     var n = function () {
                         this.off("spiderfied", n, this), e()
                     };
@@ -121,31 +122,31 @@
         }, onAdd: function (t) {
             this._map = t;
             var e, i, n;
-            if (!isFinite(this._map.getMaxZoom()))throw"Map has no maxZoom specified";
-            for (this._featureGroup.onAdd(t), this._nonPointGroup.onAdd(t), this._gridClusters || this._generateInitialClusters(), e = 0, i = this._needsRemoving.length; i > e; e++)n = this._needsRemoving[e], this._removeLayer(n, !0);
+            if (!isFinite(this._map.getMaxZoom())) throw"Map has no maxZoom specified";
+            for (this._featureGroup.onAdd(t), this._nonPointGroup.onAdd(t), this._gridClusters || this._generateInitialClusters(), e = 0, i = this._needsRemoving.length; i > e; e++) n = this._needsRemoving[e], this._removeLayer(n, !0);
             this._needsRemoving = [], this._zoom = this._map.getZoom(), this._currentShownBounds = this._getExpandedVisibleBounds(), this._map.on("zoomend", this._zoomEnd, this), this._map.on("moveend", this._moveEnd, this), this._spiderfierOnAdd && this._spiderfierOnAdd(), this._bindEvents(), i = this._needsClustering, this._needsClustering = [], this.addLayers(i)
         }, onRemove: function (t) {
             t.off("zoomend", this._zoomEnd, this), t.off("moveend", this._moveEnd, this), this._unbindEvents(), this._map._mapPane.className = this._map._mapPane.className.replace(" leaflet-cluster-anim", ""), this._spiderfierOnRemove && this._spiderfierOnRemove(), this._hideCoverage(), this._featureGroup.onRemove(t), this._nonPointGroup.onRemove(t), this._featureGroup.clearLayers(), this._map = null
         }, getVisibleParent: function (t) {
-            for (var e = t; e && !e._icon;)e = e.__parent;
+            for (var e = t; e && !e._icon;) e = e.__parent;
             return e || null
         }, _arraySplice: function (t, e) {
-            for (var i = t.length - 1; i >= 0; i--)if (t[i] === e)return t.splice(i, 1), !0
+            for (var i = t.length - 1; i >= 0; i--) if (t[i] === e) return t.splice(i, 1), !0
         }, _removeLayer: function (t, e, i) {
             var n = this._gridClusters, s = this._gridUnclustered, r = this._featureGroup, o = this._map;
-            if (e)for (var a = this._maxZoom; a >= 0 && s[a].removeObject(t, o.project(t.getLatLng(), a)); a--);
+            if (e) for (var a = this._maxZoom; a >= 0 && s[a].removeObject(t, o.project(t.getLatLng(), a)); a--) ;
             var h, _ = t.__parent, u = _._markers;
-            for (this._arraySplice(u, t); _ && (_._childCount--, !(_._zoom < 0));)e && _._childCount <= 1 ? (h = _._markers[0] === t ? _._markers[1] : _._markers[0], n[_._zoom].removeObject(_, o.project(_._cLatLng, _._zoom)), s[_._zoom].addObject(h, o.project(h.getLatLng(), _._zoom)), this._arraySplice(_.__parent._childClusters, _), _.__parent._markers.push(h), h.__parent = _.__parent, _._icon && (r.removeLayer(_), i || r.addLayer(h))) : (_._recalculateBounds(), i && _._icon || _._updateIcon()), _ = _.__parent;
+            for (this._arraySplice(u, t); _ && (_._childCount--, !(_._zoom < 0));) e && _._childCount <= 1 ? (h = _._markers[0] === t ? _._markers[1] : _._markers[0], n[_._zoom].removeObject(_, o.project(_._cLatLng, _._zoom)), s[_._zoom].addObject(h, o.project(h.getLatLng(), _._zoom)), this._arraySplice(_.__parent._childClusters, _), _.__parent._markers.push(h), h.__parent = _.__parent, _._icon && (r.removeLayer(_), i || r.addLayer(h))) : (_._recalculateBounds(), i && _._icon || _._updateIcon()), _ = _.__parent;
             delete t.__parent
         }, _isOrIsParent: function (t, e) {
             for (; e;) {
-                if (t === e)return !0;
+                if (t === e) return !0;
                 e = e.parentNode
             }
             return !1
         }, _propagateEvent: function (t) {
             if (t.layer instanceof L.MarkerCluster) {
-                if (t.originalEvent && this._isOrIsParent(t.layer._icon, t.originalEvent.relatedTarget))return;
+                if (t.originalEvent && this._isOrIsParent(t.layer._icon, t.originalEvent.relatedTarget)) return;
                 t.type = "cluster" + t.type
             }
             this.fire(t.type, t)
@@ -157,7 +158,8 @@
                 iconSize: new L.Point(40, 40)
             })
         }, _bindEvents: function () {
-            var t = this._map, e = this.options.spiderfyOnMaxZoom, i = this.options.showCoverageOnHover, n = this.options.zoomToBoundsOnClick;
+            var t = this._map, e = this.options.spiderfyOnMaxZoom, i = this.options.showCoverageOnHover,
+                n = this.options.zoomToBoundsOnClick;
             (e || n) && this.on("clusterclick", this._zoomOrSpiderfy, this), i && (this.on("clustermouseover", this._showCoverage, this), this.on("clustermouseout", this._hideCoverage, this), t.on("zoomend", this._hideCoverage, this))
         }, _zoomOrSpiderfy: function (t) {
             var e = this._map;
@@ -168,7 +170,8 @@
         }, _hideCoverage: function () {
             this._shownPolygon && (this._map.removeLayer(this._shownPolygon), this._shownPolygon = null)
         }, _unbindEvents: function () {
-            var t = this.options.spiderfyOnMaxZoom, e = this.options.showCoverageOnHover, i = this.options.zoomToBoundsOnClick, n = this._map;
+            var t = this.options.spiderfyOnMaxZoom, e = this.options.showCoverageOnHover,
+                i = this.options.zoomToBoundsOnClick, n = this._map;
             (t || i) && this.off("clusterclick", this._zoomOrSpiderfy, this), e && (this.off("clustermouseover", this._showCoverage, this), this.off("clustermouseout", this._hideCoverage, this), n.off("zoomend", this._hideCoverage, this))
         }, _zoomEnd: function () {
             this._map && (this._mergeSplitClusters(), this._zoom = this._map._zoom, this._currentShownBounds = this._getExpandedVisibleBounds())
@@ -182,7 +185,7 @@
             "function" != typeof e && (i = function () {
                 return e
             }), this.options.disableClusteringAtZoom && (t = this.options.disableClusteringAtZoom - 1), this._maxZoom = t, this._gridClusters = {}, this._gridUnclustered = {};
-            for (var n = t; n >= 0; n--)this._gridClusters[n] = new L.DistanceGrid(i(n)), this._gridUnclustered[n] = new L.DistanceGrid(i(n));
+            for (var n = t; n >= 0; n--) this._gridClusters[n] = new L.DistanceGrid(i(n)), this._gridUnclustered[n] = new L.DistanceGrid(i(n));
             this._topClusterLevel = new L.MarkerCluster(this, -1)
         }, _addLayer: function (t, e) {
             var i, n, s = this._gridClusters, r = this._gridUnclustered;
@@ -195,15 +198,15 @@
             })); e >= 0; e--) {
                 i = this._map.project(t.getLatLng(), e);
                 var o = s[e].getNearObject(i);
-                if (o)return o._addChild(t), t.__parent = o, void 0;
+                if (o) return o._addChild(t), t.__parent = o, void 0;
                 if (o = r[e].getNearObject(i)) {
                     var a = o.__parent;
                     a && this._removeLayer(o, !1);
                     var h = new L.MarkerCluster(this, e, o, t);
                     s[e].addObject(h, this._map.project(h._cLatLng, e)), o.__parent = h, t.__parent = h;
                     var _ = h;
-                    for (n = e - 1; n > a._zoom; n--)_ = new L.MarkerCluster(this, n, _), s[n].addObject(_, this._map.project(o.getLatLng(), n));
-                    for (a._addChild(_), n = e; n >= 0 && r[n].removeObject(o, this._map.project(o.getLatLng(), n)); n--);
+                    for (n = e - 1; n > a._zoom; n--) _ = new L.MarkerCluster(this, n, _), s[n].addObject(_, this._map.project(o.getLatLng(), n));
+                    for (a._addChild(_), n = e; n >= 0 && r[n].removeObject(o, this._map.project(o.getLatLng(), n)); n--) ;
                     return
                 }
                 r[e].addObject(t, i)
@@ -212,16 +215,17 @@
         }, _enqueue: function (t) {
             this._queue.push(t), this._queueTimeout || (this._queueTimeout = setTimeout(L.bind(this._processQueue, this), 300))
         }, _processQueue: function () {
-            for (var t = 0; t < this._queue.length; t++)this._queue[t].call(this);
+            for (var t = 0; t < this._queue.length; t++) this._queue[t].call(this);
             this._queue.length = 0, clearTimeout(this._queueTimeout), this._queueTimeout = null
         }, _mergeSplitClusters: function () {
             this._processQueue(), this._zoom < this._map._zoom && this._currentShownBounds.contains(this._getExpandedVisibleBounds()) ? (this._animationStart(), this._topClusterLevel._recursivelyRemoveChildrenFromMap(this._currentShownBounds, this._zoom, this._getExpandedVisibleBounds()), this._animationZoomIn(this._zoom, this._map._zoom)) : this._zoom > this._map._zoom ? (this._animationStart(), this._animationZoomOut(this._zoom, this._map._zoom)) : this._moveEnd()
         }, _getExpandedVisibleBounds: function () {
-            if (!this.options.removeOutsideVisibleBounds)return this.getBounds();
-            var t = this._map, e = t.getBounds(), i = e._southWest, n = e._northEast, s = L.Browser.mobile ? 0 : Math.abs(i.lat - n.lat), r = L.Browser.mobile ? 0 : Math.abs(i.lng - n.lng);
+            if (!this.options.removeOutsideVisibleBounds) return this.getBounds();
+            var t = this._map, e = t.getBounds(), i = e._southWest, n = e._northEast,
+                s = L.Browser.mobile ? 0 : Math.abs(i.lat - n.lat), r = L.Browser.mobile ? 0 : Math.abs(i.lng - n.lng);
             return new L.LatLngBounds(new L.LatLng(i.lat - s, i.lng - r, !0), new L.LatLng(n.lat + s, n.lng + r, !0))
         }, _animationAddLayerNonAnimated: function (t, e) {
-            if (e === t)this._featureGroup.addLayer(t); else if (2 === e._childCount) {
+            if (e === t) this._featureGroup.addLayer(t); else if (2 === e._childCount) {
                 e._addToMap();
                 var i = e.getAllChildMarkers();
                 this._featureGroup.removeLayer(i[0]), this._featureGroup.removeLayer(i[1])
@@ -236,7 +240,7 @@
             var i, n = this._getExpandedVisibleBounds(), s = this._featureGroup;
             this._topClusterLevel._recursively(n, t, 0, function (r) {
                 var o, a = r._latlng, h = r._markers;
-                for (n.contains(a) || (a = null), r._isSingleParent() && t + 1 === e ? (s.removeLayer(r), r._recursivelyAddChildrenToMap(null, e, n)) : (r.setOpacity(0), r._recursivelyAddChildrenToMap(a, e, n)), i = h.length - 1; i >= 0; i--)o = h[i], n.contains(o._latlng) || s.removeLayer(o)
+                for (n.contains(a) || (a = null), r._isSingleParent() && t + 1 === e ? (s.removeLayer(r), r._recursivelyAddChildrenToMap(null, e, n)) : (r.setOpacity(0), r._recursivelyAddChildrenToMap(a, e, n)), i = h.length - 1; i >= 0; i--) o = h[i], n.contains(o._latlng) || s.removeLayer(o)
             }), this._forceLayout(), this._topClusterLevel._recursivelyBecomeVisible(n, e), s.eachLayer(function (t) {
                 t instanceof L.MarkerCluster || !t._icon || t.setOpacity(1)
             }), this._topClusterLevel._recursively(n, t, e, function (t) {
@@ -285,8 +289,8 @@
             L.Marker.prototype.initialize.call(this, i ? i._cLatLng || i.getLatLng() : new L.LatLng(0, 0), {icon: this}), this._group = t, this._zoom = e, this._markers = [], this._childClusters = [], this._childCount = 0, this._iconNeedsUpdate = !0, this._bounds = new L.LatLngBounds, i && this._addChild(i), n && this._addChild(n)
         }, getAllChildMarkers: function (t) {
             t = t || [];
-            for (var e = this._childClusters.length - 1; e >= 0; e--)this._childClusters[e].getAllChildMarkers(t);
-            for (var i = this._markers.length - 1; i >= 0; i--)t.push(this._markers[i]);
+            for (var e = this._childClusters.length - 1; e >= 0; e--) this._childClusters[e].getAllChildMarkers(t);
+            for (var i = this._markers.length - 1; i >= 0; i--) t.push(this._markers[i]);
             return t
         }, getChildCount: function () {
             return this._childCount
@@ -294,7 +298,7 @@
             for (var t, e = this._childClusters.slice(), i = this._group._map, n = i.getBoundsZoom(this._bounds), s = this._zoom + 1, r = i.getZoom(); e.length > 0 && n > s;) {
                 s++;
                 var o = [];
-                for (t = 0; t < e.length; t++)o = o.concat(e[t]._childClusters);
+                for (t = 0; t < e.length; t++) o = o.concat(e[t]._childClusters);
                 e = o
             }
             n > s ? this._group._map.setView(this._latlng, s) : r >= n ? this._group._map.setView(this._latlng, r + 1) : this._group._map.fitBounds(this._bounds)
@@ -319,10 +323,10 @@
         }, _recursivelyAnimateChildrenIn: function (t, e, i) {
             this._recursively(t, 0, i - 1, function (t) {
                 var i, n, s = t._markers;
-                for (i = s.length - 1; i >= 0; i--)n = s[i], n._icon && (n._setPos(e), n.setOpacity(0))
+                for (i = s.length - 1; i >= 0; i--) n = s[i], n._icon && (n._setPos(e), n.setOpacity(0))
             }, function (t) {
                 var i, n, s = t._childClusters;
-                for (i = s.length - 1; i >= 0; i--)n = s[i], n._icon && (n._setPos(e), n.setOpacity(0))
+                for (i = s.length - 1; i >= 0; i--) n = s[i], n._icon && (n._setPos(e), n.setOpacity(0))
             })
         }, _recursivelyAnimateChildrenInAndAddSelfToMap: function (t, e, i) {
             this._recursively(t, i, 0, function (n) {
@@ -334,7 +338,7 @@
             })
         }, _recursivelyAddChildrenToMap: function (t, e, i) {
             this._recursively(i, -1, e, function (n) {
-                if (e !== n._zoom)for (var s = n._markers.length - 1; s >= 0; s--) {
+                if (e !== n._zoom) for (var s = n._markers.length - 1; s >= 0; s--) {
                     var r = n._markers[s];
                     i.contains(r._latlng) && (t && (r._backupLatlng = r.getLatLng(), r.setLatLng(t), r.setOpacity && r.setOpacity(0)), n._group._featureGroup.addLayer(r))
                 }
@@ -346,23 +350,23 @@
                 var i = this._markers[e];
                 i._backupLatlng && (i.setLatLng(i._backupLatlng), delete i._backupLatlng)
             }
-            if (t - 1 === this._zoom)for (var n = this._childClusters.length - 1; n >= 0; n--)this._childClusters[n]._restorePosition(); else for (var s = this._childClusters.length - 1; s >= 0; s--)this._childClusters[s]._recursivelyRestoreChildPositions(t)
+            if (t - 1 === this._zoom) for (var n = this._childClusters.length - 1; n >= 0; n--) this._childClusters[n]._restorePosition(); else for (var s = this._childClusters.length - 1; s >= 0; s--) this._childClusters[s]._recursivelyRestoreChildPositions(t)
         }, _restorePosition: function () {
             this._backupLatlng && (this.setLatLng(this._backupLatlng), delete this._backupLatlng)
         }, _recursivelyRemoveChildrenFromMap: function (t, e, i) {
             var n, s;
             this._recursively(t, -1, e - 1, function (t) {
-                for (s = t._markers.length - 1; s >= 0; s--)n = t._markers[s], i && i.contains(n._latlng) || (t._group._featureGroup.removeLayer(n), n.setOpacity && n.setOpacity(1))
+                for (s = t._markers.length - 1; s >= 0; s--) n = t._markers[s], i && i.contains(n._latlng) || (t._group._featureGroup.removeLayer(n), n.setOpacity && n.setOpacity(1))
             }, function (t) {
-                for (s = t._childClusters.length - 1; s >= 0; s--)n = t._childClusters[s], i && i.contains(n._latlng) || (t._group._featureGroup.removeLayer(n), n.setOpacity && n.setOpacity(1))
+                for (s = t._childClusters.length - 1; s >= 0; s--) n = t._childClusters[s], i && i.contains(n._latlng) || (t._group._featureGroup.removeLayer(n), n.setOpacity && n.setOpacity(1))
             })
         }, _recursively: function (t, e, i, n, s) {
             var r, o, a = this._childClusters, h = this._zoom;
-            if (e > h)for (r = a.length - 1; r >= 0; r--)o = a[r], t.intersects(o._bounds) && o._recursively(t, e, i, n, s); else if (n && n(this), s && this._zoom === i && s(this), i > h)for (r = a.length - 1; r >= 0; r--)o = a[r], t.intersects(o._bounds) && o._recursively(t, e, i, n, s)
+            if (e > h) for (r = a.length - 1; r >= 0; r--) o = a[r], t.intersects(o._bounds) && o._recursively(t, e, i, n, s); else if (n && n(this), s && this._zoom === i && s(this), i > h) for (r = a.length - 1; r >= 0; r--) o = a[r], t.intersects(o._bounds) && o._recursively(t, e, i, n, s)
         }, _recalculateBounds: function () {
             var t, e = this._markers, i = this._childClusters;
-            for (this._bounds = new L.LatLngBounds, delete this._wLatLng, t = e.length - 1; t >= 0; t--)this._expandBounds(e[t]);
-            for (t = i.length - 1; t >= 0; t--)this._expandBounds(i[t])
+            for (this._bounds = new L.LatLngBounds, delete this._wLatLng, t = e.length - 1; t >= 0; t--) this._expandBounds(e[t]);
+            for (t = i.length - 1; t >= 0; t--) this._expandBounds(i[t])
         }, _isSingleParent: function () {
             return this._childClusters.length > 0 && this._childClusters[0]._childCount === this._childCount
         }
@@ -370,22 +374,25 @@
         this._cellSize = t, this._sqCellSize = t * t, this._grid = {}, this._objectPoint = {}
     }, L.DistanceGrid.prototype = {
         addObject: function (t, e) {
-            var i = this._getCoord(e.x), n = this._getCoord(e.y), s = this._grid, r = s[n] = s[n] || {}, o = r[i] = r[i] || [], a = L.Util.stamp(t);
+            var i = this._getCoord(e.x), n = this._getCoord(e.y), s = this._grid, r = s[n] = s[n] || {},
+                o = r[i] = r[i] || [], a = L.Util.stamp(t);
             this._objectPoint[a] = e, o.push(t)
         }, updateObject: function (t, e) {
             this.removeObject(t), this.addObject(t, e)
         }, removeObject: function (t, e) {
-            var i, n, s = this._getCoord(e.x), r = this._getCoord(e.y), o = this._grid, a = o[r] = o[r] || {}, h = a[s] = a[s] || [];
-            for (delete this._objectPoint[L.Util.stamp(t)], i = 0, n = h.length; n > i; i++)if (h[i] === t)return h.splice(i, 1), 1 === n && delete a[s], !0
+            var i, n, s = this._getCoord(e.x), r = this._getCoord(e.y), o = this._grid, a = o[r] = o[r] || {},
+                h = a[s] = a[s] || [];
+            for (delete this._objectPoint[L.Util.stamp(t)], i = 0, n = h.length; n > i; i++) if (h[i] === t) return h.splice(i, 1), 1 === n && delete a[s], !0
         }, eachObject: function (t, e) {
             var i, n, s, r, o, a, h, _ = this._grid;
             for (i in _) {
                 o = _[i];
-                for (n in o)for (a = o[n], s = 0, r = a.length; r > s; s++)h = t.call(e, a[s]), h && (s--, r--)
+                for (n in o) for (a = o[n], s = 0, r = a.length; r > s; s++) h = t.call(e, a[s]), h && (s--, r--)
             }
         }, getNearObject: function (t) {
-            var e, i, n, s, r, o, a, h, _ = this._getCoord(t.x), u = this._getCoord(t.y), l = this._objectPoint, d = this._sqCellSize, p = null;
-            for (e = u - 1; u + 1 >= e; e++)if (s = this._grid[e])for (i = _ - 1; _ + 1 >= i; i++)if (r = s[i])for (n = 0, o = r.length; o > n; n++)a = r[n], h = this._sqDist(l[L.Util.stamp(a)], t), d > h && (d = h, p = a);
+            var e, i, n, s, r, o, a, h, _ = this._getCoord(t.x), u = this._getCoord(t.y), l = this._objectPoint,
+                d = this._sqCellSize, p = null;
+            for (e = u - 1; u + 1 >= e; e++) if (s = this._grid[e]) for (i = _ - 1; _ + 1 >= i; i++) if (r = s[i]) for (n = 0, o = r.length; o > n; n++) a = r[n], h = this._sqDist(l[L.Util.stamp(a)], t), d > h && (d = h, p = a);
             return p
         }, _getCoord: function (t) {
             return Math.floor(t / this._cellSize)
@@ -400,7 +407,7 @@
                 return n * (t.lat - e[0].lat) + i * (t.lng - e[0].lng)
             }, findMostDistantPointFromBaseLine: function (t, e) {
                 var i, n, s, r = 0, o = null, a = [];
-                for (i = e.length - 1; i >= 0; i--)n = e[i], s = this.getDistant(n, t), s > 0 && (a.push(n), s > r && (r = s, o = n));
+                for (i = e.length - 1; i >= 0; i--) n = e[i], s = this.getDistant(n, t), s > 0 && (a.push(n), s > r && (r = s, o = n));
                 return {maxPoint: o, newPoints: a}
             }, buildConvexHull: function (t, e) {
                 var i = [], n = this.findMostDistantPointFromBaseLine(t, e);
@@ -418,7 +425,7 @@
     }(), L.MarkerCluster.include({
         getConvexHull: function () {
             var t, e, i = this.getAllChildMarkers(), n = [];
-            for (e = i.length - 1; e >= 0; e--)t = i[e].getLatLng(), n.push(t);
+            for (e = i.length - 1; e >= 0; e--) t = i[e].getLatLng(), n.push(t);
             return L.QuickHull.getConvexHull(n)
         }
     }), L.MarkerCluster.include({
@@ -431,7 +438,8 @@
         _circleSpiralSwitchover: 9,
         spiderfy: function () {
             if (this._group._spiderfied !== this && !this._group._inZoomAnimation) {
-                var t, e = this.getAllChildMarkers(), i = this._group, n = i._map, s = n.latLngToLayerPoint(this._latlng);
+                var t, e = this.getAllChildMarkers(), i = this._group, n = i._map,
+                    s = n.latLngToLayerPoint(this._latlng);
                 this._group._unspiderfy(), this._group._spiderfied = this, e.length >= this._circleSpiralSwitchover ? t = this._generatePointsSpiral(e.length, s) : (s.y += 10, t = this._generatePointsCircle(e.length, s)), this._animationSpiderfy(e, t)
             }
         },
@@ -439,56 +447,62 @@
             this._group._inZoomAnimation || (this._animationUnspiderfy(t), this._group._spiderfied = null)
         },
         _generatePointsCircle: function (t, e) {
-            var i, n, s = this._group.options.spiderfyDistanceMultiplier * this._circleFootSeparation * (2 + t), r = s / this._2PI, o = this._2PI / t, a = [];
-            for (a.length = t, i = t - 1; i >= 0; i--)n = this._circleStartAngle + i * o, a[i] = new L.Point(e.x + r * Math.cos(n), e.y + r * Math.sin(n))._round();
+            var i, n, s = this._group.options.spiderfyDistanceMultiplier * this._circleFootSeparation * (2 + t),
+                r = s / this._2PI, o = this._2PI / t, a = [];
+            for (a.length = t, i = t - 1; i >= 0; i--) n = this._circleStartAngle + i * o, a[i] = new L.Point(e.x + r * Math.cos(n), e.y + r * Math.sin(n))._round();
             return a
         },
         _generatePointsSpiral: function (t, e) {
-            var i, n = this._group.options.spiderfyDistanceMultiplier * this._spiralLengthStart, s = this._group.options.spiderfyDistanceMultiplier * this._spiralFootSeparation, r = this._group.options.spiderfyDistanceMultiplier * this._spiralLengthFactor, o = 0, a = [];
-            for (a.length = t, i = t - 1; i >= 0; i--)o += s / n + 5e-4 * i, a[i] = new L.Point(e.x + n * Math.cos(o), e.y + n * Math.sin(o))._round(), n += this._2PI * r / o;
+            var i, n = this._group.options.spiderfyDistanceMultiplier * this._spiralLengthStart,
+                s = this._group.options.spiderfyDistanceMultiplier * this._spiralFootSeparation,
+                r = this._group.options.spiderfyDistanceMultiplier * this._spiralLengthFactor, o = 0, a = [];
+            for (a.length = t, i = t - 1; i >= 0; i--) o += s / n + 5e-4 * i, a[i] = new L.Point(e.x + n * Math.cos(o), e.y + n * Math.sin(o))._round(), n += this._2PI * r / o;
             return a
         },
         _noanimationUnspiderfy: function () {
             var t, e, i = this._group, n = i._map, s = i._featureGroup, r = this.getAllChildMarkers();
-            for (this.setOpacity(1), e = r.length - 1; e >= 0; e--)t = r[e], s.removeLayer(t), t._preSpiderfyLatlng && (t.setLatLng(t._preSpiderfyLatlng), delete t._preSpiderfyLatlng), t.setZIndexOffset && t.setZIndexOffset(0), t._spiderLeg && (n.removeLayer(t._spiderLeg), delete t._spiderLeg);
+            for (this.setOpacity(1), e = r.length - 1; e >= 0; e--) t = r[e], s.removeLayer(t), t._preSpiderfyLatlng && (t.setLatLng(t._preSpiderfyLatlng), delete t._preSpiderfyLatlng), t.setZIndexOffset && t.setZIndexOffset(0), t._spiderLeg && (n.removeLayer(t._spiderLeg), delete t._spiderLeg);
             i._spiderfied = null
         }
     }), L.MarkerCluster.include(L.DomUtil.TRANSITION ? {
         SVG_ANIMATION: function () {
             return e.createElementNS("http://www.w3.org/2000/svg", "animate").toString().indexOf("SVGAnimate") > -1
         }(), _animationSpiderfy: function (t, i) {
-            var n, s, r, o, a = this, h = this._group, _ = h._map, u = h._featureGroup, l = _.latLngToLayerPoint(this._latlng);
-            for (n = t.length - 1; n >= 0; n--)s = t[n], s.setOpacity ? (s.setZIndexOffset(1e6), s.setOpacity(0), u.addLayer(s), s._setPos(l)) : u.addLayer(s);
+            var n, s, r, o, a = this, h = this._group, _ = h._map, u = h._featureGroup,
+                l = _.latLngToLayerPoint(this._latlng);
+            for (n = t.length - 1; n >= 0; n--) s = t[n], s.setOpacity ? (s.setZIndexOffset(1e6), s.setOpacity(0), u.addLayer(s), s._setPos(l)) : u.addLayer(s);
             h._forceLayout(), h._animationStart();
             var d = L.Path.SVG ? 0 : .3, p = L.Path.SVG_NS;
-            for (n = t.length - 1; n >= 0; n--)if (o = _.layerPointToLatLng(i[n]), s = t[n], s._preSpiderfyLatlng = s._latlng, s.setLatLng(o), s.setOpacity && s.setOpacity(1), r = new L.Polyline([a._latlng, o], {
-                    weight: 1.5,
-                    color: "#222",
-                    opacity: d
-                }), _.addLayer(r), s._spiderLeg = r, L.Path.SVG && this.SVG_ANIMATION) {
+            for (n = t.length - 1; n >= 0; n--) if (o = _.layerPointToLatLng(i[n]), s = t[n], s._preSpiderfyLatlng = s._latlng, s.setLatLng(o), s.setOpacity && s.setOpacity(1), r = new L.Polyline([a._latlng, o], {
+                weight: 1.5,
+                color: "#222",
+                opacity: d
+            }), _.addLayer(r), s._spiderLeg = r, L.Path.SVG && this.SVG_ANIMATION) {
                 var c = r._path.getTotalLength();
                 r._path.setAttribute("stroke-dasharray", c + "," + c);
                 var m = e.createElementNS(p, "animate");
                 m.setAttribute("attributeName", "stroke-dashoffset"), m.setAttribute("begin", "indefinite"), m.setAttribute("from", c), m.setAttribute("to", 0), m.setAttribute("dur", .25), r._path.appendChild(m), m.beginElement(), m = e.createElementNS(p, "animate"), m.setAttribute("attributeName", "stroke-opacity"), m.setAttribute("attributeName", "stroke-opacity"), m.setAttribute("begin", "indefinite"), m.setAttribute("from", 0), m.setAttribute("to", .5), m.setAttribute("dur", .25), r._path.appendChild(m), m.beginElement()
             }
-            if (a.setOpacity(.3), L.Path.SVG)for (this._group._forceLayout(), n = t.length - 1; n >= 0; n--)s = t[n]._spiderLeg, s.options.opacity = .5, s._path.setAttribute("stroke-opacity", .5);
+            if (a.setOpacity(.3), L.Path.SVG) for (this._group._forceLayout(), n = t.length - 1; n >= 0; n--) s = t[n]._spiderLeg, s.options.opacity = .5, s._path.setAttribute("stroke-opacity", .5);
             setTimeout(function () {
                 h._animationEnd(), h.fire("spiderfied")
             }, 200)
         }, _animationUnspiderfy: function (t) {
-            var e, i, n, s = this._group, r = s._map, o = s._featureGroup, a = t ? r._latLngToNewLayerPoint(this._latlng, t.zoom, t.center) : r.latLngToLayerPoint(this._latlng), h = this.getAllChildMarkers(), _ = L.Path.SVG && this.SVG_ANIMATION;
-            for (s._animationStart(), this.setOpacity(1), i = h.length - 1; i >= 0; i--)e = h[i], e._preSpiderfyLatlng && (e.setLatLng(e._preSpiderfyLatlng), delete e._preSpiderfyLatlng, e.setOpacity ? (e._setPos(a), e.setOpacity(0)) : o.removeLayer(e), _ && (n = e._spiderLeg._path.childNodes[0], n.setAttribute("to", n.getAttribute("from")), n.setAttribute("from", 0), n.beginElement(), n = e._spiderLeg._path.childNodes[1], n.setAttribute("from", .5), n.setAttribute("to", 0), n.setAttribute("stroke-opacity", 0), n.beginElement(), e._spiderLeg._path.setAttribute("stroke-opacity", 0)));
+            var e, i, n, s = this._group, r = s._map, o = s._featureGroup,
+                a = t ? r._latLngToNewLayerPoint(this._latlng, t.zoom, t.center) : r.latLngToLayerPoint(this._latlng),
+                h = this.getAllChildMarkers(), _ = L.Path.SVG && this.SVG_ANIMATION;
+            for (s._animationStart(), this.setOpacity(1), i = h.length - 1; i >= 0; i--) e = h[i], e._preSpiderfyLatlng && (e.setLatLng(e._preSpiderfyLatlng), delete e._preSpiderfyLatlng, e.setOpacity ? (e._setPos(a), e.setOpacity(0)) : o.removeLayer(e), _ && (n = e._spiderLeg._path.childNodes[0], n.setAttribute("to", n.getAttribute("from")), n.setAttribute("from", 0), n.beginElement(), n = e._spiderLeg._path.childNodes[1], n.setAttribute("from", .5), n.setAttribute("to", 0), n.setAttribute("stroke-opacity", 0), n.beginElement(), e._spiderLeg._path.setAttribute("stroke-opacity", 0)));
             setTimeout(function () {
                 var t = 0;
-                for (i = h.length - 1; i >= 0; i--)e = h[i], e._spiderLeg && t++;
-                for (i = h.length - 1; i >= 0; i--)e = h[i], e._spiderLeg && (e.setOpacity && (e.setOpacity(1), e.setZIndexOffset(0)), t > 1 && o.removeLayer(e), r.removeLayer(e._spiderLeg), delete e._spiderLeg);
+                for (i = h.length - 1; i >= 0; i--) e = h[i], e._spiderLeg && t++;
+                for (i = h.length - 1; i >= 0; i--) e = h[i], e._spiderLeg && (e.setOpacity && (e.setOpacity(1), e.setZIndexOffset(0)), t > 1 && o.removeLayer(e), r.removeLayer(e._spiderLeg), delete e._spiderLeg);
                 s._animationEnd()
             }, 200)
         }
     } : {
         _animationSpiderfy: function (t, e) {
             var i, n, s, r, o = this._group, a = o._map, h = o._featureGroup;
-            for (i = t.length - 1; i >= 0; i--)r = a.layerPointToLatLng(e[i]), n = t[i], n._preSpiderfyLatlng = n._latlng, n.setLatLng(r), n.setZIndexOffset && n.setZIndexOffset(1e6), h.addLayer(n), s = new L.Polyline([this._latlng, r], {
+            for (i = t.length - 1; i >= 0; i--) r = a.layerPointToLatLng(e[i]), n = t[i], n._preSpiderfyLatlng = n._latlng, n.setLatLng(r), n.setZIndexOffset && n.setZIndexOffset(1e6), h.addLayer(n), s = new L.Polyline([this._latlng, r], {
                 weight: 1.5,
                 color: "#222"
             }), a.addLayer(s), n._spiderLeg = s;

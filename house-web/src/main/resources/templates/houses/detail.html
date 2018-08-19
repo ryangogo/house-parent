@@ -105,7 +105,7 @@
                                         <aside>
                                             <header>您的评价</header>
                                             <div class="rating rating-user">
-                                                <div class="inner"></div>
+                                                <div class="inner" onclick="addscore()"></div>
                                             </div>
                                         </aside>
                                         <figure>
@@ -200,12 +200,12 @@
                                                           name="msg" required></textarea>
                                             </div>
                                         </form>
-                                            <div class="form-group">
-                                                <button class="btn pull-right btn-default"
-                                                        id="form-contact-agent-submit">添加评论
-                                                </button>
-                                            </div><!-- /.form-group -->
-                                            <div id="form-contact-agent-status"></div>
+                                        <div class="form-group">
+                                            <button class="btn pull-right btn-default"
+                                                    id="form-contact-agent-submit">添加评论
+                                            </button>
+                                        </div><!-- /.form-group -->
+                                        <div id="form-contact-agent-status"></div>
                                         <!-- /#form-contact -->
                                     </div>
                                     <section id="comments">
@@ -299,19 +299,18 @@
                         <aside id="featured-properties">
                             <header><h3>热门房产</h3></header>
                             <#list recomHouses as house>
-                                <div class="property small">
-                                    <a href="/house/detail?id=${house.id}">
-                                        <div class="property-image">
-                                            <img alt="" src="${(house.firstImg)!}" style="width: 100px;height: 75px">
-                                        </div>
-                                    </a>
-                                    <div class="info">
-                                        <a href="/house/detail?id=${house.id}"><h4>${(house.name)!}</h4></a>
-                                        <figure>${(house.address)!}</figure>
-                                        <div class="tag price">￥${(house.price)!}</div>
+                            <div class="property small">
+                                <a href="/house/detail?id=${house.id}">
+                                    <div class="property-image">
+                                        <img alt="" src="${(house.firstImg)!}" style="width: 100px;height: 75px">
                                     </div>
-                                </div><!-- /.property -->
-                            </#list>
+                                </a>
+                                <div class="info">
+                                    <a href="/house/detail?id=${house.id}"><h4>${(house.name)!}</h4></a>
+                                    <figure>${(house.address)!}</figure>
+                                    <div class="tag price">￥${(house.price)!}</div>
+                                </div>
+                            </div><!-- /.property -->
                         </aside><!-- /#featured-properties -->
 
                     </section><!-- /#sidebar -->

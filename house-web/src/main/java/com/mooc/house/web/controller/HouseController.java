@@ -17,7 +17,9 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpSession;
+import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Map;
 
 /**
  * Created by Administrator on 2018/6/27.
@@ -105,10 +107,9 @@ public class HouseController {
     //1.评分
     @GetMapping("rating")
     @ResponseBody
-    public ResultMsg houseRating(String id, Double rating) {
+    public Map<String,Object> houseRating(String houseId, BigDecimal rating) {
         //TODO 评分
-        houseService.updateRating(id, rating);
-        return null;
+        return houseService.updateRating(houseId, rating);
     }
 
     //2.收藏

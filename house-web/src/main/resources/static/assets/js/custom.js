@@ -456,14 +456,14 @@ function centerSlider() {
     var imageWidth = $('#slider .slide img').width();
     var viewPortWidth = $(window).width();
     if (imageWidth > viewPortWidth) {
-        var centerImage = ( imageWidth / 2 ) - ( viewPortWidth / 2 );
+        var centerImage = (imageWidth / 2) - (viewPortWidth / 2);
         $('#slider .slide img').css('left', -centerImage);
     }
     else if ($('#slider .slide img').height() < $('#slider').height()) {
 
         $('#slider .slide img').css('height', '100%');
         $('#slider .slide img').css('width', 'auto');
-        centerImage = ( $('#slider .slide img').width() / 2 ) - ( viewPortWidth / 2 );
+        centerImage = ($('#slider .slide img').width() / 2) - (viewPortWidth / 2);
         $('#slider .slide img').css('left', -centerImage);
     }
 

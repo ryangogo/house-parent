@@ -41,6 +41,26 @@ $(document).ready(function () {
 });
 
 /**
+ * 获取打分的分数
+ */
+function addscore(){
+    var rating = $(".inner").children("input").val();
+    var houseId = $("#houseId").val();
+    $.ajax({
+        url: "/house/rating",
+        data:{"rating":rating,"houseId":houseId},
+        async: false,
+        success: function (data) {
+            if(data.status == "0"){
+                layer.alert(data.msg);
+            }else{
+                layer.alert(data.msg);
+            }
+        }
+    })
+}
+
+/**
  * 添加一个留言
  * @param data
  */

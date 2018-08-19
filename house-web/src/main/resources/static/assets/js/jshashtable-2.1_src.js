@@ -200,7 +200,7 @@ var Hashtable = (function () {
         var bucket = bucketsByHash[hash];
 
         // Check that this is a genuine bucket and not something inherited from the bucketsByHash's prototype
-        return ( bucket && (bucket instanceof Bucket) ) ? bucket : null;
+        return (bucket && (bucket instanceof Bucket)) ? bucket : null;
     }
 
     /*----------------------------------------------------------------------------------------------------------------*/

@@ -11,6 +11,7 @@ $(document).ready(function () {
         return null;
     }
 })
+
 function successmsg(title, content) {
     toastr.success(content, title, {
         "timeOut": "1500",

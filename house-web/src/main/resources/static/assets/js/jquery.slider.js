@@ -25,11 +25,11 @@
         if (typeof value == "undefined") return false;
 
         if (value instanceof Array || (!(value instanceof Object) &&
-                (Object.prototype.toString.call((value)) == '[object Array]') ||
-                typeof value.length == 'number' &&
-                typeof value.splice != 'undefined' &&
-                typeof value.propertyIsEnumerable != 'undefined' && !value.propertyIsEnumerable('splice')
-            )) {
+            (Object.prototype.toString.call((value)) == '[object Array]') ||
+            typeof value.length == 'number' &&
+            typeof value.splice != 'undefined' &&
+            typeof value.propertyIsEnumerable != 'undefined' && !value.propertyIsEnumerable('splice')
+        )) {
             return true;
         }
 
@@ -335,7 +335,7 @@
             var s = this.settings.scale;
             var prc = Math.round((100 / (s.length - 1)) * 10) / 10;
             for (var i = 0; i < s.length; i++) {
-                str += '<span style="left: ' + i * prc + '%">' + ( s[i] != '|' ? '<ins>' + s[i] + '</ins>' : '' ) + '</span>';
+                str += '<span style="left: ' + i * prc + '%">' + (s[i] != '|' ? '<ins>' + s[i] + '</ins>' : '') + '</span>';
             }
             ;
             return str;
@@ -370,7 +370,7 @@
     jSlider.prototype.limits = function (x, pointer) {
         // smooth
         if (!this.settings.smooth) {
-            var step = this.settings.step * 100 / ( this.settings.interval );
+            var step = this.settings.step * 100 / (this.settings.interval);
             x = Math.round(x / step) * step;
         }
 
@@ -394,7 +394,7 @@
         if (this.o.pointers[0] && this.o.pointers[1])
             this.o.value.css({
                 left: this.o.pointers[0].value.prc + "%",
-                width: ( this.o.pointers[1].value.prc - this.o.pointers[0].value.prc ) + "%"
+                width: (this.o.pointers[1].value.prc - this.o.pointers[0].value.prc) + "%"
             });
 
         this.o.labels[pointer.uid].value.html(
@@ -437,7 +437,7 @@
         var sizes = {
             label: label.o.outerWidth(),
             right: false,
-            border: ( prc * this.sizes.domWidth ) / 100
+            border: (prc * this.sizes.domWidth) / 100
         };
 
         if (!this.settings.single) {
@@ -453,11 +453,11 @@
 
                         label.o.css({visibility: "visible"});
 
-                        prc = ( another.value.prc - prc ) / 2 + prc;
+                        prc = (another.value.prc - prc) / 2 + prc;
                         if (another.value.prc != pointer.value.prc) {
                             label.value.html(this.nice(pointer.value.origin) + "&nbsp;&ndash;&nbsp;" + this.nice(another.value.origin));
                             sizes.label = label.o.outerWidth();
-                            sizes.border = ( prc * this.sizes.domWidth ) / 100;
+                            sizes.border = (prc * this.sizes.domWidth) / 100;
                         }
                     } else {
                         another_label.o.css({visibility: "visible"});
@@ -471,11 +471,11 @@
 
                         label.o.css({visibility: "visible"});
 
-                        prc = ( prc - another.value.prc ) / 2 + another.value.prc;
+                        prc = (prc - another.value.prc) / 2 + another.value.prc;
                         if (another.value.prc != pointer.value.prc) {
                             label.value.html(this.nice(another.value.origin) + "&nbsp;&ndash;&nbsp;" + this.nice(pointer.value.origin));
                             sizes.label = label.o.outerWidth();
-                            sizes.border = ( prc * this.sizes.domWidth ) / 100;
+                            sizes.border = (prc * this.sizes.domWidth) / 100;
                         }
                     } else {
                         another_label.o.css({visibility: "visible"});
@@ -491,7 +491,7 @@
             var sizes = {
                 label: another_label.o.outerWidth(),
                 right: false,
-                border: ( another.value.prc * this.sizes.domWidth ) / 100
+                border: (another.value.prc * this.sizes.domWidth) / 100
             };
             sizes = setPosition(another_label, sizes, another.value.prc);
         }
@@ -573,13 +573,13 @@
 
             for (var i = 0; i <= h.length; i++) {
                 if (h[i]) var v = h[i].split("/");
-                else       var v = [100, this.settings.to];
+                else var v = [100, this.settings.to];
 
                 v[0] = new Number(v[0]);
                 v[1] = new Number(v[1]);
 
                 if (prc >= _start && prc <= v[0]) {
-                    var value = _from + ( (prc - _start) * (v[1] - _from) ) / (v[0] - _start);
+                    var value = _from + ((prc - _start) * (v[1] - _from)) / (v[0] - _start);
                 }
 
                 _start = v[0];
@@ -588,7 +588,7 @@
             ;
 
         } else {
-            var value = this.settings.from + ( prc * this.settings.interval ) / 100;
+            var value = this.settings.from + (prc * this.settings.interval) / 100;
         }
 
         return this.round(value);
@@ -603,7 +603,7 @@
 
             for (var i = 0; i <= h.length; i++) {
                 if (h[i]) var v = h[i].split("/");
-                else     var v = [100, this.settings.to];
+                else var v = [100, this.settings.to];
                 v[0] = new Number(v[0]);
                 v[1] = new Number(v[1]);
 

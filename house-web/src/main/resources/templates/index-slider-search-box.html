@@ -204,10 +204,10 @@
     <!-- end Page Content -->
     <!-- Page Footer -->
     <div th:replace="/base/footer :: pageFoot">
-    <!-- end Page Footer -->
-</div>
+        <!-- end Page Footer -->
+    </div>
 
-<div id="overlay"></div>
+    <div id="overlay"></div>
 
     <script type="text/javascript" th:src="@{/static/assets/js/jquery-2.1.0.min.js}"></script>
     <script type="text/javascript" th:src="@{/static/assets/js/jquery-migrate-1.2.1.min.js}"></script>
@@ -227,13 +227,13 @@
     <script type="text/javascript" th:src="@{/static/assets/js/draggable-0.1.js}"></script>
     <script type="text/javascript" th:src="@{/static/assets/js/jquery.slider.js}"></script>
     <script type="text/javascript" th:src="@{/static/assets/js/custom.js}"></script>
-<!--[if gt IE 8]>
-    <script type="text/javascript" th:src="@{/static/assets/js/ie.js}"></script>
-<![endif]-->
-<script>
-    $(window).load(function () {
-        initializeOwl(false);
-    });
-</script>
+    <!--[if gt IE 8]>
+        <script type="text/javascript" th:src="@{/static/assets/js/ie.js}"></script>
+    <![endif]-->
+    <script>
+        $(window).load(function () {
+            initializeOwl(false);
+        });
+    </script>
 </body>
 </html>

@@ -80,7 +80,7 @@
     <p>To set your favorite header style you need to add some classes in the <code>&lt;body&gt;</code> tag:</p>
     <br>
     <p><strong>1. For <em>Default Navigation</em>:</strong></p>
-<pre>
+    <pre>
 &lt;body class=""&gt;
     <em style="color: #7c7c7c">// your HTML content</em>
 &lt;/body&gt;
@@ -88,7 +88,7 @@
     <p>For default navigation you don't need to use any class.</p>
     <br>
     <p><strong>2. For <em>Navigation Fixed to Bottom</em>:</strong></p>
-<pre>
+    <pre>
 &lt;body class="<strong>navigation-fixed-bottom has-fullscreen-map</strong>"&gt;
     <em style="color: #7c7c7c">// your HTML content</em>
 &lt;/body&gt;
@@ -99,7 +99,7 @@
     </p>
     <br>
     <p><strong>3. For <em>Navigation Fixed to Top</em>:</strong></p>
-<pre>
+    <pre>
 &lt;body class="<strong>navigation-fixed-top</strong>"&gt;
     <em style="color: #7c7c7c">// your HTML content</em>
 &lt;/body&gt;
@@ -124,7 +124,7 @@
         </li>
     </ol>
     <strong>Whole code:</strong>
-<pre>
+    <pre>
 &lt;body class="<strong>map-google</strong>"&gt;
     <em style="color: #7c7c7c">// your HTML content</em>
     &lt;script type="text/javascript" src="assets/js/custom-map.js"&gt;&lt;/script&gt;
@@ -148,7 +148,7 @@
         </li>
     </ol>
     <strong>Whole code:</strong>
-<pre>
+    <pre>
 &lt;body class="<strong>map-osm</strong>"&gt;
     <em style="color: #7c7c7c">// your HTML content</em>
     &lt;script type="text/javascript" src="assets/js/custom-map.js"&gt;&lt;/script&gt;
@@ -189,7 +189,7 @@
     <p>Zoner loads properties data from <code>locations.js</code> file as default. It contains array with properties
         parameters.</p>
     <p><strong>Example:</strong></p>
-<pre>
+    <pre>
 [
     "2479 Murphy Court", <em style="color: #7c7c7c">// Title</em>
     "Minneapolis, MN 55402", <em style="color: #7c7c7c">// Locations</em>
@@ -210,7 +210,7 @@
         <code>has-parallax</code> class on <strong>map</strong> or <strong>slider</strong> element.
     </p>
 
-<pre>
+    <pre>
 &lt;div class="<strong>block</strong>"&gt;
     &lt;section id="your-section"&gt;
         <em style="color: #7c7c7c">// your HTML content</em>
@@ -243,7 +243,7 @@
         located in root directory.</p>
 
     <strong>contact.php</strong> settings you can change:
-<pre>
+    <pre>
 $to = 'hithemestarz@gmail.com'; <em style="color: #7c7c7c">// Here you can set address for receiving emails (usually
     your email)</em>
 $subject = 'Message From Your Website Contact Form'; <em style="color: #7c7c7c">// Message displayed in "subject" label
@@ -260,7 +260,7 @@ $subject = 'Message From Your Website Contact Form'; <em style="color: #7c7c7c">
         will be displayed in body of the message. Then you need to <em>uncomment</em> (remove "//" dashes) of the
         commented code and comment the code above.
         The final code should look like this:</p>
-<pre>
+    <pre>
 <em style="color: #7c7c7c">//$headers = 'From: ' .$email . "\r\n";</em>
 
 $headers = 'From: noreply@domain.com' . "\r\n";
@@ -290,13 +290,13 @@ $body .= "\n";
     <h3 id="rtl"><strong>RTL Support</strong></h3>
     <h4><strong>CSS part</strong></h4>
     <p>To enable RTL support for Zoner you need to add:</p>
-<pre>
+    <pre>
 &lt;link rel="stylesheet" href="assets/css/bootstrap-rtl.min.css" type="text/css">
 &lt;link rel="stylesheet" href="assets/css/rtl.css" type="text/css">
 </pre>
     <p><strong>after</strong> the <code>style.css</code> in <code>&lt;head></code> tag, so it looks like:</p>
 
-<pre>
+    <pre>
 &lt;link rel="stylesheet" href="assets/css/style.css" type="text/css">
 &lt;link rel="stylesheet" href="assets/css/bootstrap-rtl.min.css" type="text/css">
 &lt;link rel="stylesheet" href="assets/css/rtl.css" type="text/css">
@@ -311,7 +311,7 @@ $body .= "\n";
     </ul>
     <p>These states are use in function <code>initializeOwl()</code> which is at the bottom of the page.</p>
     <strong>Enable RTL support for Owl Carousel:</strong>
-<pre>
+    <pre>
 $(window).load(function(){
     initializeOwl(<strong>true</strong>);
 });

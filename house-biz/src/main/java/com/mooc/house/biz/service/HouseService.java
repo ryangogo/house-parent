@@ -1,5 +1,6 @@
 package com.mooc.house.biz.service;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.mooc.house.biz.mapper.HouseMapper;
@@ -16,17 +17,20 @@ import com.mooc.house.common.utils.QiNiuCDNOperator;
 import com.mooc.house.common.vo.HouseVO;
 import com.qiniu.storage.model.DefaultPutRet;
 import lombok.val;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 import redis.clients.jedis.Jedis;
 
+import com.fasterxml.jackson.databind.JavaType;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.util.Date;
-import java.util.List;
-import java.util.UUID;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+import java.util.*;
 
 /**
  * Created by Administrator on 2018/6/28.
@@ -194,9 +198,49 @@ public class HouseService {
         return houseMapper.selectByHotIds(ids);
     }
 
-    public void updateRating(String id, Double rating) {
-        Jedis jedis = new Jedis("127.0.0.1");
 
-
+    @Transactional
+    public Map<String,Object> updateRating(String houseId, BigDecimal rating){
+        Map<String,Object> returnMap = new HashMap<>();
+        try{
+            Map<String,Object> scoreMap = new HashMap<String,Object>();
+            ObjectMapper MAPPER = new ObjectMapper();
+            Jedis jedis = new Jedis("127.0.0.1");
+            String scoreJSON = jedis.get("houseScore_" + houseId);
+            if(StringUtils.isBlank(scoreJSON)){
+                scoreMap.put("rating",rating);
+                scoreMap.put("times",1);
+                String scorejson = MAPPER.writeValueAsString(scoreMap);
+                jedis.set("houseScore_" + houseId,scorejson);
+                returnMap.put("status",0);
+                returnMap.put("msg","您已成功评分");
+                return returnMap;
+            }else{
+                //TUDO  这行报错了
+                JavaType jvt = MAPPER.getTypeFactory().constructParametricType(HashMap.class,String.class,Object.class);
+                scoreMap = MAPPER.readValue(scoreJSON, jvt);
+                Object oldRatingInteger = (Object)scoreMap.get("rating");
+                BigDecimal oldRating = new BigDecimal(oldRatingInteger.toString());
+                Integer sumTimes = (Integer) scoreMap.get("times");
+                BigDecimal sumRating = oldRating.multiply(new BigDecimal(sumTimes.toString()));
+                sumRating = sumRating.add(rating);
+                sumTimes = sumTimes + 1;
+                rating = sumRating.divide(new BigDecimal(sumTimes.toString()), 2, RoundingMode.HALF_UP);
+                scoreMap.put("rating",rating);
+                scoreMap.put("times",sumTimes);
+                String scorejson = MAPPER.writeValueAsString(scoreMap);
+                jedis.set("houseScore_" + houseId,scorejson);
+                double rat = rating.setScale( 0, BigDecimal.ROUND_HALF_UP ).doubleValue(); // 向下取整
+                houseMapper.updateRatingById(houseId,rat);
+                returnMap.put("status",0);
+                returnMap.put("msg","您已成功评分");
+                return returnMap;
+            }
+        }catch (IOException e){
+            e.printStackTrace();
+            returnMap.put("status",1);
+            returnMap.put("msg","评分失败");
+            return returnMap;
+        }
     }
 }

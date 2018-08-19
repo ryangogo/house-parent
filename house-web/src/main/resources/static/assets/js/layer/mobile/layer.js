@@ -6,7 +6,7 @@
     }, s = {type: 0, shade: !0, shadeClose: !0, fixed: !0, anim: "scale"}, l = {
         extend: function (e) {
             var t = JSON.parse(JSON.stringify(s));
-            for (var n in e)t[n] = e[n];
+            for (var n in e) t[n] = e[n];
             return t
         }, timer: {}, end: {}
     };
@@ -46,7 +46,7 @@
             var t = this.getAttribute("type");
             0 == t ? (e.no && e.no(), layer.close(n.index)) : e.yes ? e.yes(n.index) : layer.close(n.index)
         };
-        if (e.btn)for (var s = t[i]("layui-m-layerbtn")[0].children, r = s.length, o = 0; o < r; o++)l.touch(s[o], a);
+        if (e.btn) for (var s = t[i]("layui-m-layerbtn")[0].children, r = s.length, o = 0; o < r; o++) l.touch(s[o], a);
         if (e.shade && e.shadeClose) {
             var c = t[i]("layui-m-layershade")[0];
             l.touch(c, function () {
@@ -62,7 +62,7 @@
             var n = a("#" + o[0] + e)[0];
             n && (n.innerHTML = "", t.body.removeChild(n), clearTimeout(l.timer[e]), delete l.timer[e], "function" == typeof l.end[e] && l.end[e](), delete l.end[e])
         }, closeAll: function () {
-            for (var e = t[i](o[0]), n = 0, a = e.length; n < a; n++)layer.close(0 | e[0].getAttribute("index"))
+            for (var e = t[i](o[0]), n = 0, a = e.length; n < a; n++) layer.close(0 | e[0].getAttribute("index"))
         }
     }, "function" == typeof define ? define(function () {
         return layer

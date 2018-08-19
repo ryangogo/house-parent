@@ -21,7 +21,7 @@
         community_id,
         address,
         state
-   </sql>
+    </sql>
 
     <sql id="houseCondition">
         <if test="house.userId != null and house.userId != 0">
@@ -103,124 +103,130 @@
     </select>
 
     <select id="selectHouseUser" resultType="houseUser">
-     select id,house_id,user_id,create_time,type
-     from house_user
-     where house_id = #{id} and user_id = #{userId} and type = #{type}
-   </select>
+        select id,house_id,user_id,create_time,type
+        from house_user
+        where house_id = #{id} and user_id = #{userId} and type = #{type}
+    </select>
 
     <select id="selectSaleHouseUser" resultType="houseUser">
-     select id,house_id,user_id,create_time,type
-     from house_user
-     where house_id = #{id} and  type = 1
-     limit 1
-   </select>
+        select id,house_id,user_id,create_time,type
+        from house_user
+        where house_id = #{id} and type = 1
+        limit 1
+    </select>
 
     <update id="updateHouse">
-      update house
-      set  rating = #{rating}
-      where id = #{id}
-   </update>
+        update house
+        set rating = #{rating}
+        where id = #{id}
+    </update>
 
     <update id="downHouse">
-      update house
-      set    state = 2
-      where  id = #{id}
+        update house
+        set state = 2
+        where id = #{id}
+    </update>
+
+    <update id="updateRatingById" >
+        UPDATE house
+            SET rating = #{rating}
+         WHERE id = #{houseId}
     </update>
 
 
     <insert id="insert" useGeneratedKeys="true" keyProperty="id">
-     insert into house(
-                     type,
-                     name,
-                     price,
-                     images,
-                     area,
-                     beds,
-                     baths,
-                     rating,
-                     remarks,
-                     properties,
-                     floor_plan,
-                     tags,
-                     create_time,
-                     city_id,
-                     community_id,
-                     address,
-                     state
-                  )
-                 value(
-                     #{type},
-                     #{name},
-                     #{price},
-                     #{images},
-                     #{area},
-                     #{beds},
-                     #{baths},
-                     #{rating},
-                     #{remarks},
-                     #{properties},
-                     #{floorPlan},
-                     #{tags},
+        insert into house(
+        type,
+        name,
+        price,
+        images,
+        area,
+        beds,
+        baths,
+        rating,
+        remarks,
+        properties,
+        floor_plan,
+        tags,
+        create_time,
+        city_id,
+        community_id,
+        address,
+        state
+        )
+        value(
+        #{type},
+        #{name},
+        #{price},
+        #{images},
+        #{area},
+        #{beds},
+        #{baths},
+        #{rating},
+        #{remarks},
+        #{properties},
+        #{floorPlan},
+        #{tags},
         now(),
-                     #{cityId},
-                     #{communityId},
-                     #{address},
-                     #{state}
-                     )
-   </insert>
+        #{cityId},
+        #{communityId},
+        #{address},
+        #{state}
+        )
+    </insert>
 
     <insert id="insertHouseUser">
-     insert into house_user (house_id,
-                             user_id,
-                             create_time,
-                             type)
-                     value(
-                       #{houseId},
-                       #{userId},
+        insert into house_user (house_id,
+        user_id,
+        create_time,
+        type)
+        value(
+        #{houseId},
+        #{userId},
         now(),
-                       #{type}
-                     )
-                     
-   </insert>
+        #{type}
+        )
+
+    </insert>
 
     <insert id="insertUserMsg">
-     insert into house_msg (
-                     msg,
-                     create_time,
-                     user_name,
-                     house_id,
-                     agent_id
-                     )
-                     value(
-                      #{msg},
-                      #{createTime},
-                      #{userName},
-                      #{houseId},
-                      #{agentId}
-                     )
+        insert into house_msg (
+        msg,
+        create_time,
+        user_name,
+        house_id,
+        agent_id
+        )
+        value(
+        #{msg},
+        #{createTime},
+        #{userName},
+        #{houseId},
+        #{agentId}
+        )
     </insert>
 
     <delete id="deleteHouseUser">
-      delete from house_user
-      where  house_id = #{id} and user_id = #{userId} and type=#{type}
-    
+        delete from house_user
+        where house_id = #{id} and user_id = #{userId} and type=#{type}
+
     </delete>
 
     <select id="selectUserByHouseId" resultType="user">
         select
-            u.*
+        u.*
         from
-          user u
+        user u
         left join
-          house_user
+        house_user
         on
-          u.id = house_user.user_id
+        u.id = house_user.user_id
         left join
-            house
+        house
         on
-            house.id = house_user.house_id
+        house.id = house_user.house_id
         where
-            house_id = #{houseId}
+        house_id = #{houseId}
     </select>
 
     <insert id="insertHouseMsg">

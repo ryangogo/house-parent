@@ -3,8 +3,8 @@
 <mapper namespace="com.mooc.house.biz.mapper.BlogMapper">
 
     <sql id="blogField">
-         id,tags ,content,create_time,title
-     </sql>
+        id,tags ,content,create_time,title
+    </sql>
 
     <select id="selectBlog" resultType="blog">
         select

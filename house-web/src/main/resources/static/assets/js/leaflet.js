@@ -12,7 +12,7 @@
             var e, i, n, o, s = Array.prototype.slice.call(arguments, 1);
             for (i = 0, n = s.length; n > i; i++) {
                 o = s[i] || {};
-                for (e in o)o.hasOwnProperty(e) && (t[e] = o[e])
+                for (e in o) o.hasOwnProperty(e) && (t[e] = o[e])
             }
             return t
         }, bind: function (t, e) {
@@ -29,7 +29,7 @@
             var n, o;
             if ("object" == typeof t) {
                 o = Array.prototype.slice.call(arguments, 3);
-                for (n in t)e.apply(i, [n, t[n]].concat(o));
+                for (n in t) e.apply(i, [n, t[n]].concat(o));
                 return !0
             }
             return !1
@@ -54,12 +54,12 @@
             return t.options = o.extend({}, t.options, e), t.options
         }, getParamString: function (t, e, i) {
             var n = [];
-            for (var o in t)n.push(encodeURIComponent(i ? o.toUpperCase() : o) + "=" + encodeURIComponent(t[o]));
+            for (var o in t) n.push(encodeURIComponent(i ? o.toUpperCase() : o) + "=" + encodeURIComponent(t[o]));
             return (e && -1 !== e.indexOf("?") ? "&" : "?") + n.join("&")
         }, template: function (t, e) {
             return t.replace(/\{ *([\w_]+) *\}/g, function (t, n) {
                 var o = e[n];
-                if (o === i)throw new Error("No value provided for variable " + t);
+                if (o === i) throw new Error("No value provided for variable " + t);
                 return "function" == typeof o && (o = o(e)), o
             })
         }, isArray: Array.isArray || function (t) {
@@ -68,7 +68,7 @@
     }, function () {
         function e(e) {
             var i, n, o = ["webkit", "moz", "o", "ms"];
-            for (i = 0; i < o.length && !n; i++)n = t[o[i] + e];
+            for (i = 0; i < o.length && !n; i++) n = t[o[i] + e];
             return n
         }
 
@@ -77,7 +77,8 @@
             return n = i + o, t.setTimeout(e, o)
         }
 
-        var n = 0, s = t.requestAnimationFrame || e("RequestAnimationFrame") || i, a = t.cancelAnimationFrame || e("CancelAnimationFrame") || e("CancelRequestAnimationFrame") || function (e) {
+        var n = 0, s = t.requestAnimationFrame || e("RequestAnimationFrame") || i,
+            a = t.cancelAnimationFrame || e("CancelAnimationFrame") || e("CancelRequestAnimationFrame") || function (e) {
                 t.clearTimeout(e)
             };
         o.Util.requestAnimFrame = function (e, n, a, r) {
@@ -94,13 +95,13 @@
         i.prototype = this.prototype;
         var n = new i;
         n.constructor = e, e.prototype = n;
-        for (var s in this)this.hasOwnProperty(s) && "prototype" !== s && (e[s] = this[s]);
+        for (var s in this) this.hasOwnProperty(s) && "prototype" !== s && (e[s] = this[s]);
         t.statics && (o.extend(e, t.statics), delete t.statics), t.includes && (o.Util.extend.apply(null, [n].concat(t.includes)), delete t.includes), t.options && n.options && (t.options = o.extend({}, n.options, t.options)), o.extend(n, t), n._initHooks = [];
         var a = this;
         return e.__super__ = a.prototype, n.callInitHooks = function () {
             if (!this._initHooksCalled) {
                 a.prototype.callInitHooks && a.prototype.callInitHooks.call(this), this._initHooksCalled = !0;
-                for (var t = 0, e = n._initHooks.length; e > t; t++)n._initHooks[t].call(this)
+                for (var t = 0, e = n._initHooks.length; e > t; t++) n._initHooks[t].call(this)
             }
         }, e
     }, o.Class.include = function (t) {
@@ -116,9 +117,9 @@
     var s = "_leaflet_events";
     o.Mixin = {}, o.Mixin.Events = {
         addEventListener: function (t, e, i) {
-            if (o.Util.invokeEach(t, this.addEventListener, this, e, i))return this;
+            if (o.Util.invokeEach(t, this.addEventListener, this, e, i)) return this;
             var n, a, r, h, l, u, c, d = this[s] = this[s] || {}, p = i && i !== this && o.stamp(i);
-            for (t = o.Util.splitWords(t), n = 0, a = t.length; a > n; n++)r = {
+            for (t = o.Util.splitWords(t), n = 0, a = t.length; a > n; n++) r = {
                 action: e,
                 context: i || this
             }, h = t[n], p ? (l = h + "_idx", u = l + "_len", c = d[l] = d[l] || {}, c[p] || (c[p] = [], d[u] = (d[u] || 0) + 1), c[p].push(r)) : (d[h] = d[h] || [], d[h].push(r));
@@ -127,13 +128,13 @@
             var e = this[s];
             return !!e && (t in e && e[t].length > 0 || t + "_idx" in e && e[t + "_idx_len"] > 0)
         }, removeEventListener: function (t, e, i) {
-            if (!this[s])return this;
-            if (!t)return this.clearAllEventListeners();
-            if (o.Util.invokeEach(t, this.removeEventListener, this, e, i))return this;
+            if (!this[s]) return this;
+            if (!t) return this.clearAllEventListeners();
+            if (o.Util.invokeEach(t, this.removeEventListener, this, e, i)) return this;
             var n, a, r, h, l, u, c, d, p, _ = this[s], m = i && i !== this && o.stamp(i);
-            for (t = o.Util.splitWords(t), n = 0, a = t.length; a > n; n++)if (r = t[n], u = r + "_idx", c = u + "_len", d = _[u], e) {
+            for (t = o.Util.splitWords(t), n = 0, a = t.length; a > n; n++) if (r = t[n], u = r + "_idx", c = u + "_len", d = _[u], e) {
                 if (h = m && d ? d[m] : _[r]) {
-                    for (l = h.length - 1; l >= 0; l--)h[l].action !== e || i && h[l].context !== i || (p = h.splice(l, 1), p[0].action = o.Util.falseFn);
+                    for (l = h.length - 1; l >= 0; l--) h[l].action !== e || i && h[l].context !== i || (p = h.splice(l, 1), p[0].action = o.Util.falseFn);
                     i && d && 0 === h.length && (delete d[m], _[c]--)
                 }
             } else delete _[r], delete _[u], delete _[c];
@@ -141,23 +142,33 @@
         }, clearAllEventListeners: function () {
             return delete this[s], this
         }, fireEvent: function (t, e) {
-            if (!this.hasEventListeners(t))return this;
+            if (!this.hasEventListeners(t)) return this;
             var i, n, a, r, h, l = o.Util.extend({}, e, {type: t, target: this}), u = this[s];
-            if (u[t])for (i = u[t].slice(), n = 0, a = i.length; a > n; n++)i[n].action.call(i[n].context, l);
+            if (u[t]) for (i = u[t].slice(), n = 0, a = i.length; a > n; n++) i[n].action.call(i[n].context, l);
             r = u[t + "_idx"];
-            for (h in r)if (i = r[h].slice())for (n = 0, a = i.length; a > n; n++)i[n].action.call(i[n].context, l);
+            for (h in r) if (i = r[h].slice()) for (n = 0, a = i.length; a > n; n++) i[n].action.call(i[n].context, l);
             return this
         }, addOneTimeEventListener: function (t, e, i) {
-            if (o.Util.invokeEach(t, this.addOneTimeEventListener, this, e, i))return this;
+            if (o.Util.invokeEach(t, this.addOneTimeEventListener, this, e, i)) return this;
             var n = o.bind(function () {
                 this.removeEventListener(t, e, i).removeEventListener(t, n, i)
             }, this);
             return this.addEventListener(t, e, i).addEventListener(t, n, i)
         }
     }, o.Mixin.Events.on = o.Mixin.Events.addEventListener, o.Mixin.Events.off = o.Mixin.Events.removeEventListener, o.Mixin.Events.once = o.Mixin.Events.addOneTimeEventListener, o.Mixin.Events.fire = o.Mixin.Events.fireEvent, function () {
-        var n = "ActiveXObject" in t, s = n && !e.addEventListener, a = navigator.userAgent.toLowerCase(), r = -1 !== a.indexOf("webkit"), h = -1 !== a.indexOf("chrome"), l = -1 !== a.indexOf("phantom"), u = -1 !== a.indexOf("android"), c = -1 !== a.search("android [23]"), d = -1 !== a.indexOf("gecko"), p = typeof orientation != i + "", _ = t.navigator && t.navigator.msPointerEnabled && t.navigator.msMaxTouchPoints && !t.PointerEvent, m = t.PointerEvent && t.navigator.pointerEnabled && t.navigator.maxTouchPoints || _, f = "devicePixelRatio" in t && t.devicePixelRatio > 1 || "matchMedia" in t && t.matchMedia("(min-resolution:144dpi)") && t.matchMedia("(min-resolution:144dpi)").matches, g = e.documentElement, v = n && "transition" in g.style, y = "WebKitCSSMatrix" in t && "m11" in new t.WebKitCSSMatrix && !c, P = "MozPerspective" in g.style, L = "OTransition" in g.style, x = !t.L_DISABLE_3D && (v || y || P || L) && !l, w = !t.L_NO_TOUCH && !l && function () {
+        var n = "ActiveXObject" in t, s = n && !e.addEventListener, a = navigator.userAgent.toLowerCase(),
+            r = -1 !== a.indexOf("webkit"), h = -1 !== a.indexOf("chrome"), l = -1 !== a.indexOf("phantom"),
+            u = -1 !== a.indexOf("android"), c = -1 !== a.search("android [23]"), d = -1 !== a.indexOf("gecko"),
+            p = typeof orientation != i + "",
+            _ = t.navigator && t.navigator.msPointerEnabled && t.navigator.msMaxTouchPoints && !t.PointerEvent,
+            m = t.PointerEvent && t.navigator.pointerEnabled && t.navigator.maxTouchPoints || _,
+            f = "devicePixelRatio" in t && t.devicePixelRatio > 1 || "matchMedia" in t && t.matchMedia("(min-resolution:144dpi)") && t.matchMedia("(min-resolution:144dpi)").matches,
+            g = e.documentElement, v = n && "transition" in g.style,
+            y = "WebKitCSSMatrix" in t && "m11" in new t.WebKitCSSMatrix && !c, P = "MozPerspective" in g.style,
+            L = "OTransition" in g.style, x = !t.L_DISABLE_3D && (v || y || P || L) && !l,
+            w = !t.L_NO_TOUCH && !l && function () {
                 var t = "ontouchstart";
-                if (m || t in g)return !0;
+                if (m || t in g) return !0;
                 var i = e.createElement("div"), n = !1;
                 return i.setAttribute ? (i.setAttribute(t, "return;"), "function" == typeof i[t] && (n = !0), i.removeAttribute(t), i = null, n) : !1
             }();
@@ -226,7 +237,7 @@
     }, o.point = function (t, e, n) {
         return t instanceof o.Point ? t : o.Util.isArray(t) ? new o.Point(t[0], t[1]) : t === i || null === t ? t : new o.Point(t, e, n)
     }, o.Bounds = function (t, e) {
-        if (t)for (var i = e ? [t, e] : t, n = 0, o = i.length; o > n; n++)this.extend(i[n])
+        if (t) for (var i = e ? [t, e] : t, n = 0, o = i.length; o > n; n++) this.extend(i[n])
     }, o.Bounds.prototype = {
         extend: function (t) {
             return t = o.point(t), this.min || this.max ? (this.min.x = Math.min(t.x, this.min.x), this.max.x = Math.max(t.x, this.max.x), this.min.y = Math.min(t.y, this.min.y), this.max.y = Math.max(t.y, this.max.y)) : (this.min = t.clone(), this.max = t.clone()), this
@@ -243,7 +254,8 @@
             return t = "number" == typeof t[0] || t instanceof o.Point ? o.point(t) : o.bounds(t), t instanceof o.Bounds ? (e = t.min, i = t.max) : e = i = t, e.x >= this.min.x && i.x <= this.max.x && e.y >= this.min.y && i.y <= this.max.y
         }, intersects: function (t) {
             t = o.bounds(t);
-            var e = this.min, i = this.max, n = t.min, s = t.max, a = s.x >= e.x && n.x <= i.x, r = s.y >= e.y && n.y <= i.y;
+            var e = this.min, i = this.max, n = t.min, s = t.max, a = s.x >= e.x && n.x <= i.x,
+                r = s.y >= e.y && n.y <= i.y;
             return a && r
         }, isValid: function () {
             return !(!this.min || !this.max)
@@ -273,13 +285,14 @@
         }, getViewportOffset: function (t) {
             var i, n = 0, s = 0, a = t, r = e.body, h = e.documentElement;
             do {
-                if (n += a.offsetTop || 0, s += a.offsetLeft || 0, n += parseInt(o.DomUtil.getStyle(a, "borderTopWidth"), 10) || 0, s += parseInt(o.DomUtil.getStyle(a, "borderLeftWidth"), 10) || 0, i = o.DomUtil.getStyle(a, "position"), a.offsetParent === r && "absolute" === i)break;
+                if (n += a.offsetTop || 0, s += a.offsetLeft || 0, n += parseInt(o.DomUtil.getStyle(a, "borderTopWidth"), 10) || 0, s += parseInt(o.DomUtil.getStyle(a, "borderLeftWidth"), 10) || 0, i = o.DomUtil.getStyle(a, "position"), a.offsetParent === r && "absolute" === i) break;
                 if ("fixed" === i) {
                     n += r.scrollTop || h.scrollTop || 0, s += r.scrollLeft || h.scrollLeft || 0;
                     break
                 }
                 if ("relative" === i && !a.offsetLeft) {
-                    var l = o.DomUtil.getStyle(a, "width"), u = o.DomUtil.getStyle(a, "max-width"), c = a.getBoundingClientRect();
+                    var l = o.DomUtil.getStyle(a, "width"), u = o.DomUtil.getStyle(a, "max-width"),
+                        c = a.getBoundingClientRect();
                     ("none" !== l || "none" !== u) && (s += c.left + a.clientLeft), n += c.top + (r.scrollTop || h.scrollTop || 0);
                     break
                 }
@@ -287,7 +300,7 @@
             } while (a);
             a = t;
             do {
-                if (a === r)break;
+                if (a === r) break;
                 n -= a.scrollTop || 0, s -= a.scrollLeft || 0, a = a.parentNode
             } while (a);
             return new o.Point(s, n)
@@ -297,11 +310,11 @@
             var o = e.createElement(t);
             return o.className = i, n && n.appendChild(o), o
         }, hasClass: function (t, e) {
-            if (t.classList !== i)return t.classList.contains(e);
+            if (t.classList !== i) return t.classList.contains(e);
             var n = o.DomUtil._getClass(t);
             return n.length > 0 && new RegExp("(^|\\s)" + e + "(\\s|$)").test(n)
         }, addClass: function (t, e) {
-            if (t.classList !== i)for (var n = o.Util.splitWords(e), s = 0, a = n.length; a > s; s++)t.classList.add(n[s]); else if (!o.DomUtil.hasClass(t, e)) {
+            if (t.classList !== i) for (var n = o.Util.splitWords(e), s = 0, a = n.length; a > s; s++) t.classList.add(n[s]); else if (!o.DomUtil.hasClass(t, e)) {
                 var r = o.DomUtil._getClass(t);
                 o.DomUtil._setClass(t, (r ? r + " " : "") + e)
             }
@@ -312,17 +325,17 @@
         }, _getClass: function (t) {
             return t.className.baseVal === i ? t.className : t.className.baseVal
         }, setOpacity: function (t, e) {
-            if ("opacity" in t.style)t.style.opacity = e; else if ("filter" in t.style) {
+            if ("opacity" in t.style) t.style.opacity = e; else if ("filter" in t.style) {
                 var i = !1, n = "DXImageTransform.Microsoft.Alpha";
                 try {
                     i = t.filters.item(n)
                 } catch (o) {
-                    if (1 === e)return
+                    if (1 === e) return
                 }
                 e = Math.round(100 * e), i ? (i.Enabled = 100 !== e, i.Opacity = e) : t.style.filter += " progid:" + n + "(opacity=" + e + ")"
             }
         }, testProp: function (t) {
-            for (var i = e.documentElement.style, n = 0; n < t.length; n++)if (t[n] in i)return t[n];
+            for (var i = e.documentElement.style, n = 0; n < t.length; n++) if (t[n] in i) return t[n];
             return !1
         }, getTranslateString: function (t) {
             var e = o.Browser.webkit3d, i = "translate" + (e ? "3d" : "") + "(", n = (e ? ",0" : "") + ")";
@@ -336,7 +349,7 @@
             return t._leaflet_pos
         }
     }, o.DomUtil.TRANSFORM = o.DomUtil.testProp(["transform", "WebkitTransform", "OTransform", "MozTransform", "msTransform"]), o.DomUtil.TRANSITION = o.DomUtil.testProp(["webkitTransition", "transition", "OTransition", "MozTransition", "msTransition"]), o.DomUtil.TRANSITION_END = "webkitTransition" === o.DomUtil.TRANSITION || "OTransition" === o.DomUtil.TRANSITION ? o.DomUtil.TRANSITION + "End" : "transitionend", function () {
-        if ("onselectstart" in e)o.extend(o.DomUtil, {
+        if ("onselectstart" in e) o.extend(o.DomUtil, {
             disableTextSelection: function () {
                 o.DomEvent.on(t, "selectstart", o.DomEvent.preventDefault)
             }, enableTextSelection: function () {
@@ -363,7 +376,7 @@
             }
         })
     }(), o.LatLng = function (t, e, n) {
-        if (t = parseFloat(t), e = parseFloat(e), isNaN(t) || isNaN(e))throw new Error("Invalid LatLng object: (" + t + ", " + e + ")");
+        if (t = parseFloat(t), e = parseFloat(e), isNaN(t) || isNaN(e)) throw new Error("Invalid LatLng object: (" + t + ", " + e + ")");
         this.lat = t, this.lng = e, n !== i && (this.alt = parseFloat(n))
     }, o.extend(o.LatLng, {
         DEG_TO_RAD: Math.PI / 180,
@@ -371,7 +384,7 @@
         MAX_MARGIN: 1e-9
     }), o.LatLng.prototype = {
         equals: function (t) {
-            if (!t)return !1;
+            if (!t) return !1;
             t = o.latLng(t);
             var e = Math.max(Math.abs(this.lat - t.lat), Math.abs(this.lng - t.lng));
             return e <= o.LatLng.MAX_MARGIN
@@ -379,7 +392,9 @@
             return "LatLng(" + o.Util.formatNum(this.lat, t) + ", " + o.Util.formatNum(this.lng, t) + ")"
         }, distanceTo: function (t) {
             t = o.latLng(t);
-            var e = 6378137, i = o.LatLng.DEG_TO_RAD, n = (t.lat - this.lat) * i, s = (t.lng - this.lng) * i, a = this.lat * i, r = t.lat * i, h = Math.sin(n / 2), l = Math.sin(s / 2), u = h * h + l * l * Math.cos(a) * Math.cos(r);
+            var e = 6378137, i = o.LatLng.DEG_TO_RAD, n = (t.lat - this.lat) * i, s = (t.lng - this.lng) * i,
+                a = this.lat * i, r = t.lat * i, h = Math.sin(n / 2), l = Math.sin(s / 2),
+                u = h * h + l * l * Math.cos(a) * Math.cos(r);
             return 2 * e * Math.atan2(Math.sqrt(u), Math.sqrt(1 - u))
         }, wrap: function (t, e) {
             var i = this.lng;
@@ -388,14 +403,15 @@
     }, o.latLng = function (t, e) {
         return t instanceof o.LatLng ? t : o.Util.isArray(t) ? "number" == typeof t[0] || "string" == typeof t[0] ? new o.LatLng(t[0], t[1], t[2]) : null : t === i || null === t ? t : "object" == typeof t && "lat" in t ? new o.LatLng(t.lat, "lng" in t ? t.lng : t.lon) : e === i ? null : new o.LatLng(t, e)
     }, o.LatLngBounds = function (t, e) {
-        if (t)for (var i = e ? [t, e] : t, n = 0, o = i.length; o > n; n++)this.extend(i[n])
+        if (t) for (var i = e ? [t, e] : t, n = 0, o = i.length; o > n; n++) this.extend(i[n])
     }, o.LatLngBounds.prototype = {
         extend: function (t) {
-            if (!t)return this;
+            if (!t) return this;
             var e = o.latLng(t);
             return t = null !== e ? e : o.latLngBounds(t), t instanceof o.LatLng ? this._southWest || this._northEast ? (this._southWest.lat = Math.min(t.lat, this._southWest.lat), this._southWest.lng = Math.min(t.lng, this._southWest.lng), this._northEast.lat = Math.max(t.lat, this._northEast.lat), this._northEast.lng = Math.max(t.lng, this._northEast.lng)) : (this._southWest = new o.LatLng(t.lat, t.lng), this._northEast = new o.LatLng(t.lat, t.lng)) : t instanceof o.LatLngBounds && (this.extend(t._southWest), this.extend(t._northEast)), this
         }, pad: function (t) {
-            var e = this._southWest, i = this._northEast, n = Math.abs(e.lat - i.lat) * t, s = Math.abs(e.lng - i.lng) * t;
+            var e = this._southWest, i = this._northEast, n = Math.abs(e.lat - i.lat) * t,
+                s = Math.abs(e.lng - i.lng) * t;
             return new o.LatLngBounds(new o.LatLng(e.lat - n, e.lng - s), new o.LatLng(i.lat + n, i.lng + s))
         }, getCenter: function () {
             return new o.LatLng((this._southWest.lat + this._northEast.lat) / 2, (this._southWest.lng + this._northEast.lng) / 2)
@@ -421,7 +437,8 @@
             return t instanceof o.LatLngBounds ? (e = t.getSouthWest(), i = t.getNorthEast()) : e = i = t, e.lat >= n.lat && i.lat <= s.lat && e.lng >= n.lng && i.lng <= s.lng
         }, intersects: function (t) {
             t = o.latLngBounds(t);
-            var e = this._southWest, i = this._northEast, n = t.getSouthWest(), s = t.getNorthEast(), a = s.lat >= e.lat && n.lat <= i.lat, r = s.lng >= e.lng && n.lng <= i.lng;
+            var e = this._southWest, i = this._northEast, n = t.getSouthWest(), s = t.getNorthEast(),
+                a = s.lat >= e.lat && n.lat <= i.lat, r = s.lng >= e.lng && n.lng <= i.lng;
             return a && r
         }, toBBoxString: function () {
             return [this.getWest(), this.getSouth(), this.getEast(), this.getNorth()].join(",")
@@ -434,7 +451,8 @@
         return !t || t instanceof o.LatLngBounds ? t : new o.LatLngBounds(t, e)
     }, o.Projection = {}, o.Projection.SphericalMercator = {
         MAX_LATITUDE: 85.0511287798, project: function (t) {
-            var e = o.LatLng.DEG_TO_RAD, i = this.MAX_LATITUDE, n = Math.max(Math.min(i, t.lat), -i), s = t.lng * e, a = n * e;
+            var e = o.LatLng.DEG_TO_RAD, i = this.MAX_LATITUDE, n = Math.max(Math.min(i, t.lat), -i), s = t.lng * e,
+                a = n * e;
             return a = Math.log(Math.tan(Math.PI / 4 + a / 2)), new o.Point(s, a)
         }, unproject: function (t) {
             var e = o.LatLng.RAD_TO_DEG, i = t.x * e, n = (2 * Math.atan(Math.exp(t.y)) - Math.PI / 2) * e;
@@ -503,12 +521,17 @@
             return this.setZoom(this._zoom - (t || 1), e)
         },
         setZoomAround: function (t, e, i) {
-            var n = this.getZoomScale(e), s = this.getSize().divideBy(2), a = t instanceof o.Point ? t : this.latLngToContainerPoint(t), r = a.subtract(s).multiplyBy(1 - 1 / n), h = this.containerPointToLatLng(s.add(r));
+            var n = this.getZoomScale(e), s = this.getSize().divideBy(2),
+                a = t instanceof o.Point ? t : this.latLngToContainerPoint(t), r = a.subtract(s).multiplyBy(1 - 1 / n),
+                h = this.containerPointToLatLng(s.add(r));
             return this.setView(h, e, {zoom: i})
         },
         fitBounds: function (t, e) {
             e = e || {}, t = t.getBounds ? t.getBounds() : o.latLngBounds(t);
-            var i = o.point(e.paddingTopLeft || e.padding || [0, 0]), n = o.point(e.paddingBottomRight || e.padding || [0, 0]), s = this.getBoundsZoom(t, !1, i.add(n)), a = n.subtract(i).divideBy(2), r = this.project(t.getSouthWest(), s), h = this.project(t.getNorthEast(), s), l = this.unproject(r.add(h).divideBy(2).add(a), s);
+            var i = o.point(e.paddingTopLeft || e.padding || [0, 0]),
+                n = o.point(e.paddingBottomRight || e.padding || [0, 0]), s = this.getBoundsZoom(t, !1, i.add(n)),
+                a = n.subtract(i).divideBy(2), r = this.project(t.getSouthWest(), s),
+                h = this.project(t.getNorthEast(), s), l = this.unproject(r.add(h).divideBy(2).add(a), s);
             return s = e && e.maxZoom ? Math.min(e.maxZoom, s) : s, this.setView(l, s, e)
         },
         fitWorld: function (t) {
@@ -539,11 +562,11 @@
             return t ? o.stamp(t) in this._layers : !1
         },
         eachLayer: function (t, e) {
-            for (var i in this._layers)t.call(e, this._layers[i]);
+            for (var i in this._layers) t.call(e, this._layers[i]);
             return this
         },
         invalidateSize: function (t) {
-            if (!this._loaded)return this;
+            if (!this._loaded) return this;
             t = o.extend({animate: !1, pan: !0}, t === !0 ? {animate: !0} : t);
             var e = this.getSize();
             this._sizeChanged = !0, this._initialCenter = null;
@@ -554,7 +577,7 @@
             })) : this
         },
         addHandler: function (t, e) {
-            if (!e)return this;
+            if (!e) return this;
             var i = this[t] = new e(this);
             return this._handlers.push(i), this.options[t] && i.enable(), this
         },
@@ -585,7 +608,8 @@
         },
         getBoundsZoom: function (t, e, i) {
             t = o.latLngBounds(t);
-            var n, s = this.getMinZoom() - (e ? 1 : 0), a = this.getMaxZoom(), r = this.getSize(), h = t.getNorthWest(), l = t.getSouthEast(), u = !0;
+            var n, s = this.getMinZoom() - (e ? 1 : 0), a = this.getMaxZoom(), r = this.getSize(), h = t.getNorthWest(),
+                l = t.getSouthEast(), u = !0;
             i = o.point(i || [0, 0]);
             do s++, n = this.project(l, s).subtract(this.project(h, s)).add(i), u = e ? n.x < r.x || n.y < r.y : r.contains(n); while (u && a >= s);
             return u && e ? null : e ? s : s - 1
@@ -651,8 +675,8 @@
         },
         _initContainer: function (t) {
             var e = this._container = o.DomUtil.get(t);
-            if (!e)throw new Error("Map container not found.");
-            if (e._leaflet)throw new Error("Map container is already initialized.");
+            if (!e) throw new Error("Map container not found.");
+            if (e._leaflet) throw new Error("Map container is already initialized.");
             e._leaflet = !0
         },
         _initLayout: function () {
@@ -675,7 +699,7 @@
         },
         _addLayers: function (t) {
             t = t ? o.Util.isArray(t) ? t : [t] : [];
-            for (var e = 0, i = t.length; i > e; e++)this.addLayer(t[e])
+            for (var e = 0, i = t.length; i > e; e++) this.addLayer(t[e])
         },
         _resetView: function (t, e, i, n) {
             var s = this._zoom !== e;
@@ -701,13 +725,14 @@
             this.panInsideBounds(this.options.maxBounds)
         },
         _checkIfLoaded: function () {
-            if (!this._loaded)throw new Error("Set map center and zoom first.")
+            if (!this._loaded) throw new Error("Set map center and zoom first.")
         },
         _initEvents: function (e) {
             if (o.DomEvent) {
                 e = e || "on", o.DomEvent[e](this._container, "click", this._onMouseClick, this);
-                var i, n, s = ["dblclick", "mousedown", "mouseup", "mouseenter", "mouseleave", "mousemove", "contextmenu"];
-                for (i = 0, n = s.length; n > i; i++)o.DomEvent[e](this._container, s[i], this._fireMouseEvent, this);
+                var i, n,
+                    s = ["dblclick", "mousedown", "mouseup", "mouseenter", "mouseleave", "mousemove", "contextmenu"];
+                for (i = 0, n = s.length; n > i; i++) o.DomEvent[e](this._container, s[i], this._fireMouseEvent, this);
                 this.options.trackResize && o.DomEvent[e](t, "resize", this._onResize, this)
             }
         },
@@ -724,7 +749,8 @@
                 var e = t.type;
                 if (e = "mouseenter" === e ? "mouseover" : "mouseleave" === e ? "mouseout" : e, this.hasEventListeners(e)) {
                     "contextmenu" === e && o.DomEvent.preventDefault(t);
-                    var i = this.mouseEventToContainerPoint(t), n = this.containerPointToLayerPoint(i), s = this.layerPointToLatLng(n);
+                    var i = this.mouseEventToContainerPoint(t), n = this.containerPointToLayerPoint(i),
+                        s = this.layerPointToLatLng(n);
                     this.fire(e, {latlng: s, layerPoint: n, containerPoint: i, originalEvent: t})
                 }
             }
@@ -733,7 +759,7 @@
             this._tileLayersToLoad--, this._tileLayersNum && !this._tileLayersToLoad && this.fire("tilelayersload")
         },
         _clearHandlers: function () {
-            for (var t = 0, e = this._handlers.length; e > t; t++)this._handlers[t].disable()
+            for (var t = 0, e = this._handlers.length; e > t; t++) this._handlers[t].disable()
         },
         whenReady: function (t, e) {
             return this._loaded ? t.call(e || this, this) : this.on("load", t, e), this
@@ -766,17 +792,20 @@
             return this.latLngToLayerPoint(t).subtract(this._getCenterLayerPoint())
         },
         _limitCenter: function (t, e, i) {
-            if (!i)return t;
-            var n = this.project(t, e), s = this.getSize().divideBy(2), a = new o.Bounds(n.subtract(s), n.add(s)), r = this._getBoundsOffset(a, i, e);
+            if (!i) return t;
+            var n = this.project(t, e), s = this.getSize().divideBy(2), a = new o.Bounds(n.subtract(s), n.add(s)),
+                r = this._getBoundsOffset(a, i, e);
             return this.unproject(n.add(r), e)
         },
         _limitOffset: function (t, e) {
-            if (!e)return t;
+            if (!e) return t;
             var i = this.getPixelBounds(), n = new o.Bounds(i.min.add(t), i.max.add(t));
             return t.add(this._getBoundsOffset(n, e))
         },
         _getBoundsOffset: function (t, e, i) {
-            var n = this.project(e.getNorthWest(), i).subtract(t.min), s = this.project(e.getSouthEast(), i).subtract(t.max), a = this._rebound(n.x, -s.x), r = this._rebound(n.y, -s.y);
+            var n = this.project(e.getNorthWest(), i).subtract(t.min),
+                s = this.project(e.getSouthEast(), i).subtract(t.max), a = this._rebound(n.x, -s.x),
+                r = this._rebound(n.y, -s.y);
             return new o.Point(a, r)
         },
         _rebound: function (t, e) {
@@ -790,12 +819,14 @@
         return new o.Map(t, e)
     }, o.Projection.Mercator = {
         MAX_LATITUDE: 85.0840591556, R_MINOR: 6356752.314245179, R_MAJOR: 6378137, project: function (t) {
-            var e = o.LatLng.DEG_TO_RAD, i = this.MAX_LATITUDE, n = Math.max(Math.min(i, t.lat), -i), s = this.R_MAJOR, a = this.R_MINOR, r = t.lng * e * s, h = n * e, l = a / s, u = Math.sqrt(1 - l * l), c = u * Math.sin(h);
+            var e = o.LatLng.DEG_TO_RAD, i = this.MAX_LATITUDE, n = Math.max(Math.min(i, t.lat), -i), s = this.R_MAJOR,
+                a = this.R_MINOR, r = t.lng * e * s, h = n * e, l = a / s, u = Math.sqrt(1 - l * l),
+                c = u * Math.sin(h);
             c = Math.pow((1 - c) / (1 + c), .5 * u);
             var d = Math.tan(.5 * (.5 * Math.PI - h)) / c;
             return h = -s * Math.log(d), new o.Point(r, h)
         }, unproject: function (t) {
-            for (var e, i = o.LatLng.RAD_TO_DEG, n = this.R_MAJOR, s = this.R_MINOR, a = t.x * i / n, r = s / n, h = Math.sqrt(1 - r * r), l = Math.exp(-t.y / n), u = Math.PI / 2 - 2 * Math.atan(l), c = 15, d = 1e-7, p = c, _ = .1; Math.abs(_) > d && --p > 0;)e = h * Math.sin(u), _ = Math.PI / 2 - 2 * Math.atan(l * Math.pow((1 - e) / (1 + e), .5 * h)) - u, u += _;
+            for (var e, i = o.LatLng.RAD_TO_DEG, n = this.R_MAJOR, s = this.R_MINOR, a = t.x * i / n, r = s / n, h = Math.sqrt(1 - r * r), l = Math.exp(-t.y / n), u = Math.PI / 2 - 2 * Math.atan(l), c = 15, d = 1e-7, p = c, _ = .1; Math.abs(_) > d && --p > 0;) e = h * Math.sin(u), _ = Math.PI / 2 - 2 * Math.atan(l * Math.pow((1 - e) / (1 + e), .5 * h)) - u, u += _;
             return new o.LatLng(u * i, a)
         }
     }, o.CRS.EPSG3395 = o.extend({}, o.CRS, {
@@ -876,12 +907,12 @@
         },
         _setAutoZIndex: function (t, e) {
             var i, n, o, s = t.children, a = -e(1 / 0, -1 / 0);
-            for (n = 0, o = s.length; o > n; n++)s[n] !== this._container && (i = parseInt(s[n].style.zIndex, 10), isNaN(i) || (a = e(a, i)));
+            for (n = 0, o = s.length; o > n; n++) s[n] !== this._container && (i = parseInt(s[n].style.zIndex, 10), isNaN(i) || (a = e(a, i)));
             this.options.zIndex = this._container.style.zIndex = (isFinite(a) ? a : 0) + e(1, -1)
         },
         _updateOpacity: function () {
             var t, e = this._tiles;
-            if (o.Browser.ielt9)for (t in e)o.DomUtil.setOpacity(e[t], this.options.opacity); else o.DomUtil.setOpacity(this._container, this.options.opacity)
+            if (o.Browser.ielt9) for (t in e) o.DomUtil.setOpacity(e[t], this.options.opacity); else o.DomUtil.setOpacity(this._container, this.options.opacity)
         },
         _initContainer: function () {
             var t = this._map._panes.tilePane;
@@ -894,11 +925,12 @@
             }
         },
         _reset: function (t) {
-            for (var e in this._tiles)this.fire("tileunload", {tile: this._tiles[e]});
+            for (var e in this._tiles) this.fire("tileunload", {tile: this._tiles[e]});
             this._tiles = {}, this._tilesToLoad = 0, this.options.reuseTiles && (this._unusedTiles = []), this._tileContainer.innerHTML = "", this._animated && t && t.hard && this._clearBgBuffer(), this._initContainer()
         },
         _getTileSize: function () {
-            var t = this._map, e = t.getZoom() + this.options.zoomOffset, i = this.options.maxNativeZoom, n = this.options.tileSize;
+            var t = this._map, e = t.getZoom() + this.options.zoomOffset, i = this.options.maxNativeZoom,
+                n = this.options.tileSize;
             return i && e > i && (n = Math.round(t.getZoomScale(e) / t.getZoomScale(i) * n)), n
         },
         _update: function () {
@@ -912,33 +944,34 @@
         },
         _addTilesFromCenterOut: function (t) {
             var i, n, s, a = [], r = t.getCenter();
-            for (i = t.min.y; i <= t.max.y; i++)for (n = t.min.x; n <= t.max.x; n++)s = new o.Point(n, i), this._tileShouldBeLoaded(s) && a.push(s);
+            for (i = t.min.y; i <= t.max.y; i++) for (n = t.min.x; n <= t.max.x; n++) s = new o.Point(n, i), this._tileShouldBeLoaded(s) && a.push(s);
             var h = a.length;
             if (0 !== h) {
                 a.sort(function (t, e) {
                     return t.distanceTo(r) - e.distanceTo(r)
                 });
                 var l = e.createDocumentFragment();
-                for (this._tilesToLoad || this.fire("loading"), this._tilesToLoad += h, n = 0; h > n; n++)this._addTile(a[n], l);
+                for (this._tilesToLoad || this.fire("loading"), this._tilesToLoad += h, n = 0; h > n; n++) this._addTile(a[n], l);
                 this._tileContainer.appendChild(l)
             }
         },
         _tileShouldBeLoaded: function (t) {
-            if (t.x + ":" + t.y in this._tiles)return !1;
+            if (t.x + ":" + t.y in this._tiles) return !1;
             var e = this.options;
             if (!e.continuousWorld) {
                 var i = this._getWrapTileNum();
-                if (e.noWrap && (t.x < 0 || t.x >= i.x) || t.y < 0 || t.y >= i.y)return !1
+                if (e.noWrap && (t.x < 0 || t.x >= i.x) || t.y < 0 || t.y >= i.y) return !1
             }
             if (e.bounds) {
-                var n = e.tileSize, o = t.multiplyBy(n), s = o.add([n, n]), a = this._map.unproject(o), r = this._map.unproject(s);
-                if (e.continuousWorld || e.noWrap || (a = a.wrap(), r = r.wrap()), !e.bounds.intersects([a, r]))return !1
+                var n = e.tileSize, o = t.multiplyBy(n), s = o.add([n, n]), a = this._map.unproject(o),
+                    r = this._map.unproject(s);
+                if (e.continuousWorld || e.noWrap || (a = a.wrap(), r = r.wrap()), !e.bounds.intersects([a, r])) return !1
             }
             return !0
         },
         _removeOtherTiles: function (t) {
             var e, i, n, o;
-            for (o in this._tiles)e = o.split(":"), i = parseInt(e[0], 10), n = parseInt(e[1], 10), (i < t.min.x || i > t.max.x || n < t.min.y || n > t.max.y) && this._removeTile(o)
+            for (o in this._tiles) e = o.split(":"), i = parseInt(e[0], 10), n = parseInt(e[1], 10), (i < t.min.x || i > t.max.x || n < t.min.y || n > t.max.y) && this._removeTile(o)
         },
         _removeTile: function (t) {
             var e = this._tiles[t];
@@ -1029,14 +1062,17 @@
             this._url = t;
             var i = o.extend({}, this.defaultWmsParams), n = e.tileSize || this.options.tileSize;
             i.width = i.height = e.detectRetina && o.Browser.retina ? 2 * n : n;
-            for (var s in e)this.options.hasOwnProperty(s) || "crs" === s || (i[s] = e[s]);
+            for (var s in e) this.options.hasOwnProperty(s) || "crs" === s || (i[s] = e[s]);
             this.wmsParams = i, o.setOptions(this, e)
         }, onAdd: function (t) {
             this._crs = this.options.crs || t.options.crs, this._wmsVersion = parseFloat(this.wmsParams.version);
             var e = this._wmsVersion >= 1.3 ? "crs" : "srs";
             this.wmsParams[e] = this._crs.code, o.TileLayer.prototype.onAdd.call(this, t)
         }, getTileUrl: function (t) {
-            var e = this._map, i = this.options.tileSize, n = t.multiplyBy(i), s = n.add([i, i]), a = this._crs.project(e.unproject(n, t.z)), r = this._crs.project(e.unproject(s, t.z)), h = this._wmsVersion >= 1.3 && this._crs === o.CRS.EPSG4326 ? [r.y, a.x, a.y, r.x].join(",") : [a.x, r.y, r.x, a.y].join(","), l = o.Util.template(this._url, {s: this._getSubdomain(t)});
+            var e = this._map, i = this.options.tileSize, n = t.multiplyBy(i), s = n.add([i, i]),
+                a = this._crs.project(e.unproject(n, t.z)), r = this._crs.project(e.unproject(s, t.z)),
+                h = this._wmsVersion >= 1.3 && this._crs === o.CRS.EPSG4326 ? [r.y, a.x, a.y, r.x].join(",") : [a.x, r.y, r.x, a.y].join(","),
+                l = o.Util.template(this._url, {s: this._getSubdomain(t)});
             return l + o.Util.getParamString(this.wmsParams, l, !0) + "&BBOX=" + h
         }, setParams: function (t, e) {
             return o.extend(this.wmsParams, t), e || this.redraw(), this
@@ -1048,7 +1084,7 @@
             o.setOptions(this, t)
         }, redraw: function () {
             this._map && (this._reset({hard: !0}), this._update());
-            for (var t in this._tiles)this._redrawTile(this._tiles[t]);
+            for (var t in this._tiles) this._redrawTile(this._tiles[t]);
             return this
         }, _redrawTile: function (t) {
             this.drawTile(t, t._tilePoint, this._map._zoom)
@@ -1104,11 +1140,15 @@
             })
         },
         _animateZoom: function (t) {
-            var e = this._map, i = this._image, n = e.getZoomScale(t.zoom), s = this._bounds.getNorthWest(), a = this._bounds.getSouthEast(), r = e._latLngToNewLayerPoint(s, t.zoom, t.center), h = e._latLngToNewLayerPoint(a, t.zoom, t.center)._subtract(r), l = r._add(h._multiplyBy(.5 * (1 - 1 / n)));
+            var e = this._map, i = this._image, n = e.getZoomScale(t.zoom), s = this._bounds.getNorthWest(),
+                a = this._bounds.getSouthEast(), r = e._latLngToNewLayerPoint(s, t.zoom, t.center),
+                h = e._latLngToNewLayerPoint(a, t.zoom, t.center)._subtract(r),
+                l = r._add(h._multiplyBy(.5 * (1 - 1 / n)));
             i.style[o.DomUtil.TRANSFORM] = o.DomUtil.getTranslateString(l) + " scale(" + n + ") "
         },
         _reset: function () {
-            var t = this._image, e = this._map.latLngToLayerPoint(this._bounds.getNorthWest()), i = this._map.latLngToLayerPoint(this._bounds.getSouthEast())._subtract(e);
+            var t = this._image, e = this._map.latLngToLayerPoint(this._bounds.getNorthWest()),
+                i = this._map.latLngToLayerPoint(this._bounds.getSouthEast())._subtract(e);
             o.DomUtil.setPosition(t, e), t.style.width = i.x + "px", t.style.height = i.y + "px"
         },
         _onImageLoad: function () {
@@ -1129,7 +1169,7 @@
         }, _createIcon: function (t, e) {
             var i = this._getIconUrl(t);
             if (!i) {
-                if ("icon" === t)throw new Error("iconUrl not set in Icon options (see the docs).");
+                if ("icon" === t) throw new Error("iconUrl not set in Icon options (see the docs).");
                 return null
             }
             var n;
@@ -1152,15 +1192,15 @@
             shadowSize: [41, 41]
         }, _getIconUrl: function (t) {
             var e = t + "Url";
-            if (this.options[e])return this.options[e];
+            if (this.options[e]) return this.options[e];
             o.Browser.retina && "icon" === t && (t += "-2x");
             var i = o.Icon.Default.imagePath;
-            if (!i)throw new Error("Couldn't autodetect L.Icon.Default.imagePath, set it manually.");
+            if (!i) throw new Error("Couldn't autodetect L.Icon.Default.imagePath, set it manually.");
             return i + "/marker-" + t + ".png"
         }
     }), o.Icon.Default.imagePath = function () {
         var t, i, n, o, s, a = e.getElementsByTagName("script"), r = /[\/^]leaflet[\-\._]?([\w\-\._]*)\.js\??/;
-        for (t = 0, i = a.length; i > t; t++)if (n = a[t].src, o = n.match(r))return s = n.split(r)[0], (s ? s + "/" : "") + "images"
+        for (t = 0, i = a.length; i > t; t++) if (n = a[t].src, o = n.match(r)) return s = n.split(r)[0], (s ? s + "/" : "") + "images"
     }(), o.Marker = o.Class.extend({
         includes: o.Mixin.Events,
         options: {
@@ -1210,7 +1250,8 @@
             return this
         },
         _initIcon: function () {
-            var t = this.options, e = this._map, i = e.options.zoomAnimation && e.options.markerZoomAnimation, n = i ? "leaflet-zoom-animated" : "leaflet-zoom-hide", s = t.icon.createIcon(this._icon), a = !1;
+            var t = this.options, e = this._map, i = e.options.zoomAnimation && e.options.markerZoomAnimation,
+                n = i ? "leaflet-zoom-animated" : "leaflet-zoom-hide", s = t.icon.createIcon(this._icon), a = !1;
             s !== this._icon && (this._icon && this._removeIcon(), a = !0, t.title && (s.title = t.title), t.alt && (s.alt = t.alt)), o.DomUtil.addClass(s, n), t.keyboard && (s.tabIndex = "0"), this._icon = s, this._initInteraction(), t.riseOnHover && o.DomEvent.on(s, "mouseover", this._bringToFront, this).on(s, "mouseout", this._resetZIndex, this);
             var r = t.icon.createShadow(this._shadow), h = !1;
             r !== this._shadow && (this._removeShadow(), h = !0), r && o.DomUtil.addClass(r, n), this._shadow = r, t.opacity < 1 && this._updateOpacity();
@@ -1237,7 +1278,7 @@
             if (this.options.clickable) {
                 var t = this._icon, e = ["dblclick", "mousedown", "mouseover", "mouseout", "contextmenu"];
                 o.DomUtil.addClass(t, "leaflet-clickable"), o.DomEvent.on(t, "click", this._onMouseClick, this), o.DomEvent.on(t, "keypress", this._onKeyPress, this);
-                for (var i = 0; i < e.length; i++)o.DomEvent.on(t, e[i], this._fireMouseEvent, this);
+                for (var i = 0; i < e.length; i++) o.DomEvent.on(t, e[i], this._fireMouseEvent, this);
                 o.Handler.MarkerDrag && (this.dragging = new o.Handler.MarkerDrag(this), this.options.draggable && this.dragging.enable())
             }
         },
@@ -1335,15 +1376,17 @@
             this._map && this._map.closePopup(this)
         },
         _initLayout: function () {
-            var t, e = "leaflet-popup", i = e + " " + this.options.className + " leaflet-zoom-" + (this._animated ? "animated" : "hide"), n = this._container = o.DomUtil.create("div", i);
+            var t, e = "leaflet-popup",
+                i = e + " " + this.options.className + " leaflet-zoom-" + (this._animated ? "animated" : "hide"),
+                n = this._container = o.DomUtil.create("div", i);
             this.options.closeButton && (t = this._closeButton = o.DomUtil.create("a", e + "-close-button", n), t.href = "#close", t.innerHTML = "&#215;", o.DomEvent.disableClickPropagation(t), o.DomEvent.on(t, "click", this._onCloseButtonClick, this));
             var s = this._wrapper = o.DomUtil.create("div", e + "-content-wrapper", n);
             o.DomEvent.disableClickPropagation(s), this._contentNode = o.DomUtil.create("div", e + "-content", s), o.DomEvent.disableScrollPropagation(this._contentNode), o.DomEvent.on(s, "contextmenu", o.DomEvent.stopPropagation), this._tipContainer = o.DomUtil.create("div", e + "-tip-container", n), this._tip = o.DomUtil.create("div", e + "-tip", this._tipContainer)
         },
         _updateContent: function () {
             if (this._content) {
-                if ("string" == typeof this._content)this._contentNode.innerHTML = this._content; else {
-                    for (; this._contentNode.hasChildNodes();)this._contentNode.removeChild(this._contentNode.firstChild);
+                if ("string" == typeof this._content) this._contentNode.innerHTML = this._content; else {
+                    for (; this._contentNode.hasChildNodes();) this._contentNode.removeChild(this._contentNode.firstChild);
                     this._contentNode.appendChild(this._content)
                 }
                 this.fire("contentupdate")
@@ -1359,7 +1402,8 @@
         },
         _updatePosition: function () {
             if (this._map) {
-                var t = this._map.latLngToLayerPoint(this._latlng), e = this._animated, i = o.point(this.options.offset);
+                var t = this._map.latLngToLayerPoint(this._latlng), e = this._animated,
+                    i = o.point(this.options.offset);
                 e && o.DomUtil.setPosition(this._container, t), this._containerBottom = -i.y - (e ? 0 : t.y), this._containerLeft = -Math.round(this._containerWidth / 2) + i.x + (e ? 0 : t.x), this._container.style.bottom = this._containerBottom + "px", this._container.style.left = this._containerLeft + "px"
             }
         },
@@ -1369,9 +1413,12 @@
         },
         _adjustPan: function () {
             if (this.options.autoPan) {
-                var t = this._map, e = this._container.offsetHeight, i = this._containerWidth, n = new o.Point(this._containerLeft, -e - this._containerBottom);
+                var t = this._map, e = this._container.offsetHeight, i = this._containerWidth,
+                    n = new o.Point(this._containerLeft, -e - this._containerBottom);
                 this._animated && n._add(o.DomUtil.getPosition(this._container));
-                var s = t.layerPointToContainerPoint(n), a = o.point(this.options.autoPanPadding), r = o.point(this.options.autoPanPaddingTopLeft || a), h = o.point(this.options.autoPanPaddingBottomRight || a), l = t.getSize(), u = 0, c = 0;
+                var s = t.layerPointToContainerPoint(n), a = o.point(this.options.autoPanPadding),
+                    r = o.point(this.options.autoPanPaddingTopLeft || a),
+                    h = o.point(this.options.autoPanPaddingBottomRight || a), l = t.getSize(), u = 0, c = 0;
                 s.x + i + h.x > l.x && (u = s.x + i - l.x + h.x), s.x - u - r.x < 0 && (u = s.x - r.x), s.y + e + h.y > l.y && (c = s.y + e - l.y + h.y), s.y - c - r.y < 0 && (c = s.y - r.y), (u || c) && t.fire("autopanstart").panBy([u, c])
             }
         },
@@ -1413,7 +1460,7 @@
         initialize: function (t) {
             this._layers = {};
             var e, i;
-            if (t)for (e = 0, i = t.length; i > e; e++)this.addLayer(t[e])
+            if (t) for (e = 0, i = t.length; i > e; e++) this.addLayer(t[e])
         }, addLayer: function (t) {
             var e = this.getLayerId(t);
             return this._layers[e] = t, this._map && this._map.addLayer(t), this
@@ -1426,7 +1473,7 @@
             return this.eachLayer(this.removeLayer, this), this
         }, invoke: function (t) {
             var e, i, n = Array.prototype.slice.call(arguments, 1);
-            for (e in this._layers)i = this._layers[e], i[t] && i[t].apply(i, n);
+            for (e in this._layers) i = this._layers[e], i[t] && i[t].apply(i, n);
             return this
         }, onAdd: function (t) {
             this._map = t, this.eachLayer(t.addLayer, t)
@@ -1435,13 +1482,13 @@
         }, addTo: function (t) {
             return t.addLayer(this), this
         }, eachLayer: function (t, e) {
-            for (var i in this._layers)t.call(e, this._layers[i]);
+            for (var i in this._layers) t.call(e, this._layers[i]);
             return this
         }, getLayer: function (t) {
             return this._layers[t]
         }, getLayers: function () {
             var t = [];
-            for (var e in this._layers)t.push(this._layers[e]);
+            for (var e in this._layers) t.push(this._layers[e]);
             return t
         }, setZIndex: function (t) {
             return this.invoke("setZIndex", t)
@@ -1538,7 +1585,8 @@
         }
     }), o.Map.include({
         _updatePathViewport: function () {
-            var t = o.Path.CLIP_PADDING, e = this.getSize(), i = o.DomUtil.getPosition(this._mapPane), n = i.multiplyBy(-1)._subtract(e.multiplyBy(t)._round()), s = n.add(e.multiplyBy(1 + 2 * t)._round());
+            var t = o.Path.CLIP_PADDING, e = this.getSize(), i = o.DomUtil.getPosition(this._mapPane),
+                n = i.multiplyBy(-1)._subtract(e.multiplyBy(t)._round()), s = n.add(e.multiplyBy(1 + 2 * t)._round());
             this._pathViewport = new o.Bounds(n, s)
         }
     }), o.Path.SVG_NS = "http://www.w3.org/2000/svg", o.Browser.svg = !(!e.createElementNS || !e.createElementNS(o.Path.SVG_NS, "svg").createSVGRect), o.Path = o.Path.extend({
@@ -1575,7 +1623,7 @@
         _initEvents: function () {
             if (this.options.clickable) {
                 (o.Browser.svg || !o.Browser.vml) && o.DomUtil.addClass(this._path, "leaflet-clickable"), o.DomEvent.on(this._container, "click", this._onMouseClick, this);
-                for (var t = ["dblclick", "mousedown", "mouseover", "mouseout", "mousemove", "contextmenu"], e = 0; e < t.length; e++)o.DomEvent.on(this._container, t[e], this._fireMouseEvent, this)
+                for (var t = ["dblclick", "mousedown", "mouseover", "mouseout", "mousemove", "contextmenu"], e = 0; e < t.length; e++) o.DomEvent.on(this._container, t[e], this._fireMouseEvent, this)
             }
         },
         _onMouseClick: function (t) {
@@ -1583,7 +1631,8 @@
         },
         _fireMouseEvent: function (t) {
             if (this.hasEventListeners(t.type)) {
-                var e = this._map, i = e.mouseEventToContainerPoint(t), n = e.containerPointToLayerPoint(i), s = e.layerPointToLatLng(n);
+                var e = this._map, i = e.mouseEventToContainerPoint(t), n = e.containerPointToLayerPoint(i),
+                    s = e.layerPointToLatLng(n);
                 this.fire(t.type, {
                     latlng: s,
                     layerPoint: n,
@@ -1599,14 +1648,16 @@
                 zoomend: this._endPathZoom
             })) : o.DomUtil.addClass(this._pathRoot, "leaflet-zoom-hide"), this.on("moveend", this._updateSvgViewport), this._updateSvgViewport())
         }, _animatePathZoom: function (t) {
-            var e = this.getZoomScale(t.zoom), i = this._getCenterOffset(t.center)._multiplyBy(-e)._add(this._pathViewport.min);
+            var e = this.getZoomScale(t.zoom),
+                i = this._getCenterOffset(t.center)._multiplyBy(-e)._add(this._pathViewport.min);
             this._pathRoot.style[o.DomUtil.TRANSFORM] = o.DomUtil.getTranslateString(i) + " scale(" + e + ") ", this._pathZooming = !0
         }, _endPathZoom: function () {
             this._pathZooming = !1
         }, _updateSvgViewport: function () {
             if (!this._pathZooming) {
                 this._updatePathViewport();
-                var t = this._pathViewport, e = t.min, i = t.max, n = i.x - e.x, s = i.y - e.y, a = this._pathRoot, r = this._panes.overlayPane;
+                var t = this._pathViewport, e = t.min, i = t.max, n = i.x - e.x, s = i.y - e.y, a = this._pathRoot,
+                    r = this._panes.overlayPane;
                 o.Browser.mobileWebkit && r.removeChild(a), o.DomUtil.setPosition(a, e), a.setAttribute("width", n), a.setAttribute("height", s), a.setAttribute("viewBox", [e.x, e.y, n, s].join(" ")), o.Browser.mobileWebkit && r.appendChild(a)
             }
         }
@@ -1623,15 +1674,15 @@
             this._popup.setLatLng(t.latlng), this._map.openPopup(this._popup)
         }
     }), o.Browser.vml = !o.Browser.svg && function () {
-            try {
-                var t = e.createElement("div");
-                t.innerHTML = '<v:shape adj="1"/>';
-                var i = t.firstChild;
-                return i.style.behavior = "url(#default#VML)", i && "object" == typeof i.adj
-            } catch (n) {
-                return !1
-            }
-        }(), o.Path = o.Browser.svg || !o.Browser.vml ? o.Path : o.Path.extend({
+        try {
+            var t = e.createElement("div");
+            t.innerHTML = '<v:shape adj="1"/>';
+            var i = t.firstChild;
+            return i.style.behavior = "url(#default#VML)", i && "object" == typeof i.adj
+        } catch (n) {
+            return !1
+        }
+    }(), o.Path = o.Browser.svg || !o.Browser.vml ? o.Path : o.Path.extend({
         statics: {VML: !0, CLIP_PADDING: .02},
         _createElement: function () {
             try {
@@ -1690,7 +1741,7 @@
         }, _drawPath: function () {
             var t, e, i, n, s, a;
             for (this._ctx.beginPath(), t = 0, i = this._parts.length; i > t; t++) {
-                for (e = 0, n = this._parts[t].length; n > e; e++)s = this._parts[t][e], a = (0 === e ? "move" : "line") + "To", this._ctx[a](s.x, s.y);
+                for (e = 0, n = this._parts[t].length; n > e; e++) s = this._parts[t][e], a = (0 === e ? "move" : "line") + "To", this._ctx[a](s.x, s.y);
                 this instanceof o.Polygon && this._ctx.closePath()
             }
         }, _checkIfEmpty: function () {
@@ -1720,7 +1771,7 @@
         }
     }), o.LineUtil = {
         simplify: function (t, e) {
-            if (!e || !t.length)return t.slice();
+            if (!e || !t.length) return t.slice();
             var i = e * e;
             return t = this._reducePoints(t, i), t = this._simplifyDP(t, i)
         }, pointToSegmentDistance: function (t, e, i) {
@@ -1731,20 +1782,20 @@
             var n = t.length, o = typeof Uint8Array != i + "" ? Uint8Array : Array, s = new o(n);
             s[0] = s[n - 1] = 1, this._simplifyDPStep(t, s, e, 0, n - 1);
             var a, r = [];
-            for (a = 0; n > a; a++)s[a] && r.push(t[a]);
+            for (a = 0; n > a; a++) s[a] && r.push(t[a]);
             return r
         }, _simplifyDPStep: function (t, e, i, n, o) {
             var s, a, r, h = 0;
-            for (a = n + 1; o - 1 >= a; a++)r = this._sqClosestPointOnSegment(t[a], t[n], t[o], !0), r > h && (s = a, h = r);
+            for (a = n + 1; o - 1 >= a; a++) r = this._sqClosestPointOnSegment(t[a], t[n], t[o], !0), r > h && (s = a, h = r);
             h > i && (e[s] = 1, this._simplifyDPStep(t, e, i, n, s), this._simplifyDPStep(t, e, i, s, o))
         }, _reducePoints: function (t, e) {
-            for (var i = [t[0]], n = 1, o = 0, s = t.length; s > n; n++)this._sqDist(t[n], t[o]) > e && (i.push(t[n]), o = n);
+            for (var i = [t[0]], n = 1, o = 0, s = t.length; s > n; n++) this._sqDist(t[n], t[o]) > e && (i.push(t[n]), o = n);
             return s - 1 > o && i.push(t[s - 1]), i
         }, clipSegment: function (t, e, i, n) {
             var o, s, a, r = n ? this._lastCode : this._getBitCode(t, i), h = this._getBitCode(e, i);
             for (this._lastCode = h; ;) {
-                if (!(r | h))return [t, e];
-                if (r & h)return !1;
+                if (!(r | h)) return [t, e];
+                if (r & h) return !1;
                 o = r || h, s = this._getEdgeIntersection(t, e, o, i), a = this._getBitCode(s, i), o === r ? (t = s, r = a) : (e = s, h = a)
             }
         }, _getEdgeIntersection: function (t, e, i, n) {
@@ -1765,9 +1816,9 @@
             o.Path.prototype.initialize.call(this, e), this._latlngs = this._convertLatLngs(t)
         }, options: {smoothFactor: 1, noClip: !1}, projectLatlngs: function () {
             this._originalPoints = [];
-            for (var t = 0, e = this._latlngs.length; e > t; t++)this._originalPoints[t] = this._map.latLngToLayerPoint(this._latlngs[t])
+            for (var t = 0, e = this._latlngs.length; e > t; t++) this._originalPoints[t] = this._map.latLngToLayerPoint(this._latlngs[t])
         }, getPathString: function () {
-            for (var t = 0, e = this._parts.length, i = ""; e > t; t++)i += this._getPathPartStr(this._parts[t]);
+            for (var t = 0, e = this._parts.length, i = ""; e > t; t++) i += this._getPathPartStr(this._parts[t]);
             return i
         }, getLatLngs: function () {
             return this._latlngs
@@ -1779,7 +1830,7 @@
             var t = [].splice.apply(this._latlngs, arguments);
             return this._convertLatLngs(this._latlngs, !0), this.redraw(), t
         }, closestLayerPoint: function (t) {
-            for (var e, i, n = 1 / 0, s = this._parts, a = null, r = 0, h = s.length; h > r; r++)for (var l = s[r], u = 1, c = l.length; c > u; u++) {
+            for (var e, i, n = 1 / 0, s = this._parts, a = null, r = 0, h = s.length; h > r; r++) for (var l = s[r], u = 1, c = l.length; c > u; u++) {
                 e = l[u - 1], i = l[u];
                 var d = o.LineUtil._sqClosestPointOnSegment(t, e, i, !0);
                 n > d && (n = d, a = o.LineUtil._sqClosestPointOnSegment(t, e, i))
@@ -1790,23 +1841,23 @@
         }, _convertLatLngs: function (t, e) {
             var i, n, s = e ? t : [];
             for (i = 0, n = t.length; n > i; i++) {
-                if (o.Util.isArray(t[i]) && "number" != typeof t[i][0])return;
+                if (o.Util.isArray(t[i]) && "number" != typeof t[i][0]) return;
                 s[i] = o.latLng(t[i])
             }
             return s
         }, _initEvents: function () {
             o.Path.prototype._initEvents.call(this)
         }, _getPathPartStr: function (t) {
-            for (var e, i = o.Path.VML, n = 0, s = t.length, a = ""; s > n; n++)e = t[n], i && e._round(), a += (n ? "L" : "M") + e.x + " " + e.y;
+            for (var e, i = o.Path.VML, n = 0, s = t.length, a = ""; s > n; n++) e = t[n], i && e._round(), a += (n ? "L" : "M") + e.x + " " + e.y;
             return a
         }, _clipPoints: function () {
             var t, e, i, n = this._originalPoints, s = n.length;
-            if (this.options.noClip)return void(this._parts = [n]);
+            if (this.options.noClip) return void(this._parts = [n]);
             this._parts = [];
             var a = this._parts, r = this._map._pathViewport, h = o.LineUtil;
-            for (t = 0, e = 0; s - 1 > t; t++)i = h.clipSegment(n[t], n[t + 1], r, t), i && (a[e] = a[e] || [], a[e].push(i[0]), (i[1] !== n[t + 1] || t === s - 2) && (a[e].push(i[1]), e++))
+            for (t = 0, e = 0; s - 1 > t; t++) i = h.clipSegment(n[t], n[t + 1], r, t), i && (a[e] = a[e] || [], a[e].push(i[0]), (i[1] !== n[t + 1] || t === s - 2) && (a[e].push(i[1]), e++))
         }, _simplifyPoints: function () {
-            for (var t = this._parts, e = o.LineUtil, i = 0, n = t.length; n > i; i++)t[i] = e.simplify(t[i], this.options.smoothFactor)
+            for (var t = this._parts, e = o.LineUtil, i = 0, n = t.length; n > i; i++) t[i] = e.simplify(t[i], this.options.smoothFactor)
         }, _updatePath: function () {
             this._map && (this._clipPoints(), this._simplifyPoints(), o.Path.prototype._updatePath.call(this))
         }
@@ -1814,9 +1865,9 @@
         return new o.Polyline(t, e)
     }, o.PolyUtil = {}, o.PolyUtil.clipPolygon = function (t, e) {
         var i, n, s, a, r, h, l, u, c, d = [1, 4, 2, 8], p = o.LineUtil;
-        for (n = 0, l = t.length; l > n; n++)t[n]._code = p._getBitCode(t[n], e);
+        for (n = 0, l = t.length; l > n; n++) t[n]._code = p._getBitCode(t[n], e);
         for (a = 0; 4 > a; a++) {
-            for (u = d[a], i = [], n = 0, l = t.length, s = l - 1; l > n; s = n++)r = t[n], h = t[s], r._code & u ? h._code & u || (c = p._getEdgeIntersection(h, r, u, e), c._code = p._getBitCode(c, e), i.push(c)) : (h._code & u && (c = p._getEdgeIntersection(h, r, u, e), c._code = p._getBitCode(c, e), i.push(c)), i.push(r));
+            for (u = d[a], i = [], n = 0, l = t.length, s = l - 1; l > n; s = n++) r = t[n], h = t[s], r._code & u ? h._code & u || (c = p._getEdgeIntersection(h, r, u, e), c._code = p._getBitCode(c, e), i.push(c)) : (h._code & u && (c = p._getEdgeIntersection(h, r, u, e), c._code = p._getBitCode(c, e), i.push(c)), i.push(r));
             t = i
         }
         return t
@@ -1825,12 +1876,12 @@
             o.Polyline.prototype.initialize.call(this, t, e), this._initWithHoles(t)
         }, _initWithHoles: function (t) {
             var e, i, n;
-            if (t && o.Util.isArray(t[0]) && "number" != typeof t[0][0])for (this._latlngs = this._convertLatLngs(t[0]), this._holes = t.slice(1), e = 0, i = this._holes.length; i > e; e++)n = this._holes[e] = this._convertLatLngs(this._holes[e]), n[0].equals(n[n.length - 1]) && n.pop();
+            if (t && o.Util.isArray(t[0]) && "number" != typeof t[0][0]) for (this._latlngs = this._convertLatLngs(t[0]), this._holes = t.slice(1), e = 0, i = this._holes.length; i > e; e++) n = this._holes[e] = this._convertLatLngs(this._holes[e]), n[0].equals(n[n.length - 1]) && n.pop();
             t = this._latlngs, t.length >= 2 && t[0].equals(t[t.length - 1]) && t.pop()
         }, projectLatlngs: function () {
             if (o.Polyline.prototype.projectLatlngs.call(this), this._holePoints = [], this._holes) {
                 var t, e, i, n;
-                for (t = 0, i = this._holes.length; i > t; t++)for (this._holePoints[t] = [], e = 0, n = this._holes[t].length; n > e; e++)this._holePoints[t][e] = this._map.latLngToLayerPoint(this._holes[t][e])
+                for (t = 0, i = this._holes.length; i > t; t++) for (this._holePoints[t] = [], e = 0, n = this._holes[t].length; n > e; e++) this._holePoints[t][e] = this._map.latLngToLayerPoint(this._holes[t][e])
             }
         }, setLatLngs: function (t) {
             return t && o.Util.isArray(t[0]) && "number" != typeof t[0][0] ? (this._initWithHoles(t), this.redraw()) : o.Polyline.prototype.setLatLngs.call(this, t)
@@ -1858,7 +1909,7 @@
                     var i = 0, n = e.length;
                     for (this.eachLayer(function (t) {
                         n > i ? t.setLatLngs(e[i++]) : this.removeLayer(t)
-                    }, this); n > i;)this.addLayer(new t(e[i++], this._options));
+                    }, this); n > i;) this.addLayer(new t(e[i++], this._options));
                     return this
                 }, getLatLngs: function () {
                     var t = [];
@@ -1909,7 +1960,7 @@
         }, _getLngRadius: function () {
             return this._getLatRadius() / Math.cos(o.LatLng.DEG_TO_RAD * this._latlng.lat)
         }, _checkIfEmpty: function () {
-            if (!this._map)return !1;
+            if (!this._map) return !1;
             var t = this._map._pathViewport, e = this._radius, i = this._point;
             return i.x - e > t.max.x || i.y - e > t.max.y || i.x + e < t.min.x || i.y + e < t.min.y
         }
@@ -1934,14 +1985,14 @@
     }, o.Polyline.include(o.Path.CANVAS ? {
         _containsPoint: function (t, e) {
             var i, n, s, a, r, h, l, u = this.options.weight / 2;
-            for (o.Browser.touch && (u += 10), i = 0, a = this._parts.length; a > i; i++)for (l = this._parts[i], n = 0, r = l.length, s = r - 1; r > n; s = n++)if ((e || 0 !== n) && (h = o.LineUtil.pointToSegmentDistance(t, l[s], l[n]), u >= h))return !0;
+            for (o.Browser.touch && (u += 10), i = 0, a = this._parts.length; a > i; i++) for (l = this._parts[i], n = 0, r = l.length, s = r - 1; r > n; s = n++) if ((e || 0 !== n) && (h = o.LineUtil.pointToSegmentDistance(t, l[s], l[n]), u >= h)) return !0;
             return !1
         }
     } : {}), o.Polygon.include(o.Path.CANVAS ? {
         _containsPoint: function (t) {
             var e, i, n, s, a, r, h, l, u = !1;
-            if (o.Polyline.prototype._containsPoint.call(this, t, !0))return !0;
-            for (s = 0, h = this._parts.length; h > s; s++)for (e = this._parts[s], a = 0, l = e.length, r = l - 1; l > a; r = a++)i = e[a], n = e[r], i.y > t.y != n.y > t.y && t.x < (n.x - i.x) * (t.y - i.y) / (n.y - i.y) + i.x && (u = !u);
+            if (o.Polyline.prototype._containsPoint.call(this, t, !0)) return !0;
+            for (s = 0, h = this._parts.length; h > s; s++) for (e = this._parts[s], a = 0, l = e.length, r = l - 1; l > a; r = a++) i = e[a], n = e[r], i.y > t.y != n.y > t.y && t.x < (n.x - i.x) * (t.y - i.y) / (n.y - i.y) + i.x && (u = !u);
             return u
         }
     } : {}), o.Circle.include(o.Path.CANVAS ? {
@@ -1962,7 +2013,7 @@
         }, addData: function (t) {
             var e, i, n, s = o.Util.isArray(t) ? t : t.features;
             if (s) {
-                for (e = 0, i = s.length; i > e; e++)n = s[e], (n.geometries || n.geometry || n.features || n.coordinates) && this.addData(s[e]);
+                for (e = 0, i = s.length; i > e; e++) n = s[e], (n.geometries || n.geometry || n.features || n.coordinates) && this.addData(s[e]);
                 return this
             }
             var a = this.options;
@@ -1987,19 +2038,19 @@
                 case"Point":
                     return s = i(u), e ? e(t, s) : new o.Marker(s);
                 case"MultiPoint":
-                    for (r = 0, h = u.length; h > r; r++)s = i(u[r]), c.push(e ? e(t, s) : new o.Marker(s));
+                    for (r = 0, h = u.length; h > r; r++) s = i(u[r]), c.push(e ? e(t, s) : new o.Marker(s));
                     return new o.FeatureGroup(c);
                 case"LineString":
                     return a = this.coordsToLatLngs(u, 0, i), new o.Polyline(a, n);
                 case"Polygon":
-                    if (2 === u.length && !u[1].length)throw new Error("Invalid GeoJSON object.");
+                    if (2 === u.length && !u[1].length) throw new Error("Invalid GeoJSON object.");
                     return a = this.coordsToLatLngs(u, 1, i), new o.Polygon(a, n);
                 case"MultiLineString":
                     return a = this.coordsToLatLngs(u, 1, i), new o.MultiPolyline(a, n);
                 case"MultiPolygon":
                     return a = this.coordsToLatLngs(u, 2, i), new o.MultiPolygon(a, n);
                 case"GeometryCollection":
-                    for (r = 0, h = l.geometries.length; h > r; r++)c.push(this.geometryToLayer({
+                    for (r = 0, h = l.geometries.length; h > r; r++) c.push(this.geometryToLayer({
                         geometry: l.geometries[r],
                         type: "Feature",
                         properties: t.properties
@@ -2012,13 +2063,13 @@
             return new o.LatLng(t[1], t[0], t[2])
         }, coordsToLatLngs: function (t, e, i) {
             var n, o, s, a = [];
-            for (o = 0, s = t.length; s > o; o++)n = e ? this.coordsToLatLngs(t[o], e - 1, i) : (i || this.coordsToLatLng)(t[o]), a.push(n);
+            for (o = 0, s = t.length; s > o; o++) n = e ? this.coordsToLatLngs(t[o], e - 1, i) : (i || this.coordsToLatLng)(t[o]), a.push(n);
             return a
         }, latLngToCoords: function (t) {
             var e = [t.lng, t.lat];
             return t.alt !== i && e.push(t.alt), e
         }, latLngsToCoords: function (t) {
-            for (var e = [], i = 0, n = t.length; n > i; i++)e.push(o.GeoJSON.latLngToCoords(t[i]));
+            for (var e = [], i = 0, n = t.length; n > i; i++) e.push(o.GeoJSON.latLngToCoords(t[i]));
             return e
         }, getFeature: function (t, e) {
             return t.feature ? o.extend({}, t.feature, {geometry: e}) : o.GeoJSON.asFeature(e)
@@ -2041,7 +2092,7 @@
     }), o.Polygon.include({
         toGeoJSON: function () {
             var t, e, i, n = [o.GeoJSON.latLngsToCoords(this.getLatLngs())];
-            if (n[0].push(n[0][0]), this._holes)for (t = 0, e = this._holes.length; e > t; t++)i = o.GeoJSON.latLngsToCoords(this._holes[t]), i.push(i[0]), n.push(i);
+            if (n[0].push(n[0][0]), this._holes) for (t = 0, e = this._holes.length; e > t; t++) i = o.GeoJSON.latLngsToCoords(this._holes[t]), i.push(i[0]), n.push(i);
             return o.GeoJSON.getFeature(this, {type: "Polygon", coordinates: n})
         }
     }), function () {
@@ -2057,7 +2108,7 @@
         o.MultiPolyline.include({toGeoJSON: t("MultiLineString")}), o.MultiPolygon.include({toGeoJSON: t("MultiPolygon")}), o.LayerGroup.include({
             toGeoJSON: function () {
                 var e, i = this.feature && this.feature.geometry, n = [];
-                if (i && "MultiPoint" === i.type)return t("MultiPoint").call(this);
+                if (i && "MultiPoint" === i.type) return t("MultiPoint").call(this);
                 var s = i && "GeometryCollection" === i.type;
                 return this.eachLayer(function (t) {
                     t.toGeoJSON && (e = t.toGeoJSON(), n.push(s ? e.geometry : o.GeoJSON.asFeature(e)))
@@ -2088,14 +2139,14 @@
             var e = o.DomEvent.stopPropagation;
             return o.DomEvent.on(t, "mousewheel", e).on(t, "MozMousePixelScroll", e)
         }, disableClickPropagation: function (t) {
-            for (var e = o.DomEvent.stopPropagation, i = o.Draggable.START.length - 1; i >= 0; i--)o.DomEvent.on(t, o.Draggable.START[i], e);
+            for (var e = o.DomEvent.stopPropagation, i = o.Draggable.START.length - 1; i >= 0; i--) o.DomEvent.on(t, o.Draggable.START[i], e);
             return o.DomEvent.on(t, "click", o.DomEvent._fakeStop).on(t, "dblclick", e)
         }, preventDefault: function (t) {
             return t.preventDefault ? t.preventDefault() : t.returnValue = !1, this
         }, stop: function (t) {
             return o.DomEvent.preventDefault(t).stopPropagation(t)
         }, getMousePosition: function (t, e) {
-            if (!e)return new o.Point(t.clientX, t.clientY);
+            if (!e) return new o.Point(t.clientX, t.clientY);
             var i = e.getBoundingClientRect();
             return new o.Point(t.clientX - i.left - e.clientLeft, t.clientY - i.top - e.clientTop)
         }, getWheelDelta: function (t) {
@@ -2108,16 +2159,16 @@
             return this._skipEvents[t.type] = !1, e
         }, _checkMouse: function (t, e) {
             var i = e.relatedTarget;
-            if (!i)return !0;
+            if (!i) return !0;
             try {
-                for (; i && i !== t;)i = i.parentNode
+                for (; i && i !== t;) i = i.parentNode
             } catch (n) {
                 return !1
             }
             return i !== t
         }, _getEvent: function () {
             var e = t.event;
-            if (!e)for (var i = arguments.callee.caller; i && (e = i.arguments[0], !e || t.Event !== e.constructor);)i = i.caller;
+            if (!e) for (var i = arguments.callee.caller; i && (e = i.arguments[0], !e || t.Event !== e.constructor);) i = i.caller;
             return e
         }, _filterClick: function (t, e) {
             var i = t.timeStamp || t.originalEvent.timeStamp, n = o.DomEvent._lastClick && i - o.DomEvent._lastClick;
@@ -2140,13 +2191,13 @@
         },
         enable: function () {
             if (!this._enabled) {
-                for (var t = o.Draggable.START.length - 1; t >= 0; t--)o.DomEvent.on(this._dragStartTarget, o.Draggable.START[t], this._onDown, this);
+                for (var t = o.Draggable.START.length - 1; t >= 0; t--) o.DomEvent.on(this._dragStartTarget, o.Draggable.START[t], this._onDown, this);
                 this._enabled = !0
             }
         },
         disable: function () {
             if (this._enabled) {
-                for (var t = o.Draggable.START.length - 1; t >= 0; t--)o.DomEvent.off(this._dragStartTarget, o.Draggable.START[t], this._onDown, this);
+                for (var t = o.Draggable.START.length - 1; t >= 0; t--) o.DomEvent.off(this._dragStartTarget, o.Draggable.START[t], this._onDown, this);
                 this._enabled = !1, this._moved = !1
             }
         },
@@ -2157,8 +2208,9 @@
             }
         },
         _onMove: function (t) {
-            if (t.touches && t.touches.length > 1)return void(this._moved = !0);
-            var i = t.touches && 1 === t.touches.length ? t.touches[0] : t, n = new o.Point(i.clientX, i.clientY), s = n.subtract(this._startPoint);
+            if (t.touches && t.touches.length > 1) return void(this._moved = !0);
+            var i = t.touches && 1 === t.touches.length ? t.touches[0] : t, n = new o.Point(i.clientX, i.clientY),
+                s = n.subtract(this._startPoint);
             (s.x || s.y) && (o.Browser.touch && Math.abs(s.x) + Math.abs(s.y) < 3 || (o.DomEvent.preventDefault(t), this._moved || (this.fire("dragstart"), this._moved = !0, this._startPos = o.DomUtil.getPosition(this._element).subtract(s), o.DomUtil.addClass(e.body, "leaflet-dragging"), this._lastTarget = t.target || t.srcElement, o.DomUtil.addClass(this._lastTarget, "leaflet-drag-target")), this._newPos = this._startPos.add(s), this._moving = !0, o.Util.cancelAnimFrame(this._animRequest), this._animRequest = o.Util.requestAnimFrame(this._updatePosition, this, !0, this._dragStartTarget)))
         },
         _updatePosition: function () {
@@ -2166,7 +2218,7 @@
         },
         _onUp: function () {
             o.DomUtil.removeClass(e.body, "leaflet-dragging"), this._lastTarget && (o.DomUtil.removeClass(this._lastTarget, "leaflet-drag-target"), this._lastTarget = null);
-            for (var t in o.Draggable.MOVE)o.DomEvent.off(e, o.Draggable.MOVE[t], this._onMove).off(e, o.Draggable.END[t], this._onUp);
+            for (var t in o.Draggable.MOVE) o.DomEvent.off(e, o.Draggable.MOVE[t], this._onMove).off(e, o.Draggable.END[t], this._onUp);
             o.DomUtil.enableImageDrag(), o.DomUtil.enableTextSelection(), this._moved && this._moving && (o.Util.cancelAnimFrame(this._animRequest), this.fire("dragend", {distance: this._newPos.distanceTo(this._startPos)})), this._moving = !1
         }
     }), o.Handler = o.Class.extend({
@@ -2215,12 +2267,18 @@
             var t = this._map.getSize()._divideBy(2), e = this._map.latLngToLayerPoint([0, 0]);
             this._initialWorldOffset = e.subtract(t).x, this._worldWidth = this._map.project([0, 180]).x
         }, _onPreDrag: function () {
-            var t = this._worldWidth, e = Math.round(t / 2), i = this._initialWorldOffset, n = this._draggable._newPos.x, o = (n - e + i) % t + e - i, s = (n + e + i) % t - e - i, a = Math.abs(o + i) < Math.abs(s + i) ? o : s;
+            var t = this._worldWidth, e = Math.round(t / 2), i = this._initialWorldOffset,
+                n = this._draggable._newPos.x, o = (n - e + i) % t + e - i, s = (n + e + i) % t - e - i,
+                a = Math.abs(o + i) < Math.abs(s + i) ? o : s;
             this._draggable._newPos.x = a
         }, _onDragEnd: function (t) {
-            var e = this._map, i = e.options, n = +new Date - this._lastTime, s = !i.inertia || n > i.inertiaThreshold || !this._positions[0];
-            if (e.fire("dragend", t), s)e.fire("moveend"); else {
-                var a = this._lastPos.subtract(this._positions[0]), r = (this._lastTime + n - this._times[0]) / 1e3, h = i.easeLinearity, l = a.multiplyBy(h / r), u = l.distanceTo([0, 0]), c = Math.min(i.inertiaMaxSpeed, u), d = l.multiplyBy(c / u), p = c / (i.inertiaDeceleration * h), _ = d.multiplyBy(-p / 2).round();
+            var e = this._map, i = e.options, n = +new Date - this._lastTime,
+                s = !i.inertia || n > i.inertiaThreshold || !this._positions[0];
+            if (e.fire("dragend", t), s) e.fire("moveend"); else {
+                var a = this._lastPos.subtract(this._positions[0]), r = (this._lastTime + n - this._times[0]) / 1e3,
+                    h = i.easeLinearity, l = a.multiplyBy(h / r), u = l.distanceTo([0, 0]),
+                    c = Math.min(i.inertiaMaxSpeed, u), d = l.multiplyBy(c / u), p = c / (i.inertiaDeceleration * h),
+                    _ = d.multiplyBy(-p / 2).round();
                 _.x && _.y ? (_ = e._limitOffset(_, e.options.maxBounds), o.Util.requestAnimFrame(function () {
                     e.panBy(_, {duration: p, easeLinearity: h, noMoveStart: !0})
                 })) : e.fire("moveend")
@@ -2264,13 +2322,13 @@
             function a(t) {
                 if (o.Browser.pointer) {
                     var e = _.indexOf(t.pointerId);
-                    if (-1 === e)return;
+                    if (-1 === e) return;
                     _.splice(e, 1)
                 }
                 if (l) {
                     if (o.Browser.pointer) {
                         var n, s = {};
-                        for (var a in h)n = h[a], s[a] = "function" == typeof n ? n.bind(h) : n;
+                        for (var a in h) n = h[a], s[a] = "function" == typeof n ? n.bind(h) : n;
                         h = s
                     }
                     h.type = "dblclick", i(h), r = null
@@ -2308,7 +2366,7 @@
         addPointerListenerStart: function (t, i, n, s) {
             var a = "_leaflet_", r = this._pointers, h = function (t) {
                 o.DomEvent.preventDefault(t);
-                for (var e = !1, i = 0; i < r.length; i++)if (r[i].pointerId === t.pointerId) {
+                for (var e = !1, i = 0; i < r.length; i++) if (r[i].pointerId === t.pointerId) {
                     e = !0;
                     break
                 }
@@ -2316,7 +2374,7 @@
             };
             if (t[a + "touchstart" + s] = h, t.addEventListener(this.POINTER_DOWN, h, !1), !this._pointerDocumentListener) {
                 var l = function (t) {
-                    for (var e = 0; e < r.length; e++)if (r[e].pointerId === t.pointerId) {
+                    for (var e = 0; e < r.length; e++) if (r[e].pointerId === t.pointerId) {
                         r.splice(e, 1);
                         break
                     }
@@ -2328,7 +2386,7 @@
         addPointerListenerMove: function (t, e, i, n) {
             function o(t) {
                 if (t.pointerType !== t.MSPOINTER_TYPE_MOUSE && "mouse" !== t.pointerType || 0 !== t.buttons) {
-                    for (var e = 0; e < a.length; e++)if (a[e].pointerId === t.pointerId) {
+                    for (var e = 0; e < a.length; e++) if (a[e].pointerId === t.pointerId) {
                         a[e] = t;
                         break
                     }
@@ -2341,7 +2399,7 @@
         },
         addPointerListenerEnd: function (t, e, i, n) {
             var o = "_leaflet_", s = this._pointers, a = function (t) {
-                for (var e = 0; e < s.length; e++)if (s[e].pointerId === t.pointerId) {
+                for (var e = 0; e < s.length; e++) if (s[e].pointerId === t.pointerId) {
                     s.splice(e, 1);
                     break
                 }
@@ -2374,7 +2432,8 @@
         }, _onTouchStart: function (t) {
             var i = this._map;
             if (t.touches && 2 === t.touches.length && !i._animatingZoom && !this._zooming) {
-                var n = i.mouseEventToLayerPoint(t.touches[0]), s = i.mouseEventToLayerPoint(t.touches[1]), a = i._getCenterLayerPoint();
+                var n = i.mouseEventToLayerPoint(t.touches[0]), s = i.mouseEventToLayerPoint(t.touches[1]),
+                    a = i._getCenterLayerPoint();
                 this._startCenter = n.add(s)._divideBy(2), this._startDist = n.distanceTo(s), this._moved = !1, this._zooming = !0, this._centerOffset = a.subtract(this._startCenter), i._panAnim && i._panAnim.stop(), o.DomEvent.on(e, "touchmove", this._onTouchMove, this).on(e, "touchend", this._onTouchEnd, this), o.DomEvent.preventDefault(t)
             }
         }, _onTouchMove: function (t) {
@@ -2387,10 +2446,12 @@
             var t = this._map, e = this._getScaleOrigin(), i = t.layerPointToLatLng(e), n = t.getScaleZoom(this._scale);
             t._animateZoom(i, n, this._startCenter, this._scale, this._delta, !1, !0)
         }, _onTouchEnd: function () {
-            if (!this._moved || !this._zooming)return void(this._zooming = !1);
+            if (!this._moved || !this._zooming) return void(this._zooming = !1);
             var t = this._map;
             this._zooming = !1, o.DomUtil.removeClass(t._mapPane, "leaflet-touching"), o.Util.cancelAnimFrame(this._animRequest), o.DomEvent.off(e, "touchmove", this._onTouchMove).off(e, "touchend", this._onTouchEnd);
-            var i = this._getScaleOrigin(), n = t.layerPointToLatLng(i), s = t.getZoom(), a = t.getScaleZoom(this._scale) - s, r = a > 0 ? Math.ceil(a) : Math.floor(a), h = t._limitZoom(s + r), l = t.getZoomScale(h) / this._scale;
+            var i = this._getScaleOrigin(), n = t.layerPointToLatLng(i), s = t.getZoom(),
+                a = t.getScaleZoom(this._scale) - s, r = a > 0 ? Math.ceil(a) : Math.floor(a), h = t._limitZoom(s + r),
+                l = t.getZoomScale(h) / this._scale;
             t._animateZoom(n, h, i, l)
         }, _getScaleOrigin: function () {
             var t = this._centerOffset.subtract(this._delta).divideBy(this._scale);
@@ -2406,7 +2467,7 @@
             o.DomEvent.off(this._map._container, "touchstart", this._onDown, this)
         }, _onDown: function (t) {
             if (t.touches) {
-                if (o.DomEvent.preventDefault(t), this._fireClick = !0, t.touches.length > 1)return this._fireClick = !1, void clearTimeout(this._holdTimeout);
+                if (o.DomEvent.preventDefault(t), this._fireClick = !0, t.touches.length > 1) return this._fireClick = !1, void clearTimeout(this._holdTimeout);
                 var i = t.touches[0], n = i.target;
                 this._startPos = this._newPos = new o.Point(i.clientX, i.clientY), n.tagName && "a" === n.tagName.toLowerCase() && o.DomUtil.addClass(n, "leaflet-active"), this._holdTimeout = setTimeout(o.bind(function () {
                     this._isTapValid() && (this._fireClick = !1, this._onUp(), this._simulateEvent("contextmenu", i))
@@ -2439,7 +2500,8 @@
             return this._moved = !1, !t.shiftKey || 1 !== t.which && 1 !== t.button ? !1 : (o.DomUtil.disableTextSelection(), o.DomUtil.disableImageDrag(), this._startLayerPoint = this._map.mouseEventToLayerPoint(t), void o.DomEvent.on(e, "mousemove", this._onMouseMove, this).on(e, "mouseup", this._onMouseUp, this).on(e, "keydown", this._onKeyDown, this))
         }, _onMouseMove: function (t) {
             this._moved || (this._box = o.DomUtil.create("div", "leaflet-zoom-box", this._pane), o.DomUtil.setPosition(this._box, this._startLayerPoint), this._container.style.cursor = "crosshair", this._map.fire("boxzoomstart"));
-            var e = this._startLayerPoint, i = this._box, n = this._map.mouseEventToLayerPoint(t), s = n.subtract(e), a = new o.Point(Math.min(n.x, e.x), Math.min(n.y, e.y));
+            var e = this._startLayerPoint, i = this._box, n = this._map.mouseEventToLayerPoint(t), s = n.subtract(e),
+                a = new o.Point(Math.min(n.x, e.x), Math.min(n.y, e.y));
             o.DomUtil.setPosition(i, a), this._moved = !0, i.style.width = Math.max(0, Math.abs(s.x) - 4) + "px", i.style.height = Math.max(0, Math.abs(s.y) - 4) + "px"
         }, _finish: function () {
             this._moved && (this._pane.removeChild(this._box), this._container.style.cursor = ""), o.DomUtil.enableTextSelection(), o.DomUtil.enableImageDrag(), o.DomEvent.off(e, "mousemove", this._onMouseMove).off(e, "mouseup", this._onMouseUp).off(e, "keydown", this._onKeyDown)
@@ -2485,14 +2547,14 @@
             this._focused = !1, this._map.fire("blur")
         }, _setPanOffset: function (t) {
             var e, i, n = this._panKeys = {}, o = this.keyCodes;
-            for (e = 0, i = o.left.length; i > e; e++)n[o.left[e]] = [-1 * t, 0];
-            for (e = 0, i = o.right.length; i > e; e++)n[o.right[e]] = [t, 0];
-            for (e = 0, i = o.down.length; i > e; e++)n[o.down[e]] = [0, t];
-            for (e = 0, i = o.up.length; i > e; e++)n[o.up[e]] = [0, -1 * t]
+            for (e = 0, i = o.left.length; i > e; e++) n[o.left[e]] = [-1 * t, 0];
+            for (e = 0, i = o.right.length; i > e; e++) n[o.right[e]] = [t, 0];
+            for (e = 0, i = o.down.length; i > e; e++) n[o.down[e]] = [0, t];
+            for (e = 0, i = o.up.length; i > e; e++) n[o.up[e]] = [0, -1 * t]
         }, _setZoomOffset: function (t) {
             var e, i, n = this._zoomKeys = {}, o = this.keyCodes;
-            for (e = 0, i = o.zoomIn.length; i > e; e++)n[o.zoomIn[e]] = t;
-            for (e = 0, i = o.zoomOut.length; i > e; e++)n[o.zoomOut[e]] = -t
+            for (e = 0, i = o.zoomIn.length; i > e; e++) n[o.zoomIn[e]] = t;
+            for (e = 0, i = o.zoomOut.length; i > e; e++) n[o.zoomOut[e]] = -t
         }, _addHooks: function () {
             o.DomEvent.on(e, "keydown", this._onKeyDown, this)
         }, _removeHooks: function () {
@@ -2500,10 +2562,10 @@
         }, _onKeyDown: function (t) {
             var e = t.keyCode, i = this._map;
             if (e in this._panKeys) {
-                if (i._panAnim && i._panAnim._inProgress)return;
+                if (i._panAnim && i._panAnim._inProgress) return;
                 i.panBy(this._panKeys[e]), i.options.maxBounds && i.panInsideBounds(i.options.maxBounds)
             } else {
-                if (!(e in this._zoomKeys))return;
+                if (!(e in this._zoomKeys)) return;
                 i.setZoom(i.getZoom() + this._zoomKeys[e])
             }
             o.DomEvent.stop(t)
@@ -2559,7 +2621,8 @@
                 e[t + s] = o.DomUtil.create("div", a, n)
             }
 
-            var e = this._controlCorners = {}, i = "leaflet-", n = this._controlContainer = o.DomUtil.create("div", i + "control-container", this._container);
+            var e = this._controlCorners = {}, i = "leaflet-",
+                n = this._controlContainer = o.DomUtil.create("div", i + "control-container", this._container);
             t("top", "left"), t("top", "right"), t("bottom", "left"), t("bottom", "right")
         }, _clearControlPos: function () {
             this._container.removeChild(this._controlContainer)
@@ -2601,7 +2664,7 @@
             o.setOptions(this, t), this._attributions = {}
         }, onAdd: function (t) {
             this._container = o.DomUtil.create("div", "leaflet-control-attribution"), o.DomEvent.disableClickPropagation(this._container);
-            for (var e in t._layers)t._layers[e].getAttribution && this.addAttribution(t._layers[e].getAttribution());
+            for (var e in t._layers) t._layers[e].getAttribution && this.addAttribution(t._layers[e].getAttribution());
             return t.on("layeradd", this._onLayerAdd, this).on("layerremove", this._onLayerRemove, this), this._update(), this._container
         }, onRemove: function (t) {
             t.off("layeradd", this._onLayerAdd).off("layerremove", this._onLayerRemove)
@@ -2614,7 +2677,7 @@
         }, _update: function () {
             if (this._map) {
                 var t = [];
-                for (var e in this._attributions)this._attributions[e] && t.push(e);
+                for (var e in this._attributions) this._attributions[e] && t.push(e);
                 var i = [];
                 this.options.prefix && i.push(this.options.prefix), t.length && i.push(t.join(", ")), this._container.innerHTML = i.join(" | ")
             }
@@ -2643,7 +2706,9 @@
         }, _addScales: function (t, e, i) {
             t.metric && (this._mScale = o.DomUtil.create("div", e + "-line", i)), t.imperial && (this._iScale = o.DomUtil.create("div", e + "-line", i))
         }, _update: function () {
-            var t = this._map.getBounds(), e = t.getCenter().lat, i = 6378137 * Math.PI * Math.cos(e * Math.PI / 180), n = i * (t.getNorthEast().lng - t.getSouthWest().lng) / 180, o = this._map.getSize(), s = this.options, a = 0;
+            var t = this._map.getBounds(), e = t.getCenter().lat, i = 6378137 * Math.PI * Math.cos(e * Math.PI / 180),
+                n = i * (t.getNorthEast().lng - t.getSouthWest().lng) / 180, o = this._map.getSize(), s = this.options,
+                a = 0;
             o.x > 0 && (a = n * (s.maxWidth / o.x)), this._updateScales(s, a)
         }, _updateScales: function (t, e) {
             t.metric && e && this._updateMetric(e), t.imperial && e && this._updateImperial(e)
@@ -2665,8 +2730,8 @@
         options: {collapsed: !0, position: "topright", autoZIndex: !0},
         initialize: function (t, e, i) {
             o.setOptions(this, i), this._layers = {}, this._lastZIndex = 0, this._handlingClick = !1;
-            for (var n in t)this._addLayer(t[n], n);
-            for (n in e)this._addLayer(e[n], n, !0)
+            for (var n in t) this._addLayer(t[n], n);
+            for (n in e) this._addLayer(e[n], n, !0)
         },
         onAdd: function (t) {
             return this._initLayout(), this._update(), t.on("layeradd", this._onLayerChange, this).on("layerremove", this._onLayerChange, this), this._container
@@ -2709,7 +2774,7 @@
             if (this._container) {
                 this._baseLayersList.innerHTML = "", this._overlaysList.innerHTML = "";
                 var t, e, i = !1, n = !1;
-                for (t in this._layers)e = this._layers[t], this._addItem(e), n = n || e.overlay, i = i || !e.overlay;
+                for (t in this._layers) e = this._layers[t], this._addItem(e), n = n || e.overlay, i = i || !e.overlay;
                 this._separator.style.display = n && i ? "" : "none"
             }
         },
@@ -2737,7 +2802,7 @@
         },
         _onInputClick: function () {
             var t, e, i, n = this._form.getElementsByTagName("input"), o = n.length;
-            for (this._handlingClick = !0, t = 0; o > t; t++)e = n[t], i = this._layers[e.layerId], e.checked && !this._map.hasLayer(i.layer) ? this._map.addLayer(i.layer) : !e.checked && this._map.hasLayer(i.layer) && this._map.removeLayer(i.layer);
+            for (this._handlingClick = !0, t = 0; o > t; t++) e = n[t], i = this._layers[e.layerId], e.checked && !this._map.hasLayer(i.layer) ? this._map.addLayer(i.layer) : !e.checked && this._map.hasLayer(i.layer) && this._map.removeLayer(i.layer);
             this._handlingClick = !1, this._refocusOnMap()
         },
         _expand: function () {
@@ -2759,7 +2824,7 @@
         }, _transformRe: /([-+]?(?:\d*\.)?\d+)\D*, ([-+]?(?:\d*\.)?\d+)\D*\)/, _getPos: function () {
             var e, i, n, s = this._el, a = t.getComputedStyle(s);
             if (o.Browser.any3d) {
-                if (n = a[o.DomUtil.TRANSFORM].match(this._transformRe), !n)return;
+                if (n = a[o.DomUtil.TRANSFORM].match(this._transformRe), !n) return;
                 e = parseFloat(n[1]), i = parseFloat(n[2])
             } else e = parseFloat(a.left), i = parseFloat(a.top);
             return new o.Point(e, i, !0)
@@ -2771,15 +2836,15 @@
             if (e = e === i ? this._zoom : this._limitZoom(e), t = this._limitCenter(o.latLng(t), e, this.options.maxBounds), n = n || {}, this._panAnim && this._panAnim.stop(), this._loaded && !n.reset && n !== !0) {
                 n.animate !== i && (n.zoom = o.extend({animate: n.animate}, n.zoom), n.pan = o.extend({animate: n.animate}, n.pan));
                 var s = this._zoom !== e ? this._tryAnimatedZoom && this._tryAnimatedZoom(t, e, n.zoom) : this._tryAnimatedPan(t, n.pan);
-                if (s)return clearTimeout(this._sizeTimer), this
+                if (s) return clearTimeout(this._sizeTimer), this
             }
             return this._resetView(t, e), this
         }, panBy: function (t, e) {
-            if (t = o.point(t).round(), e = e || {}, !t.x && !t.y)return this;
+            if (t = o.point(t).round(), e = e || {}, !t.x && !t.y) return this;
             if (this._panAnim || (this._panAnim = new o.PosAnimation, this._panAnim.on({
-                    step: this._onPanTransitionStep,
-                    end: this._onPanTransitionEnd
-                }, this)), e.noMoveStart || this.fire("movestart"), e.animate !== !1) {
+                step: this._onPanTransitionStep,
+                end: this._onPanTransitionEnd
+            }, this)), e.noMoveStart || this.fire("movestart"), e.animate !== !1) {
                 o.DomUtil.addClass(this._mapPane, "leaflet-pan-anim");
                 var i = this._getMapPanePos().subtract(t);
                 this._panAnim.run(this._mapPane, i, e.duration || .25, e.easeLinearity)
@@ -2822,9 +2887,10 @@
         }, _nothingToAnimate: function () {
             return !this._container.getElementsByClassName("leaflet-zoom-animated").length
         }, _tryAnimatedZoom: function (t, e, i) {
-            if (this._animatingZoom)return !0;
-            if (i = i || {}, !this._zoomAnimated || i.animate === !1 || this._nothingToAnimate() || Math.abs(e - this._zoom) > this.options.zoomAnimationThreshold)return !1;
-            var n = this.getZoomScale(e), o = this._getCenterOffset(t)._divideBy(1 - 1 / n), s = this._getCenterLayerPoint()._add(o);
+            if (this._animatingZoom) return !0;
+            if (i = i || {}, !this._zoomAnimated || i.animate === !1 || this._nothingToAnimate() || Math.abs(e - this._zoom) > this.options.zoomAnimationThreshold) return !1;
+            var n = this.getZoomScale(e), o = this._getCenterOffset(t)._divideBy(1 - 1 / n),
+                s = this._getCenterLayerPoint()._add(o);
             return i.animate === !0 || this.getSize().contains(o) ? (this.fire("movestart").fire("zoomstart"), this._animateZoom(t, e, s, n, null, !0), !0) : !1
         }, _animateZoom: function (t, e, i, n, s, a, r) {
             r || (this._animatingZoom = !0), o.DomUtil.addClass(this._mapPane, "leaflet-zoom-anim"), this._animateToCenter = t, this._animateToZoom = e, o.Draggable && (o.Draggable._disabled = !0), o.Util.requestAnimFrame(function () {
@@ -2836,7 +2902,9 @@
     } : {}), o.TileLayer.include({
         _animateZoom: function (t) {
             this._animating || (this._animating = !0, this._prepareBgBuffer());
-            var e = this._bgBuffer, i = o.DomUtil.TRANSFORM, n = t.delta ? o.DomUtil.getTranslateString(t.delta) : e.style[i], s = o.DomUtil.getScaleString(t.scale, t.origin);
+            var e = this._bgBuffer, i = o.DomUtil.TRANSFORM,
+                n = t.delta ? o.DomUtil.getTranslateString(t.delta) : e.style[i],
+                s = o.DomUtil.getScaleString(t.scale, t.origin);
             e.style[i] = t.backwards ? s + " " + n : n + " " + s
         }, _endZoomAnim: function () {
             var t = this._tileContainer, e = this._bgBuffer;
@@ -2845,15 +2913,16 @@
             var t = this._map;
             !t || t._animatingZoom || t.touchZoom._zooming || (this._bgBuffer.innerHTML = "", this._bgBuffer.style[o.DomUtil.TRANSFORM] = "")
         }, _prepareBgBuffer: function () {
-            var t = this._tileContainer, e = this._bgBuffer, i = this._getLoadedTilesPercentage(e), n = this._getLoadedTilesPercentage(t);
+            var t = this._tileContainer, e = this._bgBuffer, i = this._getLoadedTilesPercentage(e),
+                n = this._getLoadedTilesPercentage(t);
             return e && i > .5 && .5 > n ? (t.style.visibility = "hidden", void this._stopLoadingImages(t)) : (e.style.visibility = "hidden", e.style[o.DomUtil.TRANSFORM] = "", this._tileContainer = e, e = this._bgBuffer = t, this._stopLoadingImages(e), void clearTimeout(this._clearBgBufferTimer))
         }, _getLoadedTilesPercentage: function (t) {
             var e, i, n = t.getElementsByTagName("img"), o = 0;
-            for (e = 0, i = n.length; i > e; e++)n[e].complete && o++;
+            for (e = 0, i = n.length; i > e; e++) n[e].complete && o++;
             return o / i
         }, _stopLoadingImages: function (t) {
             var e, i, n, s = Array.prototype.slice.call(t.getElementsByTagName("img"));
-            for (e = 0, i = s.length; i > e; e++)n = s[e], n.complete || (n.onload = o.Util.falseFn, n.onerror = o.Util.falseFn, n.src = o.Util.emptyImageUrl, n.parentNode.removeChild(n))
+            for (e = 0, i = s.length; i > e; e++) n = s[e], n.complete || (n.onload = o.Util.falseFn, n.onerror = o.Util.falseFn, n.src = o.Util.emptyImageUrl, n.parentNode.removeChild(n))
         }
     }), o.Map.include({
         _defaultLocateOptions: {
@@ -2864,7 +2933,7 @@
             maximumAge: 0,
             enableHighAccuracy: !1
         }, locate: function (t) {
-            if (t = this._locateOptions = o.extend(this._defaultLocateOptions, t), !navigator.geolocation)return this._handleGeolocationError({
+            if (t = this._locateOptions = o.extend(this._defaultLocateOptions, t), !navigator.geolocation) return this._handleGeolocationError({
                 code: 0,
                 message: "Geolocation not supported."
             }), this;
@@ -2873,19 +2942,22 @@
         }, stopLocate: function () {
             return navigator.geolocation && navigator.geolocation.clearWatch(this._locationWatchId), this._locateOptions && (this._locateOptions.setView = !1), this
         }, _handleGeolocationError: function (t) {
-            var e = t.code, i = t.message || (1 === e ? "permission denied" : 2 === e ? "position unavailable" : "timeout");
+            var e = t.code,
+                i = t.message || (1 === e ? "permission denied" : 2 === e ? "position unavailable" : "timeout");
             this._locateOptions.setView && !this._loaded && this.fitWorld(), this.fire("locationerror", {
                 code: e,
                 message: "Geolocation error: " + i + "."
             })
         }, _handleGeolocationResponse: function (t) {
-            var e = t.coords.latitude, i = t.coords.longitude, n = new o.LatLng(e, i), s = 180 * t.coords.accuracy / 40075017, a = s / Math.cos(o.LatLng.DEG_TO_RAD * e), r = o.latLngBounds([e - s, i - a], [e + s, i + a]), h = this._locateOptions;
+            var e = t.coords.latitude, i = t.coords.longitude, n = new o.LatLng(e, i),
+                s = 180 * t.coords.accuracy / 40075017, a = s / Math.cos(o.LatLng.DEG_TO_RAD * e),
+                r = o.latLngBounds([e - s, i - a], [e + s, i + a]), h = this._locateOptions;
             if (h.setView) {
                 var l = Math.min(this.getBoundsZoom(r), h.maxZoom);
                 this.setView(n, l)
             }
             var u = {latlng: n, bounds: r, timestamp: t.timestamp};
-            for (var c in t.coords)"number" == typeof t.coords[c] && (u[c] = t.coords[c]);
+            for (var c in t.coords) "number" == typeof t.coords[c] && (u[c] = t.coords[c]);
             this.fire("locationfound", u)
         }
     })

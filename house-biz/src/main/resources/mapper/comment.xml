@@ -3,14 +3,14 @@
 <mapper namespace="com.mooc.house.biz.mapper.CommentMapper">
 
     <sql id="commentField">
-          id,
-		  content,
-		  house_id,
-		  create_time,
-		  blog_id,
-		  type,
-		  user_id
-   </sql>
+        id,
+        content,
+        house_id,
+        create_time,
+        blog_id,
+        type,
+        user_id
+    </sql>
 
     <select id="selectComments" resultType="comment">
         select
@@ -31,24 +31,23 @@
     </select>
 
     <insert id="insert">
-      insert into comment(
-				          content,
-						  house_id,
-						  create_time,
-						  blog_id,
-						  type,
-						  user_id)
-                  value(
-                       #{content},
-                       #{houseId},
-                       #{createTime},
-                       #{blogId},
-                       #{type},
-                       #{userId}
-                  )
-    
-    
-    
+        insert into comment(
+        content,
+        house_id,
+        create_time,
+        blog_id,
+        type,
+        user_id)
+        value(
+        #{content},
+        #{houseId},
+        #{createTime},
+        #{blogId},
+        #{type},
+        #{userId}
+        )
+
+
     </insert>
 
 </mapper> 

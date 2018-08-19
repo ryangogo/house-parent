@@ -39,4 +39,6 @@ public interface HouseMapper {
 
     @Select("select * from house where type = 1 and state = 1  order by create_time desc limit 0,8")
     List<House> selectSellHouseLatest();
+
+    void updateRatingById(@Param("houseId")String houseId,@Param("rating")double rating);
 }

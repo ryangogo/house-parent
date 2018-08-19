@@ -1,6 +1,7 @@
 $(document).ready(function () {
     get_cities();
 });
+
 /**
  * 获取所有城市
  */

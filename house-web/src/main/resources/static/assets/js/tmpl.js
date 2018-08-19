@@ -15,10 +15,10 @@
             new Function("obj",
                 "var p=[],print=function(){p.push.apply(p,arguments);};" +
 
-                    // Introduce the data as local variables using with(){}
+                // Introduce the data as local variables using with(){}
                 "with(obj){p.push('" +
 
-                    // Convert the template into pure JavaScript
+                // Convert the template into pure JavaScript
                 str
                     .replace(/[\r\t\n]/g, " ")
                     .split("<%").join("\t")

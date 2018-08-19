@@ -2,6 +2,7 @@ $(document).ready(function () {
 
     loadingPage()
 });
+
 /**
  * 加载分页信息
  */
@@ -35,6 +36,7 @@ function loadingPage() {
         $('.page').empty();
     }
 }
+
 /**
  * 获取分页参数
  */
@@ -54,6 +56,7 @@ function getPageingValue() {
     }
     return jsonObj;
 }
+
 /**
  * 分页请求houselist
  */
@@ -71,6 +74,7 @@ function list(pageNum) {
         }
     })
 }
+
 /**
  * 动态展示数据
  * @param obj

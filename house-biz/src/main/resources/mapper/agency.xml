@@ -3,15 +3,15 @@
 <mapper namespace="com.mooc.house.biz.mapper.AgencyMapper">
 
     <sql id="agencyField">
-          id ,
-		  name,
-		  address,
-		  phone,
-		  email,
-		  about_us,
-		  mobile,
-		  web_site
-   </sql>
+        id ,
+        name,
+        address,
+        phone,
+        email,
+        about_us,
+        mobile,
+        web_site
+    </sql>
 
     <select id="select" resultType="agency">
         select
@@ -28,40 +28,40 @@
     </select>
 
     <insert id="insert">
-      insert into agency(
-				        name ,
-				        address ,
-				        phone ,
-				        email ,
-				        about_us ,
-				        mobile ,
-				        web_site)
-                  value(
-                       #{name},
-                       #{address},
-                       #{phone},
-                       #{email},
-                       #{aboutUs},
-                       #{mobile},
-                       #{webSite}
-                  )
-      
-    
+        insert into agency(
+        name ,
+        address ,
+        phone ,
+        email ,
+        about_us ,
+        mobile ,
+        web_site)
+        value(
+        #{name},
+        #{address},
+        #{phone},
+        #{email},
+        #{aboutUs},
+        #{mobile},
+        #{webSite}
+        )
+
+
     </insert>
 
     <sql id="agentField">
-      id,
-      name,
-      phone,
-      email,
-      aboutme,
-      passwd,
-      avatar,
-      type,
-      create_time,
-      enable,
-      agency_id
-   </sql>
+        id,
+        name,
+        phone,
+        email,
+        aboutme,
+        passwd,
+        avatar,
+        type,
+        create_time,
+        enable,
+        agency_id
+    </sql>
     <select id="selectAgent" resultType="user">
         select * from user
         <where>
