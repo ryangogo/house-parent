@@ -30,7 +30,7 @@
                             <h1 th:text="${house.name}"></h1>
                             <figure th:text="${house.address}"></figure>
 
-                            <span class="actions">
+                            <span class="actions" th:if="${session.loginUser} != null">
                                 <!--<a href="#" class="fa fa-print"></a>-->
                                 <a href="#" class="bookmark" data-bookmark-state="empty"><span
                                         class="title-add">收藏</span><span
@@ -52,6 +52,8 @@
                                 <section id="quick-summary" class="clearfix">
                                     <header><h2>总体</h2></header>
                                     <dl>
+                                        <input type="hidden" id="id" name="houseId"
+                                               th:value="${house.id}">
                                         <dt>地址</dt>
                                         <dd th:text="${house.address}"></dd>
                                         <dt>价格</dt>
@@ -102,7 +104,7 @@
                                 <section id="property-rating">
                                     <header><h2>评价</h2></header>
                                     <div class="clearfix">
-                                        <aside>
+                                        <aside th:if="${session.loginUser} != null">
                                             <header>您的评价</header>
                                             <div class="rating rating-user">
                                                 <div class="inner" onclick="addscore()"></div>
@@ -110,7 +112,8 @@
                                         </aside>
                                         <figure>
                                             <header>总体评价</header>
-                                            <div class="rating rating-overall" data-score="${house.rating}"></div>
+                                            <div class="rating rating-overall"
+                                                 th:attr="data-score=${house.rating}"></div>
                                         </figure>
                                     </div>
                                     <div class="rating-form">

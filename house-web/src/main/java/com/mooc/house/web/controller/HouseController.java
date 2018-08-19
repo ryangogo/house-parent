@@ -6,7 +6,6 @@ import com.mooc.house.biz.service.RecommandService;
 import com.mooc.house.common.constants.CommonConstants;
 import com.mooc.house.common.model.House;
 import com.mooc.house.common.model.User;
-import com.mooc.house.common.result.ResultMsg;
 import com.mooc.house.common.result.ServerResponse;
 import com.mooc.house.common.vo.HouseVO;
 import lombok.val;
@@ -112,6 +111,26 @@ public class HouseController {
         return houseService.updateRating(houseId, rating);
     }
 
+    /**
+     * 跳转到收藏页面
+     * @return
+     */
+    /*@GetMapping("bookmarked")
+    public String bookmarked() {
+        return "/houses/bookmarked";
+    }*/
+
+    /**
+     * 收藏房产
+     * @param houseId
+     * @return
+     */
+    /*@PostMapping("bookmarked")
+    @ResponseBody
+    public String bookmarked(String houseId, HttpSession session) {
+        User user = (User) session.getAttribute(CommonConstants.USER_ATTRIBUTE);
+        return "/houses/bookmarked";
+    }*/
     //2.收藏
     //3.删除收藏
     //4.收藏列表

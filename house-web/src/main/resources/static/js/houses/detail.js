@@ -45,7 +45,7 @@ $(document).ready(function () {
  */
 function addscore(){
     var rating = $(".inner").children("input").val();
-    var houseId = $("#houseId").val();
+    var houseId = $("#id").val();
     $.ajax({
         url: "/house/rating",
         data:{"rating":rating,"houseId":houseId},
