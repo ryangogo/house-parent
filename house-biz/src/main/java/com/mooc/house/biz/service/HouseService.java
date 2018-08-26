@@ -1,6 +1,7 @@
 package com.mooc.house.biz.service;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JavaType;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.mooc.house.biz.mapper.HouseMapper;
@@ -24,8 +25,6 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 import redis.clients.jedis.Jedis;
 
-import com.fasterxml.jackson.databind.JavaType;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.math.BigDecimal;
@@ -205,7 +204,7 @@ public class HouseService {
         try{
             Map<String,Object> scoreMap = new HashMap<String,Object>();
             ObjectMapper MAPPER = new ObjectMapper();
-            Jedis jedis = new Jedis("127.0.0.1");
+            Jedis jedis = new Jedis("47.107.50.176");
             String scoreJSON = jedis.get("houseScore_" + houseId);
             if(StringUtils.isBlank(scoreJSON)){
                 scoreMap.put("rating",rating);

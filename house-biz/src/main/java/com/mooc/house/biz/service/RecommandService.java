@@ -27,14 +27,14 @@ public class RecommandService {
     private HouseMapper houseMapper;
 
     public void increase(Long id) {
-        Jedis jedis = new Jedis("127.0.0.1");
+        Jedis jedis = new Jedis("47.107.50.176");
         jedis.zincrby(HOT_HOUSE_KEY, 1.0D, id + "");
         jedis.zremrangeByRank(HOT_HOUSE_KEY, 10, -1);//排序之后删除10位意外的元素列表 -1代表结尾从第10位开始
         jedis.close();
     }
 
     public List<Long> getHot() {
-        Jedis jedis = new Jedis("127.0.0.1");
+        Jedis jedis = new Jedis("47.107.50.176");
         Set<String> idSet = jedis.zrange(HOT_HOUSE_KEY, 0, 3);
         jedis.close();
         List<Long> ids = idSet.stream().map(Long::parseLong).collect(Collectors.toList());//将idSet中的string类型转换为long类型
