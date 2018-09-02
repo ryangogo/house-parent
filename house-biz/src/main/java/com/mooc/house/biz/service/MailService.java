@@ -11,6 +11,9 @@ import com.mooc.house.common.model.User;
 import lombok.val;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.amqp.core.AmqpTemplate;
+import org.springframework.amqp.rabbit.annotation.RabbitHandler;
+import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.SimpleMailMessage;
@@ -25,6 +28,7 @@ import java.util.concurrent.TimeUnit;
  * Created by Administrator on 2018/6/25.
  */
 @Service
+@RabbitListener(queues = {"email"})
 public class MailService {
 
     @Autowired
@@ -38,6 +42,9 @@ public class MailService {
 
     @Autowired
     private UserMapper userMapper;
+
+    @Autowired
+    private AmqpTemplate rabbitTemplate;
 
     private final Cache<String, String> registerCache = CacheBuilder.newBuilder().
             maximumSize(100).//空间
@@ -79,10 +86,10 @@ public class MailService {
      * 2.借助springmail发送邮件
      * 3.借助异步框架进行操作
      *
-     * @param email
      */
-    @Async
-    public void registerNotify(String email) {
+    @RabbitHandler
+    public void process(User account) {
+        String email = account.getEmail();
         String randomKey = RandomStringUtils.randomAlphabetic(CommonConstants.EMAIL_CODE_LENGTH);
         registerCache.put(randomKey, email);//把email存入guavacache中
         String url = "http://" + domainName + "/account/verify?key=" + randomKey;

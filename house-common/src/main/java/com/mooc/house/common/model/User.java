@@ -2,10 +2,11 @@ package com.mooc.house.common.model;
 
 import lombok.Data;
 
+import java.io.Serializable;
 import java.util.Date;
 
 @Data
-public class User {
+public class User implements Serializable {
     /**
      * 主键
      */

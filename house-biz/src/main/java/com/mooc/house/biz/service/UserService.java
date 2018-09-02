@@ -2,12 +2,16 @@ package com.mooc.house.biz.service;
 
 import com.mooc.house.biz.mapper.UserMapper;
 import com.mooc.house.common.constants.CommonConstants;
+import com.mooc.house.common.constants.MQMsg;
 import com.mooc.house.common.model.Agency;
 import com.mooc.house.common.model.User;
 import com.mooc.house.common.result.ServerResponse;
 import com.mooc.house.common.utils.HashUtils;
 import com.mooc.house.common.utils.QiNiuCDNOperator;
 import com.qiniu.storage.model.DefaultPutRet;
+import org.springframework.amqp.core.AmqpTemplate;
+import org.springframework.amqp.rabbit.annotation.RabbitHandler;
+import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -21,6 +25,7 @@ import java.util.List;
 import java.util.UUID;
 
 @Service
+@RabbitListener(queues = {"mysql"})
 public class UserService {
 
     @Autowired
@@ -28,6 +33,9 @@ public class UserService {
 
     @Autowired
     private MailService mailService;
+
+    @Autowired
+    private AmqpTemplate rabbitTemplate;
 
     public List<User> selectAllUser() {
         List<User> users = userMapper.selectAll();
@@ -74,10 +82,14 @@ public class UserService {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        userMapper.insert(account);
-        //发送邮件
-        mailService.registerNotify(account.getEmail());
+        //将校验过的用户信息转发到mq上，mq会通知到发送邮件以及插入到数据库的方法
+        this.rabbitTemplate.convertAndSend(MQMsg.EXCHANGE, "regist.#", account);
         return ServerResponse.createBySuccess();
+    }
+
+    @RabbitHandler
+    public void process(User account) {
+        userMapper.insert(account);
     }
 
 
