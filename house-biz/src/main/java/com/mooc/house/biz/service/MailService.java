@@ -84,7 +84,8 @@ public class MailService {
     /**
      * 1.缓存key-email的关系
      * 2.借助springmail发送邮件
-     * 3.借助异步框架进行操作
+     * 3.借助MQ进行异步操作
+     *
      *
      */
     @RabbitHandler
